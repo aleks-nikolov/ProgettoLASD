@@ -1,6 +1,5 @@
 #include "gstutente.h"
-#define LUNGHEZZA_NOME_UTENTE 21
-#define LUNGHEZZA_PASSWORD 21
+
 
 void stampaMenuIniziale();
 

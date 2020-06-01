@@ -2,12 +2,12 @@
 
 void stampaMenuIniziale(){
 	
-	printf("Selezionare azione da effettuare;\n\n");
-	printf("1)Effettua nuova registrazione\n");
-	printf("2)Esegui accesso\n");
-	printf("3)Termina programma\n\n");
-	printf("4)Visualizza utenti\n\n");
-	printf("Inserire numero: ");
+	printf("Selezionare azione da effettuare;\n\n"
+		   "1)Effettua nuova registrazione\n"
+		   "2)Esegui accesso\n"
+		   "3)Termina programma\n"
+		   "4)Visualizza utenti\n\n"
+	       "Inserire numero: ");
 }
 
 void terminaProgramma(int * selettoreAzione){
@@ -63,7 +63,7 @@ void effettuaRegistrazione(t_abr * utenti){
 	}while(nomeAmmesso == 0 || passwordAmmessa == 0);
 }
 
-int eseguiAccesso(t_abr * utenti){
+int eseguiAccesso(t_abr * utenti){//ritorna 0 se l'accesso fallisce, 1 se l'accesso avvenuto è di un utente, 2 se l'accesso avvenuto è di un admin
 	char nomeTmp[LUNGHEZZA_NOME_UTENTE];
 	char passwordTmp[LUNGHEZZA_PASSWORD];
 	t_abr * utenteTmp;
@@ -89,7 +89,7 @@ int eseguiAccesso(t_abr * utenti){
 				else
 					esito = 2;
 			}else{
-				printf("\nPassword errata, si desira riprovare? (1 per si, altro per no)");
+				printf("\nPassword errata, si desidera riprovare? (1 per si, altro per no)");
 				scanf("%d", &altroTentativo);
 			} 
 		}while(altroTentativo == 1);
