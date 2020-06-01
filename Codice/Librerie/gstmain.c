@@ -37,12 +37,14 @@ void effettuaRegistrazione(t_abr * utenti){
 		
 		printf("\n\nInserire nome nuovo utente: ");
 		gets(nomeTmp);
+		fflush(stdin);
 		
 		if(!strchr(nomeTmp, ' ')){
-			if(!contains_U(utenti, nomeTmp)){
+			if(!contains_U(utenti, nomeTmp, NULL)){
 				
 				printf("\nInserire nuova password: ");
 				gets(passwordTmp);
+				fflush(stdin);
 				
 				if(!strchr(passwordTmp, ' '))
 					utenti = inserisciNodo_U(utenti, nomeTmp, passwordTmp);
@@ -61,15 +63,43 @@ void effettuaRegistrazione(t_abr * utenti){
 	}while(nomeAmmesso == 0 || passwordAmmessa == 0);
 }
 
-int eseguiAccesso(){
+int eseguiAccesso(t_abr * utenti){
+	char nomeTmp[LUNGHEZZA_NOME_UTENTE];
+	char passwordTmp[LUNGHEZZA_PASSWORD];
+	t_abr * utenteTmp;
 	int esito = 0;
 	
+	fflush(stdin);
 	
+	printf("\nInserire nome utente: ");
+	gets(nomeTmp);
+	fflush(stdin);
+	
+	if(contains_U(utenti, nomeTmp, &utenteTmp)){
+		do{
+			int altroTentativo = 0;
+			
+			printf("\nInserire password: ");
+			gets(passwordTmp);
+			fflush(stdin);
+			
+			if(strcmp(utenteTmp->utente.password, passwordTmp) == 0){
+				if(utenteTmp->utente.admin == 0)
+					esito = 1;
+				else
+					esito = 2;
+			}else{
+				printf("\nPassword errata, si desira riprovare? (1 per si, altro per no)");
+				scanf("%d", &altroTentativo);
+			} 
+		}while(altroTentativo == 1);
+	}else
+		printf("\nNome utente non riconosciuto, riprovare o creare un nuovo account");
 	
 	return esito;
 }
 
-gestisciUtente(int esito){
+/*gestisciUtente(int esito, t_abr * utenti, t_grafo * tratte){
 	
 }
 
