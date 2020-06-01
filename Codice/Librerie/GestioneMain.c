@@ -1,4 +1,4 @@
-#include "gestioneApplicativo.h"
+#include "GestioneMain.h"
 
  void toUpper_String(char * string){
 	int i;
