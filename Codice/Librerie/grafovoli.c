@@ -1,7 +1,6 @@
 #include "grafovoli.h"
 
 //Inizializza gli aeroporti con alcune tratte predefinite (per ora sono 10 per semplicità di testing, poi li incremento)
-//NOTA: i nomi degli aeroporti sono in maiuscolo, ogni nome inserito da tastiera viene convertito in maiuscolo
 t_grf * inizializzaGrafo(t_grf * g) {
     g = aggiungiAeroporto(g, "NAPOLI");
     g = aggiungiAeroporto(g, "ROMA");
@@ -28,7 +27,7 @@ t_grf * inizializzaGrafo(t_grf * g) {
     g = aggiungiVolo(g, "MOSCA", "SCHIPOL", 120.00f, 140);
 	g = aggiungiVolo(g, "LONDRA", "PARIGI", 60.00f, 35);
 	g = aggiungiVolo(g, "PARIGI", "MADRID", 55.00f, 40);
-	
+
     return g;
 }
 
@@ -36,8 +35,7 @@ t_grf * inizializzaGrafo(t_grf * g) {
 t_grf * aggiungiAeroporto(t_grf * g, char *nome) {
     if(grafoVuoto(g)){
         g = (t_grf *)malloc(sizeof(t_grf));
-        strcpy(g->nome, nome);
-        toUpperString(g->nome);
+        strcpy(g->nome, strupr(nome));
         g->archi = NULL;
         g->next = NULL;
     } else{
@@ -50,8 +48,7 @@ t_grf * aggiungiAeroporto(t_grf * g, char *nome) {
 //Aggiunge un nuovo aeroporto in testa alla lista dei vertici (usato solo negli algoritmi di Dijkstra)
 t_grf * aggiungiAeroportoInTesta(t_grf * g, char *nome) {
     t_grf * temp = (t_grf *)malloc(sizeof(t_grf));
-    strcpy(temp->nome, nome);
-    toUpperString(temp->nome);
+    strcpy(temp->nome, strupr(nome));
     g->archi = NULL;
     if(!grafoVuoto(g)) {
         temp->next = g;
@@ -80,6 +77,9 @@ t_grf * eliminaAeroporto(t_grf * g, char *nome) {
 t_grf * aggiungiVolo(t_grf * g, char *uscita, char *entrata, float prezzo, int durata) {
     t_grf * temp;
 
+    uscita = strupr(uscita);
+    entrata = strupr(entrata);
+
     if(grafoVuoto(g))
         printf("\nERRORE: Il grafo non risulta inizializzato");
     else if (strcmp(uscita, entrata) == 0)
@@ -100,11 +100,14 @@ t_grf * aggiungiVolo(t_grf * g, char *uscita, char *entrata, float prezzo, int d
 t_grf * eliminaVolo(t_grf * g, char *uscita, char *entrata) {
     t_grf * temp;
 
+    uscita = strupr(uscita);
+    entrata = strupr(entrata);
+
     if(grafoVuoto(g))
         printf("\nERRORE: Il grafo non risulta inizializzato");
     else if (!aeroportoEsistente(g, uscita) || !aeroportoEsistente(g, entrata))
         printf("\nATTENZIONE: Almeno uno degli aeroporti inseriti non risulta presente");
-    else if (voloEsistente(getVertice(g, uscita)->archi, entrata)) {
+    else if (!voloEsistente(getVertice(g, uscita)->archi, entrata)) {
         printf("\nATTENZIONE: Il volo che si tenta di eliminare non esiste");
     } else {
         temp = getVertice(g, uscita);
@@ -118,8 +121,7 @@ t_grf * eliminaVolo(t_grf * g, char *uscita, char *entrata) {
 t_arc * inizializzaArco(t_arc * a, char *nome, float prezzo, int durata) {
     if(arcoVuoto(a)) {
         a = (t_arc *) malloc(sizeof(t_arc));
-        strcpy(a->nome, nome);
-        toUpperString(a->nome);
+        strcpy(a->nome, strupr(nome));
         a->prezzo = prezzo;
         a->durata = durata;
         a->next = NULL;
@@ -147,6 +149,7 @@ t_arc * eliminaArco(t_arc * a, char *nome) {
 
 //Elimina tutti i voli verso un aeroporto, usata nel caso di eliminazione di un aeroporto dal grafo
 t_grf * eliminaTuttiVoliAdAeroporto(t_grf * g, char *nome) {
+    nome = strupr(nome);
     if(!grafoVuoto(g)) {
         g->archi = eliminaArco(g->archi, nome);
         g->next = eliminaTuttiVoliAdAeroporto(g->next, nome);
@@ -215,12 +218,4 @@ int grafoVuoto(t_grf * g) {
 
 int arcoVuoto(t_arc * a) {
     return (a == NULL);
-}
-
-void toUpperString(char * string){
-    int i;
-
-    for(i=0; string[i];i++){
-        string[i] = toupper(string[i]);
-    }
 }

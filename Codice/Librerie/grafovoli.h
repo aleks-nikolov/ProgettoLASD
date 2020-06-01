@@ -50,7 +50,6 @@ int aeroportoEsistente(t_grf * g, char *nome);
 int lunghezzaGrafo(t_grf * g);
 int grafoVuoto(t_grf * g);
 int arcoVuoto(t_arc * a);
-void toUpperString(char * string);
 
 //Dijkstra
 t_grf * dijkstra(t_grf * g, char nome[], int pesoDiRiferimento);

@@ -1,25 +1,22 @@
 #include "gstadmin.h"
 
-int sceltaAdmin;
+void menuAdmin(int* scelta){
+    printf("\nInserisci"
+    "\n\t1 - Aggiungi una nuova destinazione."
+    "\n\t2 - Aggiungi un nuovo volo"
+    "\n\t3 - Rimuovi una destinazione"
+    "\n\t4 - Rimuovi un volo"
+    "\n\t5 - Stampa tutti i voli"
+    "\n\t6 - Logout\n");
 
-
-void menuAdmin(int* scelta;){
-    printf("Inserisci\n"
-           "\t1 - Aggiungi una nuova destinazione."
-           "\t2 - Aggiungi un nuovo volo"
-           "\t3 - Rimuovi una destinazione"
-           "\t4 - Rimuovi un volo"
-           "\t5 - Stampa tutti i voli"
-           "\t6 - Logout");
-
-    scanf("%d", *scelta);
+    scanf("%d", scelta);
 }
 
-t_grf* gestisciopzione(t_grf* g){
+t_grf* gestisciOpzione(t_grf* g){
     int scelta;
-    char* nomeaeroporto;
-    char* nomepartenzavolo;
-    char* nomearrivovolo;
+    char nomeaeroporto[LUNGHEZZA_NOME_AEROPORTO];
+    char nomepartenzavolo[LUNGHEZZA_NOME_AEROPORTO];
+    char nomearrivovolo[LUNGHEZZA_NOME_AEROPORTO];
     float prezzo;
     int durata;
 
@@ -31,9 +28,11 @@ t_grf* gestisciopzione(t_grf* g){
 
             case(1):
 
-                printf("Qual'è il nuovo aeroporto che vuoi aggiungere alle destinazioni?\n");
+                printf("Qual'e' il nuovo aeroporto che vuoi aggiungere alle destinazioni?\n");
                 scanf("%s", nomeaeroporto);
                 fflush(stdin);
+
+                printf("\ntest");
 
                 g = aggiungiAeroporto(g, nomeaeroporto);
                 printf("\nHo aggiunto %s alle destinazioni con successo!\n", nomeaeroporto);
@@ -46,16 +45,16 @@ t_grf* gestisciopzione(t_grf* g){
                 scanf("%s", nomepartenzavolo);
                 fflush(stdin);
 
-                printf("Qual'e' la destinazione del nuovo volo con partenza da %s?", nomepartenzavolo);
+                printf("Qual'e' la destinazione del nuovo volo con partenza da %s?\n", nomepartenzavolo);
                 scanf("%s", nomearrivovolo);
                 fflush(stdin);
 
-                printf("Qual'e' il prezzo del nuovo volo con partenza da %s e diretto a %s?", nomepartenzavolo, nomearrivovolo);
-                scanf("%f", prezzo);
+                printf("Qual'e' il prezzo del nuovo volo con partenza da %s e diretto a %s?\n", nomepartenzavolo, nomearrivovolo);
+                scanf("%f", &prezzo);
                 fflush(stdin);
 
-                printf("Qual'e' la durata del nuovo volo con partenza da %s e diretto a %s?", nomepartenzavolo, nomearrivovolo);
-                scanf("%d", durata);
+                printf("Qual'e' la durata del nuovo volo con partenza da %s e diretto a %s?\n", nomepartenzavolo, nomearrivovolo);
+                scanf("%d", &durata);
                 fflush(stdin);
 
 
@@ -67,11 +66,12 @@ t_grf* gestisciopzione(t_grf* g){
 
             case (3):
 
-                printf("Qual'è il nome dell'aeroporto che vuoi rimuovere dalle destinazioni?\n");
+                printf("Qual'e' il nome dell'aeroporto che vuoi rimuovere dalle destinazioni?\n");
                 scanf("%s", nomeaeroporto);
                 fflush(stdin);
 
                 g = eliminaAeroporto(g, nomeaeroporto);
+                g = eliminaTuttiVoliAdAeroporto(g, nomeaeroporto);
 
                 printf("Ho eliminato %s dalle destinazioni!\n", nomeaeroporto);
 
@@ -83,11 +83,11 @@ t_grf* gestisciopzione(t_grf* g){
                 scanf("%s", nomepartenzavolo);
                 fflush(stdin);
 
-                printf("Qual'e' la destinazione del volo con partenza da %s che vuoi eliminare?", nomepartenzavolo);
+                printf("Qual'e' la destinazione del volo con partenza da %s che vuoi eliminare?\n", nomepartenzavolo);
                 scanf("%s", nomearrivovolo);
                 fflush(stdin);
 
-                eliminaVolo(g, nomepartenzavolo, nomearrivovolo);
+                g = eliminaVolo(g, nomepartenzavolo, nomearrivovolo);
 
                 printf("\nIl volo proveniente da %s e diretto a %s e' stato eliminato con successo!\n", nomepartenzavolo, nomearrivovolo);
 
@@ -95,12 +95,13 @@ t_grf* gestisciopzione(t_grf* g){
 
             case (5):
 
-                printf("\nQuesti sono tutti i voli dell'aeroporto:\n\n")
+                printf("\nQuesti sono tutti i voli dell'aeroporto:\n\n");
                 stampaGrafo(g);
+                break;
 
             case (6):
 
-                printf("\n*************\nLogout dalla pagina admin\n*************\n")
+                printf("\n*************\nLogout dalla pagina admin\n*************\n");
                 break;
 
             default:
@@ -110,8 +111,7 @@ t_grf* gestisciopzione(t_grf* g){
 
         }
 
+    }while(scelta != 6);
 
-    }while(scelta != 5);
-
-    return tempg;
+    return g;
 }
