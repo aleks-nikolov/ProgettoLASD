@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "GestioneMain.h"
+#include "gstmain.h"
 
 int main(){
 	int selettoreAzione;
@@ -18,7 +18,7 @@ int main(){
 		
 		switch(selettoreAzione){
 			case 1:
-			//effettuaRegistrazione();
+			//effettuaRegistrazione(utenti);
 			break;
 				
 			case 2:
@@ -28,6 +28,10 @@ int main(){
 				
 			case 3:
 			terminaProgramma(&selettoreAzione);
+			break;
+			
+			case 4://inserito per questioni di testing
+			//mostraUtenti(utenti);
 			break;
 			
 			default:

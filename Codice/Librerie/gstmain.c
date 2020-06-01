@@ -1,12 +1,4 @@
-#include "GestioneMain.h"
-
- void toUpper_String(char * string){
-	int i;
-	
-	for(i=0; string[i];i++){
-		string[i] = toupper(string[i]);
-	}
-}
+#include "gstmain.h"
 
 void stampaMenuIniziale(){
 	
@@ -14,6 +6,7 @@ void stampaMenuIniziale(){
 	printf("1)Effettua nuova registrazione\n");
 	printf("2)Esegui accesso\n");
 	printf("3)Termina programma\n\n");
+	printf("4)Visualizza utenti\n\n");
 	printf("Inserire numero: ");
 }
 
@@ -25,45 +18,61 @@ void terminaProgramma(int * selettoreAzione){
 		scanf("%d" , selettoreAzione);
 }
 
-/*void stampaRegoleCredenziali(){
-	printf("\nNome utente e password non possono contenere spazi!);
+void stampaRegoleCredenziali(){
+	printf("\nNome utente e password non possono contenere spazi!");
 }
 
 void effettuaRegistrazione(t_abr * utenti){
 	char nomeTmp[LUNGHEZZA_NOME_UTENTE];
-	char passTmp[LUNGHEZZA_PASSWORD];
+	char passwordTmp[LUNGHEZZA_PASSWORD];
 	int nomeAmmesso;
 	int passwordAmmessa;
 	
 	fflush(stdin);
 	
 	stampaRegoleCredenziali();
-	
 	do{
 		nomeAmmesso = 1;
 		passwordAmmessa = 1;
 		
-		printf("\n\nInserire nuovo nome utente");
+		printf("\n\nInserire nome nuovo utente: ");
 		gets(nomeTmp);
 		
 		if(!strchr(nomeTmp, ' ')){
 			if(!contains_U(utenti, nomeTmp)){
-			
+				
+				printf("\nInserire nuova password: ");
+				gets(passwordTmp);
+				
+				if(!strchr(passwordTmp, ' '))
+					utenti = inserisciNodo_U(utenti, nomeTmp, passwordTmp);
+				else{
+					printf("\nLa password non può contenere spazi, riprovare");
+					passwordAmmessa = 0;
+				}
 			}else{
 				printf("\nNome utente non disponibile, riprovare");
 				nomeAmmesso = 0;
 			}
+		}else{
+			printf("\nIl nome utente non può contenere spazi, riprovare");
+			nomeAmmesso = 0;
 		}
-		
-	}while(!nomeAmmesso || !passwordAmmessa);
+	}while(nomeAmmesso == 0 || passwordAmmessa == 0);
 }
 
 int eseguiAccesso(){
-
+	int esito = 0;
+	
+	
+	
+	return esito;
 }
 
-gestisciUtente(esito){
+gestisciUtente(int esito){
 	
 }
 
 */
+
+
