@@ -1,6 +1,7 @@
 #include "grafovoli.h"
 
 //Inizializza gli aeroporti con alcune tratte predefinite (per ora sono 10 per semplicità di testing, poi li incremento)
+//NOTA: i nomi degli aeroporti sono in maiuscolo, ogni nome inserito da tastiera viene convertito in maiuscolo
 t_grf * inizializzaGrafo(t_grf * g) {
     g = aggiungiAeroporto(g, "NAPOLI");
     g = aggiungiAeroporto(g, "ROMA");
@@ -30,6 +31,7 @@ t_grf * aggiungiAeroporto(t_grf * g, char *nome) {
     if(grafoVuoto(g)){
         g = (t_grf *)malloc(sizeof(t_grf));
         strcpy(g->nome, nome);
+        toUpperString(g->nome);
         g->archi = NULL;
         g->next = NULL;
     } else{
@@ -43,6 +45,8 @@ t_grf * aggiungiAeroporto(t_grf * g, char *nome) {
 t_grf * aggiungiAeroportoInTesta(t_grf * g, char *nome) {
     t_grf * temp = (t_grf *)malloc(sizeof(t_grf));
     strcpy(temp->nome, nome);
+    toUpperString(temp->nome);
+    g->archi = NULL;
     if(!grafoVuoto(g)) {
         temp->next = g;
         return temp;
@@ -109,6 +113,7 @@ t_arc * inizializzaArco(t_arc * a, char *nome, float prezzo, int durata) {
     if(arcoVuoto(a)) {
         a = (t_arc *) malloc(sizeof(t_arc));
         strcpy(a->nome, nome);
+        toUpperString(a->nome);
         a->prezzo = prezzo;
         a->durata = durata;
         a->next = NULL;
@@ -204,4 +209,12 @@ int grafoVuoto(t_grf * g) {
 
 int arcoVuoto(t_arc * a) {
     return (a == NULL);
+}
+
+void toUpperString(char * string){
+    int i;
+
+    for(i=0; string[i];i++){
+        string[i] = toupper(string[i]);
+    }
 }

@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <ctype.h>
 
 #define LUNGHEZZA_NOME_AEROPORTO 100
 
@@ -49,6 +50,7 @@ int aeroportoEsistente(t_grf * g, char *nome);
 int lunghezzaGrafo(t_grf * g);
 int grafoVuoto(t_grf * g);
 int arcoVuoto(t_arc * a);
+void toUpperString(char * string);
 
 //Dijkstra
 t_grf * dijkstra(t_grf * g, char nome[], int pesoDiRiferimento);
