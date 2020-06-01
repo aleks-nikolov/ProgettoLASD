@@ -16,13 +16,19 @@ t_grf * inizializzaGrafo(t_grf * g) {
 
     g = aggiungiVolo(g, "NAPOLI", "ROMA", 50.00f, 45);
     g = aggiungiVolo(g, "ROMA", "MILANO", 65.00f, 50);
+    g = aggiungiVolo(g, "ROMA", "FRANCOFORTE", 100.00f, 160);
     g = aggiungiVolo(g, "MILANO", "NAPOLI", 95.00f, 100);
-    g = aggiungiVolo(g, "ROMA", "LONDRA", 110.00f, 180);
-    g = aggiungiVolo(g, "ROMA", "SCHIPOL", 95.00f, 145);
-    g = aggiungiVolo(g, "ROMA", "MADRID", 80.00f, 120);
-    g = aggiungiVolo(g, "MADRID", "BARCELLONA", 40, 30);
-    g = aggiungiVolo(g, "SCHIPOL", "MOSCA", 120.00f, 160);
-
+    g = aggiungiVolo(g, "MILANO", "LONDRA", 110.00f, 140);
+    g = aggiungiVolo(g, "MILANO", "SCHIPOL", 95.00f, 125);
+    g = aggiungiVolo(g, "MILANO", "FRANCOFORTE", 90.00f, 90);
+	g = aggiungiVolo(g, "MILANO", "MADRID", 65.00f, 50);
+	g = aggiungiVolo(g, "FRANCOFORTE", "MOSCA", 80.00f, 80);
+    g = aggiungiVolo(g, "MADRID", "BARCELLONA", 40.00f, 30);
+	g = aggiungiVolo(g, "BARCELLONA", "MILANO", 75.00f, 45);
+    g = aggiungiVolo(g, "MOSCA", "SCHIPOL", 120.00f, 140);
+	g = aggiungiVolo(g, "LONDRA", "PARIGI", 60.00f, 35);
+	g = aggiungiVolo(g, "PARIGI", "MADRID", 55.00f, 40);
+	
     return g;
 }
 
