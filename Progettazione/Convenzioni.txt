@@ -1,6 +1,6 @@
 Nomi di variabili: tutto minuscolo
 Nomi di funzioni: camel-case con la prima lettera minuscola (faiQualcosa(), estraiDati(), ecc..)
-Nomi di file: camel-case (AlberoUtenti, GrafoViaggi, ecc..)
+Nomi di file: minuscolo (alberoutenti, grafoviaggi, ecc..)
 
 Tipi predefiniti con typedef: t_nometipo (t_lst, t_abr, t_grf)
 Costanti: tutto maiuscolo (LUNGHEZZA_QUALCOSA)
