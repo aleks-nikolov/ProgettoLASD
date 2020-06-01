@@ -1,6 +1,5 @@
 #include "gstutente.h"
 
-
 void stampaMenuIniziale();
 
 void stampaMenuUtente();

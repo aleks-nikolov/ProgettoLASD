@@ -6,7 +6,7 @@
 typedef struct t_utente{
 	char nomeUtente[LUNGHEZZA_NOME_UTENTE];
 	char password[LUNGHEZZA_PASSWORD];
-	t_lista prenotazioni;
+	t_lista  * prenotazioni;
 	int punti;
 	int tickets[LUNGHEZZA_TICKETS];
 	int admin;
