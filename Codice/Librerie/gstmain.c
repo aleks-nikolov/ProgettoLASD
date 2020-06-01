@@ -99,7 +99,7 @@ int eseguiAccesso(t_abr * utenti){
 	return esito;
 }
 
-/*gestisciUtente(int esito, t_abr * utenti, t_grafo * tratte){
+/*gestisciUtente(int esito, t_abr * utenti, t_grf * tratte){
 	
 }
 

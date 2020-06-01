@@ -10,11 +10,11 @@ void terminaProgramma(int * selettoreAzione);
 
 void stampaRegoleCredenziali();
 
-//void effettuaRegistrazione(t_abr * utenti);
+void effettuaRegistrazione(t_abr * utenti);
 
-//int eseguiAccesso();
+int eseguiAccesso(t_abr * utenti);
 
-//gestisciUtente(int esito);
+//void gestisciUtente(int esito, t_abr * utenti, t_grf * tratte);
 
 
 
