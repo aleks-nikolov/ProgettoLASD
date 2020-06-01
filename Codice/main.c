@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include "GestioneMain.h"
 
 int main(){
 	int selettoreAzione;
