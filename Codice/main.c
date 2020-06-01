@@ -5,7 +5,8 @@
 int main(){
 	int selettoreAzione;
 	
-	//t_grafo * tratte = inizializzaGrafo(); //Non è detto che si inizializzerà in questo modo(magari hai na funzione che prende grafo come argomento, idk). Giù invece funzionerà così, ho già il metodo per gli abr dal vecchio progetto
+	t_grf * grafo = NULL;
+    grafo = inizializzaGrafo(grafo);
 	
 	//t_abr *  utenti = inizializzaUtenti();
 	
