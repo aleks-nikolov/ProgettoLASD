@@ -79,7 +79,7 @@ int eseguiAccesso(t_abr * utenti){//ritorna 0 se l'accesso fallisce, 1 se l'acce
 	
 	if(contains_U(utenti, nomeTmp, &utenteTmp)){
 		do{
-			int altroTentativo = 0;
+			altroTentativo = 0;
 			
 			printf("\nInserire password: ");
 			gets(passwordTmp);
@@ -94,6 +94,7 @@ int eseguiAccesso(t_abr * utenti){//ritorna 0 se l'accesso fallisce, 1 se l'acce
 			}else{
 				printf("\nPassword errata, si desidera riprovare? (1 per si, altro per no): ");
 				scanf("%d", &altroTentativo);
+				fflush(stdin);
 			} 
 		}while(altroTentativo == 1);
 	}else
