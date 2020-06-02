@@ -1,7 +1,5 @@
-#include <stdio.h>
-#include <stdlib.h>
 #include "gstmain.h"
-
+ 
 int main(){
 	int selettoreAzione;
 	int esito;
