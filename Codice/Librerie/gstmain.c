@@ -64,7 +64,7 @@ void effettuaRegistrazione(t_abr * utenti){
 	}while(nomeAmmesso == 0 || passwordAmmessa == 0);
 }
 
-int eseguiAccesso(t_abr * utenti){//ritorna 0 se l'accesso fallisce, 1 se l'accesso avvenuto è di un utente, 2 se l'accesso avvenuto è di un admin
+int eseguiAccesso(t_abr * utenti, t_abr ** contenitore){//ritorna 0 se l'accesso fallisce, 1 se l'accesso avvenuto è di un utente, 2 se l'accesso avvenuto è di un admin. Contenitore andrà a contenere l'utente che ha fatto l'accesso(se c'è)
 	char nomeTmp[LUNGHEZZA_NOME_UTENTE];
 	char passwordTmp[LUNGHEZZA_PASSWORD];
 	t_abr * utenteTmp;
@@ -91,6 +91,8 @@ int eseguiAccesso(t_abr * utenti){//ritorna 0 se l'accesso fallisce, 1 se l'acce
 				else
 					esito = 2;
 				printf("\nAccesso eseguito con successo");
+				if(contenitore)
+				*contenitore = utenteTmp;
 			}else{
 				printf("\nPassword errata, si desidera riprovare? (1 per si, altro per no): ");
 				scanf("%d", &altroTentativo);
@@ -103,7 +105,7 @@ int eseguiAccesso(t_abr * utenti){//ritorna 0 se l'accesso fallisce, 1 se l'acce
 	return esito;
 }
 
-/*gestisciUtente(int esito, t_abr * utenti, t_grf * tratte){
+/*gestisciUtente(int esito, t_abr * utenti, t_grf * tratte, t_abr ** utenteCorrente){
 	
 }
 

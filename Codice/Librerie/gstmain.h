@@ -10,9 +10,9 @@ void stampaRegoleCredenziali();
 
 void effettuaRegistrazione(t_abr * utenti);
 
-int eseguiAccesso(t_abr * utenti);
+int eseguiAccesso(t_abr * utenti, t_abr ** contenitore);
 
-//void gestisciUtente(int esito, t_abr * utenti, t_grf * tratte);
+//void gestisciUtente(int esito, t_abr * utenti, t_grf * tratte, t_abr ** utenteCorrente);
 
 
 

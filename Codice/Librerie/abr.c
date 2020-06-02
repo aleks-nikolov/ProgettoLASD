@@ -1,5 +1,12 @@
 #include "abr.h"
 
+void inizializzaTickets (int * tickets){
+	int i;
+	
+	for(i=0;i<LUNGHEZZA_TICKETS;i++)
+		tickets[i] = 0;
+}
+
 t_abr * creaNodo_U(char * nomeUtente, char * password, int admin){
 	t_abr * tmp =(t_abr *) malloc(sizeof(t_abr));
 	
@@ -10,7 +17,7 @@ t_abr * creaNodo_U(char * nomeUtente, char * password, int admin){
 		tmp->utente.admin = admin;
 		tmp->utente.prenotazioni = NULL;
 		tmp->utente.punti = 0;
-		tmp->utente.tickets[0] = 0;
+		inizializzaTickets(tmp->utente.tickets);
 	}else 
 		printf("Memoria non disponibile\n");
 	return tmp;

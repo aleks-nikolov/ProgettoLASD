@@ -29,3 +29,5 @@ int contains_U(t_abr * radice, char * nomeUtente, t_abr ** contenitore);
 void mostraUtenti(t_abr * radice);
 
 t_abr * inizializzaUtenti(); //metodo lanciato a inizio programma per inizializzare 3 utenti admin e 2 utenti clienti
+
+void inizializzaTickets(int * tickets);
