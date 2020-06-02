@@ -3,13 +3,13 @@
 #define LUNGHEZZA_PASSWORD 21
 #define LUNGHEZZA_TICKETS 5
 
-typedef struct t_utente{
+typedef struct t_utente{//definizione del tipo t_utente
 	char nomeUtente[LUNGHEZZA_NOME_UTENTE];
 	char password[LUNGHEZZA_PASSWORD];
+	int admin;
 	t_lista  * prenotazioni;
 	int punti;
 	int tickets[LUNGHEZZA_TICKETS];
-	int admin;
 }t_utente;
 
 typedef struct t_abr{//definizione della struttura che andrà a contenere i vari utenti, in questo caso, un albero binario di ricerca
@@ -20,12 +20,12 @@ typedef struct t_abr{//definizione della struttura che andrà a contenere i vari 
 
 //funzioni per la gestione della struttura t_abr
 
-t_abr_U * creaNodo_U(char * nomeUtente, char * password);
+t_abr * creaNodo_U(char * nomeUtente, char * password, int admin);
 
-t_abr_U * inserisciNodo_U(t_abr * radice, char * nomeUtente, char * password);
+t_abr * inserisciNodo_U(t_abr * radice, char * nomeUtente, char * password, int admin);
 
 int contains_U(t_abr * radice, char * nomeUtente, t_abr ** contenitore);
 	
 void mostraUtenti(t_abr * radice);
 
-t_abr * inizializzaUtenti(); //metodo lanciato a inizio programma per inizializzare 3 utenti admin
+t_abr * inizializzaUtenti(); //metodo lanciato a inizio programma per inizializzare 3 utenti admin e 2 utenti clienti
