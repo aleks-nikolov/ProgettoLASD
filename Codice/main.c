@@ -6,8 +6,8 @@ int main(){
     int esito;
     t_abr * utenteCorrente;
 
-    t_grf * grafo = NULL;
-    grafo = inizializzaGrafo(grafo);
+    t_grf * voli = NULL;
+    voli = inizializzaGrafo(voli);
 
     t_abr *  utenti = inizializzaUtenti();
 
@@ -24,13 +24,13 @@ int main(){
                 break;
 
             case 2:
-            	utenteCorrente = NULL;
+                utenteCorrente = NULL;
                 esito = eseguiAccesso(utenti, &utenteCorrente); //restituisce 0 se login fallito, 1 se le credenziali appartengono a un semplice cliente, 2 se appartengono a un admin. UtenteCorrente andrà a eseguire l'utente che ha effettuato l'accesso
                 //gestisciUtente(esito, utenti, tratte, &utenteCorrente);
                 if (esito == 1)
                     printf("\nAccesso come utente");
                 else if (esito == 2)
-                    gestisciOpzioneAdmin(&grafo);
+                    gestisciOpzioneAdmin(&voli);
                 break;
 
             case 3:
