@@ -63,8 +63,9 @@ t_grf * aggiungiAeroportoInTesta(t_grf * g, char *nome) {
 t_grf * eliminaAeroporto(t_grf * g, char *nome) {
     if(!grafoVuoto(g)){
         g->next = eliminaAeroporto(g->next, nome);
-        if(strcmp(g->nome, nome) == 0) {
+        if(strcmp(g->nome, strupr(nome)) == 0) {
             t_grf * temp = g->next;
+            printf("\nHo eliminato %s dalle destinazioni!", g->nome);
             free(g);
             return temp;
         }
@@ -112,6 +113,7 @@ t_grf * eliminaVolo(t_grf * g, char *uscita, char *entrata) {
     } else {
         temp = getVertice(g, uscita);
         temp->archi = eliminaArco(temp->archi, entrata);
+        printf("\nIl volo proveniente da %s e diretto a %s e' stato eliminato con successo!\n", temp->nome, entrata);
     }
 
     return g;
@@ -169,7 +171,7 @@ t_grf * getVertice(t_grf * g, char *nome) {
 //Controlla se esiste il volo dal campo 'archi' di un vertice a 'entrata'
 int voloEsistente(t_arc * a, char *entrata) {
     if(!arcoVuoto(a)) {
-        if(strcmp(a->nome, entrata) == 0)
+        if(strcmp(a->nome, strupr(entrata)) == 0)
             return 1;
         else
             return voloEsistente(a->next, entrata);
@@ -181,7 +183,7 @@ int voloEsistente(t_arc * a, char *entrata) {
 //Controlla l'esistenza di un aeroporto nel grafo
 int aeroportoEsistente(t_grf * g, char *nome) {
     if(!grafoVuoto(g)) {
-        if(strcmp(g->nome, nome) == 0)
+        if(strcmp(g->nome, strupr(nome)) == 0)
             return 1;
         else
             return aeroportoEsistente(g->next, nome);

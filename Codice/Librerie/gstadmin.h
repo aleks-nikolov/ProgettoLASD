@@ -1,4 +1,4 @@
 #include "grafovoli.h"
 
-void menuAdmin(int* scelta);
-t_grf* gestisciOpzione(t_grf* g);
+void stampaMenuAdmin(int* scelta);
+void gestisciOpzioneAdmin(t_grf ** g);

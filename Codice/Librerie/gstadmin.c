@@ -1,6 +1,6 @@
 #include "gstadmin.h"
 
-void menuAdmin(int* scelta){
+void stampaMenuAdmin(int* scelta){
     printf("\nInserisci"
     "\n\t1 - Aggiungi una nuova destinazione."
     "\n\t2 - Aggiungi un nuovo volo"
@@ -12,7 +12,7 @@ void menuAdmin(int* scelta){
     scanf("%d", scelta);
 }
 
-t_grf* gestisciOpzione(t_grf* g){
+void gestisciOpzioneAdmin(t_grf ** g){
     int scelta;
     char nomeaeroporto[LUNGHEZZA_NOME_AEROPORTO];
     char nomepartenzavolo[LUNGHEZZA_NOME_AEROPORTO];
@@ -20,9 +20,8 @@ t_grf* gestisciOpzione(t_grf* g){
     float prezzo;
     int durata;
 
-
     do{
-        menuAdmin(&scelta);
+        stampaMenuAdmin(&scelta);
 
         switch(scelta){
 
@@ -32,9 +31,7 @@ t_grf* gestisciOpzione(t_grf* g){
                 scanf("%s", nomeaeroporto);
                 fflush(stdin);
 
-                printf("\ntest");
-
-                g = aggiungiAeroporto(g, nomeaeroporto);
+                *g = aggiungiAeroporto(*g, nomeaeroporto);
                 printf("\nHo aggiunto %s alle destinazioni con successo!\n", nomeaeroporto);
 
                 break;
@@ -58,7 +55,7 @@ t_grf* gestisciOpzione(t_grf* g){
                 fflush(stdin);
 
 
-                g = aggiungiVolo(g, nomepartenzavolo, nomearrivovolo, prezzo, durata);
+                *g = aggiungiVolo(*g, nomepartenzavolo, nomearrivovolo, prezzo, durata);
 
                 printf("\nIl nuovo volo proveniente da %s e diretto a %s e' stato aggiunto con successo!\n", nomepartenzavolo, nomearrivovolo);
 
@@ -69,11 +66,11 @@ t_grf* gestisciOpzione(t_grf* g){
                 printf("Qual'e' il nome dell'aeroporto che vuoi rimuovere dalle destinazioni?\n");
                 scanf("%s", nomeaeroporto);
                 fflush(stdin);
-
-                g = eliminaAeroporto(g, nomeaeroporto);
-                g = eliminaTuttiVoliAdAeroporto(g, nomeaeroporto);
-
-                printf("Ho eliminato %s dalle destinazioni!\n", nomeaeroporto);
+                if(aeroportoEsistente(*g, nomeaeroporto)) {
+                    *g = eliminaAeroporto(*g, nomeaeroporto);
+                    *g = eliminaTuttiVoliAdAeroporto(*g, nomeaeroporto);
+                } else
+                    printf("L'aeroporto inserito non esiste");
 
                 break;
 
@@ -87,16 +84,14 @@ t_grf* gestisciOpzione(t_grf* g){
                 scanf("%s", nomearrivovolo);
                 fflush(stdin);
 
-                g = eliminaVolo(g, nomepartenzavolo, nomearrivovolo);
-
-                printf("\nIl volo proveniente da %s e diretto a %s e' stato eliminato con successo!\n", nomepartenzavolo, nomearrivovolo);
+                *g = eliminaVolo(*g, nomepartenzavolo, nomearrivovolo);
 
                 break;
 
             case (5):
 
                 printf("\nQuesti sono tutti i voli dell'aeroporto:\n\n");
-                stampaGrafo(g);
+                stampaGrafo(*g);
                 break;
 
             case (6):
@@ -113,5 +108,4 @@ t_grf* gestisciOpzione(t_grf* g){
 
     }while(scelta != 6);
 
-    return g;
 }
