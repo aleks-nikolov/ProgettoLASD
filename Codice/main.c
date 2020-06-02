@@ -24,7 +24,7 @@ int main(){
 
             case 2:
                 utenteCorrente = NULL;
-                esito = eseguiAccesso(utenti, &utenteCorrente); //restituisce 0 se login fallito, 1 se le credenziali appartengono a un semplice cliente, 2 se appartengono a un admin. UtenteCorrente andrà a eseguire l'utente che ha effettuato l'accesso
+                esito = eseguiAccesso(utenti, &utenteCorrente); //restituisce 0 se login fallito, 1 se le credenziali appartengono a un semplice cliente, 2 se appartengono a un admin. UtenteCorrente andrà a contenere l'utente che ha effettuato l'accesso
                 gestisciUtente(esito, utenti, voli, &utenteCorrente);
                 break;
 
