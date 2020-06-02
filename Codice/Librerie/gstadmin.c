@@ -15,19 +15,19 @@ void gestisciOpzioneAdmin(t_grf ** g){
         switch(scelta){
 
             case(1):
-                AggiuntaAeroporto(g);
+                aggiuntaAeroporto(g);
                 break;
 
             case (2):
-                AggiuntaVolo(g);
+                aggiuntaVolo(g);
                 break;
 
             case (3):
-                RimozioneAeroporto(g);
+                rimozioneAeroporto(g);
                 break;
 
             case (4):
-                RimozioneVolo(g);
+                rimozioneVolo(g);
                 break;
 
             case (5):
@@ -60,7 +60,7 @@ void stampaMenuAdmin(int* scelta){
     scanf("%d", scelta);
 }
 
-void AggiuntaAeroporto(t_grf ** g) {
+void aggiuntaAeroporto(t_grf ** g) {
 
     printf("Qual'e' il nuovo aeroporto che vuoi aggiungere alle destinazioni?\n");
     scanf("%s", nomeaeroporto);
@@ -71,7 +71,7 @@ void AggiuntaAeroporto(t_grf ** g) {
 
 }
 
-void AggiuntaVolo(t_grf ** g) {
+void aggiuntaVolo(t_grf ** g) {
 
     printf("Qual'e' la partenza del nuovo volo che vuoi aggiungere?\n");
     scanf("%s", nomepartenzavolo);
@@ -112,7 +112,7 @@ void AggiuntaVolo(t_grf ** g) {
 
 }
 
-void RimozioneAeroporto(t_grf ** g) {
+void rimozioneAeroporto(t_grf ** g) {
 
     printf("Qual'e' il nome dell'aeroporto che vuoi rimuovere dalle destinazioni?\n");
     scanf("%s", nomeaeroporto);
@@ -125,7 +125,7 @@ void RimozioneAeroporto(t_grf ** g) {
 
 }
 
-void RimozioneVolo(t_grf ** g) {
+void rimozioneVolo(t_grf ** g) {
 
     printf("Qual'e' la partenza del volo che vuoi eliminare?\n");
     scanf("%s", nomepartenzavolo);
