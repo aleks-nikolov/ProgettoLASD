@@ -57,7 +57,7 @@ void mostraUtenti(t_abr * radice){
 		if(radice->utente.admin == 1)
 			printf("%s (admin), password: %s\n", radice->utente.nomeUtente, radice->utente.password);
 		else
-			printf("%s (cliente), password: %s\n", radice->utente.nomeUtente, radice->utente.nomeUtente);
+			printf("%s (cliente), password: %s\n", radice->utente.nomeUtente, radice->utente.password);
 		mostraUtenti(radice->destro);
 	}
 }

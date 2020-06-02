@@ -46,9 +46,10 @@ void effettuaRegistrazione(t_abr * utenti){
 				gets(passwordTmp);
 				fflush(stdin);
 				
-				if(!strchr(passwordTmp, ' '))
+				if(!strchr(passwordTmp, ' ')){
 					utenti = inserisciNodo_U(utenti, nomeTmp, passwordTmp, 0);
-				else{
+					printf("\nRegistrazione avvenuta con successo");
+				}else{
 					printf("\nLa password non puo' contenere spazi, riprovare");
 					passwordAmmessa = 0;
 				}
@@ -89,8 +90,9 @@ int eseguiAccesso(t_abr * utenti){//ritorna 0 se l'accesso fallisce, 1 se l'acce
 					esito = 1;
 				else
 					esito = 2;
+				printf("\nAccesso eseguito con successo");
 			}else{
-				printf("\nPassword errata, si desidera riprovare? (1 per si, altro per no)");
+				printf("\nPassword errata, si desidera riprovare? (1 per si, altro per no): ");
 				scanf("%d", &altroTentativo);
 			} 
 		}while(altroTentativo == 1);
