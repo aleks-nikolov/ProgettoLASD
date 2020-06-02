@@ -1,4 +1,4 @@
-#include "gstutente.h"
+#include "gstcliente.h"
 
 void toUpper_String(char * string){
 	int i;

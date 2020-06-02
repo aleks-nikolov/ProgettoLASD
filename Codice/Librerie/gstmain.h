@@ -1,4 +1,5 @@
-#include "gstutente.h"
+#include "gstcliente.h"
+#include "gstadmin.h"
 
 void stampaMenuIniziale();
 

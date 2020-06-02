@@ -1,5 +1,4 @@
 #include "Librerie/gstmain.h"
-#include "Librerie/gstadmin.h"
 
 int main(){
     int selettoreAzione;
