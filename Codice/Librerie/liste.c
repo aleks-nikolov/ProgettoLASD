@@ -1,6 +1,6 @@
 #include "liste.h"
 
-t_lista * creaNodo_P (char * partenza, char * destinazione, int numeroScali, float prezzo, int numeroPostiPrenotati){
+t_lista * creaNodo_P (char * partenza, char * destinazione, int numeroScali, float prezzo){
 	t_lista * tmp = (t_lista *) malloc (sizeof(t_lista));
 	
 	if(tmp){
@@ -8,7 +8,6 @@ t_lista * creaNodo_P (char * partenza, char * destinazione, int numeroScali, flo
 		strcpy(tmp->prenotazioni.destinazione, destinazione);
 		tmp->prenotazioni.numeroScali = numeroScali;
 		tmp->prenotazioni.prezzo = prezzo;
-		tmp->prenotazioni.numeroPostiPrenotati = numeroPostiPrenotati;
 		tmp->next = NULL;
 	}else 
 		printf("Memoria insufficiente per la creazione di un nuovo elemento");
@@ -16,8 +15,8 @@ t_lista * creaNodo_P (char * partenza, char * destinazione, int numeroScali, flo
 	return tmp;
 }
 
-t_lista * inserisciInTesta_P (t_lista * top, char * partenza, char * destinazione, int numeroScali, float prezzo, int numeroPostiPrenotati){
-	t_lista * tmp = creaNodo_P(partenza, destinazione, numeroScali, prezzo, numeroPostiPrenotati);
+t_lista * inserisciInTesta_P (t_lista * top, char * partenza, char * destinazione, int numeroScali, float prezzo){
+	t_lista * tmp = creaNodo_P(partenza, destinazione, numeroScali, prezzo);
 	
 	if(tmp){
 		tmp->next = top;

@@ -19,9 +19,9 @@ typedef struct t_lista{//definizione della struttura che andrà a contenere le pr
 
 //funzioni per la gestione della struttura t_lista
 
-t_lista * creaNodo_P (char * partenza, char * destinazione, int numeroScali, float prezzo, int numeroPostiPrenotati);
+t_lista * creaNodo_P (char * partenza, char * destinazione, int numeroScali, float prezzo);
 
-t_lista * inserisciInTesta_P (t_lista * top, char * partenza, char * destinazione, int numeroScali, float prezzo, int numeroPostiPrenotati);
+t_lista * inserisciInTesta_P (t_lista * top, char * partenza, char * destinazione, int numeroScali, float prezzo);
 
 t_lista * rimuoviElemento_P(t_lista * top, char * partenza, char * destinazione);
 
