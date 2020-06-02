@@ -4,6 +4,7 @@
 int main(){
     int selettoreAzione;
     int esito;
+    t_abr * utenteCorrente;
 
     t_grf * grafo = NULL;
     grafo = inizializzaGrafo(grafo);
@@ -23,8 +24,9 @@ int main(){
                 break;
 
             case 2:
-                esito = eseguiAccesso(utenti); //restituisce 0 se login fallito(credenziali non presenti nella struttura contenente gli utenti), 1 se le credenziali appartengono a un semplice cliente, 2 se appartengono a un admin
-                //gestisciUtente(esito, utenti, tratte);
+            	utenteCorrente = NULL;
+                esito = eseguiAccesso(utenti, &utenteCorrente); //restituisce 0 se login fallito, 1 se le credenziali appartengono a un semplice cliente, 2 se appartengono a un admin. UtenteCorrente andrà a eseguire l'utente che ha effettuato l'accesso
+                //gestisciUtente(esito, utenti, tratte, &utenteCorrente);
                 if (esito == 1)
                     printf("\nAccesso come utente");
                 else if (esito == 2)
