@@ -4,11 +4,12 @@
 
 int main(){
 	int selettoreAzione;
+	int esito;
 	
-	t_grf * grafo = NULL;
-    grafo = inizializzaGrafo(grafo);
+	//t_grf * grafo = NULL;
+    //grafo = inizializzaGrafo(grafo);
 	
-	//t_abr *  utenti = inizializzaUtenti();
+	t_abr *  utenti = inizializzaUtenti();
 	
 	do{
 		selettoreAzione = 0;
@@ -19,11 +20,11 @@ int main(){
 		
 		switch(selettoreAzione){
 			case 1:
-			//effettuaRegistrazione(utenti);
+			effettuaRegistrazione(utenti);
 			break;
 				
 			case 2:
-			//int esito = eseguiAccesso(utenti); //restituisce 0 se login fallito(credenziali non presenti nella struttura contenente gli utenti), 1 se le credenziali appartengono a un semplice cliente, 2 se appartengono a un admin
+			esito = eseguiAccesso(utenti); //restituisce 0 se login fallito(credenziali non presenti nella struttura contenente gli utenti), 1 se le credenziali appartengono a un semplice cliente, 2 se appartengono a un admin
 			//gestisciUtente(esito, utenti, tratte);
 			break;
 				
@@ -32,7 +33,8 @@ int main(){
 			break;
 			
 			case 4://inserito per questioni di testing
-			//mostraUtenti(utenti);
+			puts("");
+			mostraUtenti(utenti);
 			break;
 			
 			default:

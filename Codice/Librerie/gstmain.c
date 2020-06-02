@@ -19,7 +19,7 @@ void terminaProgramma(int * selettoreAzione){
 }
 
 void stampaRegoleCredenziali(){
-	printf("\nNome utente e password non possono contenere spazi!");
+	printf("\nRicorda, nome utente e password non possono contenere spazi!");
 }
 
 void effettuaRegistrazione(t_abr * utenti){
@@ -47,9 +47,9 @@ void effettuaRegistrazione(t_abr * utenti){
 				fflush(stdin);
 				
 				if(!strchr(passwordTmp, ' '))
-					utenti = inserisciNodo_U(utenti, nomeTmp, passwordTmp);
+					utenti = inserisciNodo_U(utenti, nomeTmp, passwordTmp, 0);
 				else{
-					printf("\nLa password non può contenere spazi, riprovare");
+					printf("\nLa password non puo' contenere spazi, riprovare");
 					passwordAmmessa = 0;
 				}
 			}else{
@@ -57,7 +57,7 @@ void effettuaRegistrazione(t_abr * utenti){
 				nomeAmmesso = 0;
 			}
 		}else{
-			printf("\nIl nome utente non può contenere spazi, riprovare");
+			printf("\nIl nome utente non puo' contenere spazi, riprovare");
 			nomeAmmesso = 0;
 		}
 	}while(nomeAmmesso == 0 || passwordAmmessa == 0);
@@ -68,6 +68,7 @@ int eseguiAccesso(t_abr * utenti){//ritorna 0 se l'accesso fallisce, 1 se l'acce
 	char passwordTmp[LUNGHEZZA_PASSWORD];
 	t_abr * utenteTmp;
 	int esito = 0;
+	int altroTentativo;
 	
 	fflush(stdin);
 	

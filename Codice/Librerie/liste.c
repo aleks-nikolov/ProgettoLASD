@@ -46,7 +46,7 @@ int contains_P(t_lista * top, char * partenza, char * destinazione){
 		if(strcmp(top->prenotazioni.partenza, partenza) == 0 && strcmp(top->prenotazioni.destinazione, destinazione))
 			result = 1;
 		else
-			result = contains_P(top->next, titolo);
+			result = contains_P(top->next, partenza, destinazione);
 	}
 	return result;
 }

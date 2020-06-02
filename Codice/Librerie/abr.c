@@ -1,6 +1,6 @@
 #include "abr.h"
 
-t_abr * creaNodo_U(char * nomeUtente, char * password, int admin);
+t_abr * creaNodo_U(char * nomeUtente, char * password, int admin){
 	t_abr * tmp =(t_abr *) malloc(sizeof(t_abr));
 	
 	if(tmp){
@@ -10,7 +10,7 @@ t_abr * creaNodo_U(char * nomeUtente, char * password, int admin);
 		tmp->utente.admin = admin;
 		tmp->utente.prenotazioni = NULL;
 		tmp->utente.punti = 0;
-		tmp->utente.tickets = {0};
+		tmp->utente.tickets[0] = 0;
 	}else 
 		printf("Memoria non disponibile\n");
 	return tmp;
@@ -33,12 +33,12 @@ int contains_U(t_abr * radice, char * nomeUtente, t_abr ** contenitore){//verifi
 	int result = 0;
 	
 	if(radice){
-		if(strcmp(radice->utente.nomeUtente, utente) != 0){
+		if(strcmp(radice->utente.nomeUtente, nomeUtente) != 0){
 			
-			if(strcmp(radice->utente.nomeUtente, utente) > 0)
+			if(strcmp(radice->utente.nomeUtente, nomeUtente) > 0)
 				result = contains_U(radice->sinistro, nomeUtente, contenitore);
 			else 
-				if(strcmp(radice->utente.nomeUtente, utente) < 0)
+				if(strcmp(radice->utente.nomeUtente, nomeUtente) < 0)
 					result = contains_U(radice->destro, nomeUtente, contenitore);
 				
 		}else{

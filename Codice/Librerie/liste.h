@@ -14,7 +14,7 @@ typedef struct t_prenotazione{//definizione del tipo t_prenotazione
 
 typedef struct t_lista{//definizione della struttura che andrà a contenere le prenotazioni di ogni utente, in questo caso, una lista singolarmente linkata
 	t_prenotazione prenotazioni;
-	t_lista * next;
+	struct t_lista * next;
 }t_lista;
 
 //funzioni per la gestione della struttura t_lista
