@@ -138,7 +138,7 @@ void rimozioneVolo(t_grf ** g) {
     printf("Qual'e' la destinazione del volo con partenza da %s che vuoi eliminare?\n", nomepartenzavolo);
     scanf("%s", nomearrivovolo);
     fflush(stdin);
-    if(!aeroportoEsistente(*g, nomepartenzavolo)) {
+        if(!aeroportoEsistente(*g, nomearrivovolo)) {
         printf("\nL'aeroporto %s non esiste", nomearrivovolo);
         return;
     }
