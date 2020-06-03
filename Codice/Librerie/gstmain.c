@@ -105,12 +105,11 @@ int eseguiAccesso(t_abr * utenti, t_abr ** contenitore){//ritorna 0 se l'accesso
 	return esito;
 }
 
-void gestisciUtente(int esito, t_abr * utenti, t_grf * voli, t_abr ** utenteCorrente){
+void gestisciUtente(int esito, t_abr * utenti, t_grf ** voli, t_abr ** utenteCorrente){
 	if(esito == 1)
-		//gestisciCliente(t_abr * utenti, t_grf * voli, t_abr ** utenteCorrente);
-		;
+		gestisciCliente(utenti, *voli, utenteCorrente);
 	else if(esito == 2)
-		 gestisciOpzioneAdmin(&voli);
+		 gestisciOpzioneAdmin(voli);
 }
 
 

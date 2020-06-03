@@ -7,3 +7,7 @@ void toUpper_String(char * string){
 		string[i] = toupper(string[i]);
 	}
 }
+
+void gestisciCliente(t_abr * utenti, t_grf * voli, t_abr ** utenteCorrente){
+	
+}

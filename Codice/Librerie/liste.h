@@ -9,7 +9,6 @@ typedef struct t_prenotazione{//definizione del tipo t_prenotazione
 	char destinazione[LUNGHEZZA_DESTINAZIONE];
 	int numeroScali;
 	float prezzo;
-	int numeroPostiPrenotati;
 }t_prenotazione;
 
 typedef struct t_lista{//definizione della struttura che andrà a contenere le prenotazioni di ogni utente, in questo caso, una lista singolarmente linkata
