@@ -121,7 +121,7 @@ void rimozioneAeroporto(t_grf ** g) {
         *g = eliminaAeroporto(*g, nomeaeroporto);
         *g = eliminaTuttiVoliAdAeroporto(*g, nomeaeroporto);
     } else
-        printf("L'aeroporto inserito non esiste");
+        printf("L'aeroporto %s non esiste", nomeaeroporto);
 
 }
 
@@ -130,10 +130,23 @@ void rimozioneVolo(t_grf ** g) {
     printf("Qual'e' la partenza del volo che vuoi eliminare?\n");
     scanf("%s", nomepartenzavolo);
     fflush(stdin);
+    if(!aeroportoEsistente(*g, nomepartenzavolo)) {
+        printf("\nL'aeroporto %s non esiste", nomearrivovolo);
+        return;
+    }
 
     printf("Qual'e' la destinazione del volo con partenza da %s che vuoi eliminare?\n", nomepartenzavolo);
     scanf("%s", nomearrivovolo);
     fflush(stdin);
+    if(!aeroportoEsistente(*g, nomepartenzavolo)) {
+        printf("\nL'aeroporto %s non esiste", nomearrivovolo);
+        return;
+    }
+
+    if(!voloEsistente(getVertice(*g, nomepartenzavolo)->archi, nomearrivovolo)) {
+        printf("\nIl volo da %s a %s non esiste", nomepartenzavolo, nomearrivovolo);
+        return;
+    }
 
     *g = eliminaVolo(*g, nomepartenzavolo, nomearrivovolo);
 
