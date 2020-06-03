@@ -14,9 +14,6 @@ void stampaMenuCliente(){
 gestisciTickets(utenteCorrente){
 }
 
-mostraPrenotazioni((*utenteCorrente)->utente.prenotazioni){
-}
-
 effettuaPrenotazione(utenti, voli, utenteCorrente){
 }
 
