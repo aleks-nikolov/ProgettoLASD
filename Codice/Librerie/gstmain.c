@@ -14,12 +14,12 @@ void terminaProgramma(int * selettoreAzione){
 	*selettoreAzione = 0;																
 	
 		printf("\nE' stato selezionato il comando di terminazione del programma, si reinserisca 3 per confermare: ");
-			
+		fflush(stdin);	
 		scanf("%d" , selettoreAzione);
 }
 
 void stampaRegoleCredenziali(){
-	printf("\nRicorda, nome utente e password non possono contenere spazi!");
+	printf("\nRicorda, nome utente e password non possono contenere spazi, e la loro lunghezza non deve superare i 20 caratteri!");
 }
 
 void effettuaRegistrazione(t_abr * utenti){
@@ -39,18 +39,18 @@ void effettuaRegistrazione(t_abr * utenti){
 		gets(nomeTmp);
 		fflush(stdin);
 		
-		if(!strchr(nomeTmp, ' ')){
+		if(!strchr(nomeTmp, ' ') && strlen(nomeTmp) <= 20){
 			if(!contains_U(utenti, nomeTmp, NULL)){
 				
 				printf("\nInserire nuova password: ");
 				gets(passwordTmp);
 				fflush(stdin);
 				
-				if(!strchr(passwordTmp, ' ')){
+				if(!strchr(passwordTmp, ' ') && strlen(passwordTmp) <= 20){
 					utenti = inserisciNodo_U(utenti, nomeTmp, passwordTmp, 0);
 					printf("\nRegistrazione avvenuta con successo");
 				}else{
-					printf("\nLa password non puo' contenere spazi, riprovare");
+					printf("\nLa password non puo' contenere spazi e la lunghezza non deve superare i 20 caratteri, riprovare");
 					passwordAmmessa = 0;
 				}
 			}else{
@@ -58,7 +58,7 @@ void effettuaRegistrazione(t_abr * utenti){
 				nomeAmmesso = 0;
 			}
 		}else{
-			printf("\nIl nome utente non puo' contenere spazi, riprovare");
+			printf("\nIl nome utente non puo' contenere spazi e la lunghezza non deve superare i 20 caratteri, riprovare");
 			nomeAmmesso = 0;
 		}
 	}while(nomeAmmesso == 0 || passwordAmmessa == 0);
@@ -77,7 +77,7 @@ int eseguiAccesso(t_abr * utenti, t_abr ** contenitore){//ritorna 0 se l'accesso
 	gets(nomeTmp);
 	fflush(stdin);
 	
-	if(contains_U(utenti, nomeTmp, &utenteTmp)){
+	if(strlen(nomeTmp) <= 20 && contains_U(utenti, nomeTmp, &utenteTmp)){
 		do{
 			altroTentativo = 0;
 			
@@ -85,7 +85,7 @@ int eseguiAccesso(t_abr * utenti, t_abr ** contenitore){//ritorna 0 se l'accesso
 			gets(passwordTmp);
 			fflush(stdin);
 			
-			if(strcmp(utenteTmp->utente.password, passwordTmp) == 0){
+			if(strlen(passwordTmp) <= 20 && strcmp(utenteTmp->utente.password, passwordTmp) == 0){
 				if(utenteTmp->utente.admin == 0)
 					esito = 1;
 				else
@@ -109,7 +109,7 @@ void gestisciUtente(int esito, t_abr * utenti, t_grf ** voli, t_abr ** utenteCor
 	if(esito == 1)
 		gestisciCliente(utenti, *voli, utenteCorrente);
 	else if(esito == 2)
-		 gestisciOpzioneAdmin(voli);
+		gestisciOpzioneAdmin(voli);
 }
 
 
