@@ -1,5 +1,7 @@
 #include "liste.h"
 
+//vanno modificate le funzioni sotto in seguito all'introduzione di lista di stringhe contenente gli scali
+
 t_lista * creaNodo_P (char * partenza, char * destinazione, int numeroScali, float prezzo){
 	t_lista * tmp = (t_lista *) malloc (sizeof(t_lista));
 	
@@ -50,4 +52,12 @@ int contains_P(t_lista * top, char * partenza, char * destinazione){
 	return result;
 }
 
+/*
+void mostraPrenotazioni(t_lista * top){
+	if(top){
+		printf("%d ", top->dato);
+		stampaListaSL(top->next);
+	}
+}
+*/
 

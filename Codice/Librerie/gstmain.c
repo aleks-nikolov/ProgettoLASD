@@ -90,7 +90,7 @@ int eseguiAccesso(t_abr * utenti, t_abr ** contenitore){//ritorna 0 se l'accesso
 					esito = 1;
 				else
 					esito = 2;
-				printf("\nAccesso eseguito con successo");
+				printf("\nAccesso eseguito con successo, benvenuto %s!\n", nomeTmp);
 				if(contenitore)
 				*contenitore = utenteTmp;
 			}else{

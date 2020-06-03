@@ -9,6 +9,7 @@ typedef struct t_prenotazione{//definizione del tipo t_prenotazione
 	char destinazione[LUNGHEZZA_DESTINAZIONE];
 	int numeroScali;
 	float prezzo;
+	//va aggiunta lista di stringhe per gli scali
 }t_prenotazione;
 
 typedef struct t_lista{//definizione della struttura che andrà a contenere le prenotazioni di ogni utente, in questo caso, una lista singolarmente linkata
@@ -25,4 +26,6 @@ t_lista * inserisciInTesta_P (t_lista * top, char * partenza, char * destinazion
 t_lista * rimuoviElemento_P(t_lista * top, char * partenza, char * destinazione);
 
 int contains_P (t_lista * top, char * partenza, char * destinazione);
+
+//void mostraPrenotazioni(t_lista * top);
 
