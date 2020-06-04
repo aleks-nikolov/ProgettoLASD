@@ -7,9 +7,9 @@ typedef struct t_utente{//definizione del tipo t_utente
 	char nomeUtente[LUNGHEZZA_NOME_UTENTE];
 	char password[LUNGHEZZA_PASSWORD];
 	int admin;
-	t_lista  * prenotazioni;
+	t_lista_P  * prenotazioni;
 	int punti;
-	int tickets[LUNGHEZZA_TICKETS];//ove tickets[0] è il numero di tickets di sconto 5%, tickets[1] è il numero di tickets di sconto da 10%...
+	int tickets[LUNGHEZZA_TICKETS];//ove tickets[0] è il numero di tickets di sconto da 5%, tickets[1] il numero di tickets di sconto da 10%...
 }t_utente;
 
 typedef struct t_abr{//definizione della struttura che andrà a contenere i vari utenti, in questo caso, un albero binario di ricerca
