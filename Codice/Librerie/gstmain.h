@@ -12,7 +12,7 @@ void effettuaRegistrazione(t_abr * utenti);
 
 int eseguiAccesso(t_abr * utenti, t_abr ** contenitore);
 
-void gestisciUtente(int esito, t_abr * utenti, t_grf ** voli, t_abr ** utenteCorrente);
+void gestisciUtente(int esito, t_abr * utenti, t_grf ** voli, t_abr * utenteCorrente);
 
 
 

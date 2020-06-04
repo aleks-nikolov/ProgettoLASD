@@ -11,10 +11,10 @@ void stampaMenuCliente(){
 
 /*
 
-gestisciTickets(utenteCorrente){
+gestisciTickets(t_abr * utenteCorrente){
 }
 
-effettuaPrenotazione(utenti, voli, utenteCorrente){
+effettuaPrenotazione(t_abr * utenti, t_grf * voli, t_abr * utenteCorrente){
 }
 
 */
@@ -29,7 +29,7 @@ void terminaGestioneCliente(int * selettoreAzione){
 			printf("\nLogout avvenuto con successo");
 }
 
-void gestisciCliente(t_abr * utenti, t_grf * voli, t_abr ** utenteCorrente){
+void gestisciCliente(t_abr * utenti, t_grf * voli, t_abr * utenteCorrente){
 	int selettoreAzione;
 	
 	do{
@@ -46,7 +46,7 @@ void gestisciCliente(t_abr * utenti, t_grf * voli, t_abr ** utenteCorrente){
                 
             case 2:
             	puts("");
-                //mostraPrenotazioni((*utenteCorrente)->utente.prenotazioni);
+                //mostraPrenotazioni(utenteCorrente->utente.prenotazioni);
                 break;
 
             case 3:
