@@ -29,12 +29,12 @@ int main(){
                 break;
 
             case 3:
-                terminaProgramma(&selettoreAzione);
+            	puts("");
+                mostraUtenti(utenti);
                 break;
 
             case 4:
-                puts("");
-                mostraUtenti(utenti);
+                terminaProgramma(&selettoreAzione);
                 break;
 
             default:
@@ -43,7 +43,7 @@ int main(){
         puts("\n");
         fflush(stdin);
 
-    }while(selettoreAzione != 3);
+    }while(selettoreAzione != 4);
 
     return 0;
 }

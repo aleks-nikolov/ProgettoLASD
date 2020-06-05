@@ -12,6 +12,16 @@ void gestisciSolaPartenza(t_abr * utenti, t_grf * voli, t_abr * utenteCorrente);
 
 void effettuaPrenotazione(t_abr * utenti, t_grf * voli, t_abr * utenteCorrente);
 
+void stampaMenuTickets();
+
+void mostraPunti(t_abr * utenteCorrente);
+
+void mostraTickets(t_abr * utenteCorrente);
+
+void stampaRegoleConversione();
+
+void convertiPunti(t_abr * utenteCorrente);
+
 void gestisciTickets(t_abr * utenteCorrente);
 
 void terminaGestioneCliente(int * selettoreAzione);

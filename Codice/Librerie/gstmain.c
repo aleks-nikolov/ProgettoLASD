@@ -5,15 +5,15 @@ void stampaMenuIniziale(){
 	printf("Selezionare azione da effettuare;\n\n"
 		   "1)Effettua nuova registrazione\n"
 		   "2)Esegui accesso\n"
-		   "3)Termina programma\n"
-		   "4)Visualizza utenti\n\n"
+		   "3)Visualizza utenti\n"
+		   "4)Termina programma\n\n"
 	       "Inserire numero: ");
 }
 
 void terminaProgramma(int * selettoreAzione){
 	*selettoreAzione = 0;																
 	
-		printf("\nE' stato selezionato il comando di terminazione del programma, si reinserisca 3 per confermare: ");
+		printf("\nE' stato selezionato il comando di terminazione del programma, si reinserisca 4 per confermare: ");
 		fflush(stdin);	
 		scanf("%d" , selettoreAzione);
 }
