@@ -91,7 +91,7 @@ void mostraTickets(t_abr * utenteCorrente){
 
 void stampaRegoleConversione(){
 	printf("\nDi seguito le regole di conversione;\n\n"
-		   "1)E' possibile convertire punti in tickets appatto che il numero di punti sia compreso tra 50 e 250\n"
+		   "1)E' possibile convertire punti in tickets a patto che il numero di punti sia compreso tra 50 e 250\n"
 		   "2)I tickets di sconto ottenibili vanno dal 5%%, 10%%, ... fino a 25%%(aumentano di 5 in 5 da 5 fino a 25)\n"
 		   "3)50 punti corrispondono a uno sconto del 5%%, 100 punti del 10%%,... fino a 250 che corrispondono a un ticket del 25%%\n"
 		   "4)Inserire numeri diversi da 50, 100, 150, 200 o 250 e' inutile(con 80 punti non otterrete uno sconto dell'8%% ma del 5 e vi saranno sottratti solo 50 punti) ma non errato\n");
