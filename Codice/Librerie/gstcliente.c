@@ -29,6 +29,8 @@ void effettuaPrenotazione(t_abr * utenti, t_grf * voli, t_abr * utenteCorrente){
 	int selettoreAzione;
 	
 	do{
+		selettoreAzione = 0;
+		
 	   	stampaMenuPrenotazione();
 		
 		fflush(stdin);
@@ -77,6 +79,7 @@ void gestisciCliente(t_abr * utenti, t_grf * voli, t_abr * utenteCorrente){
 	int selettoreAzione;
 	
 	do{
+		selettoreAzione = 0;
 		
 		stampaMenuCliente();
 		

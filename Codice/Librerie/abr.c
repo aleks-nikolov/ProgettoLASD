@@ -69,7 +69,7 @@ void mostraUtenti(t_abr * radice){
 	}
 }
 
-t_abr * inizializzaUtenti(){
+t_abr * inizializzaUtenti(){//metodo lanciato a inizio programma per inizializzare 3 utenti admin e 2 utenti clienti
 	t_abr * tmp = NULL;
 	
 	tmp = inserisciNodo_U(tmp,"admin1", "passwordA1", 1);

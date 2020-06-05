@@ -3,20 +3,25 @@
 #include <string.h>
 #include "gstadmin.h"
 
-typedef struct t_lista_S{//definizione della struttura che andrà a contenere i vari scali, in questo caso, una lista singolarmente linkata
+//definizione della struttura che andrà a contenere i vari scali di ogni prenotazione di viaggio per ciascun utente, in questo caso, una lista singolarmente linkata
+
+typedef struct t_lista_S{
 	char scalo[LUNGHEZZA_NOME_AEROPORTO];
 	struct t_lista_S * next;
 }t_lista_S;
 
-typedef struct t_prenotazione{//definizione del tipo t_prenotazione
+//definizione del tipo t_prenotazione
+
+typedef struct t_prenotazione{
 	char partenza[LUNGHEZZA_NOME_AEROPORTO];
 	char destinazione[LUNGHEZZA_NOME_AEROPORTO];
 	t_lista_S * scali;
 	float prezzo;
-	//va aggiunta lista di stringhe per gli scali
 }t_prenotazione;
 
-typedef struct t_lista_P{//definizione della struttura che andrà a contenere le prenotazioni di ogni utente, in questo caso, una lista singolarmente linkata
+//definizione della struttura che andrà a contenere le prenotazioni di ogni utente, in questo caso, una lista singolarmente linkata
+
+typedef struct t_lista_P{
 	t_prenotazione prenotazioni;
 	struct t_lista_P * next;
 }t_lista_P;

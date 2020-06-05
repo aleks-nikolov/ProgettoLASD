@@ -1,5 +1,7 @@
 #include "gstcliente.h"
 
+//funzioni per la gestione delle operazioni che appaiono nel main
+
 void stampaMenuIniziale();
 
 void stampaMenuUtente();

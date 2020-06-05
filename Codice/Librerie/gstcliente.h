@@ -1,5 +1,7 @@
 #include "abr.h"
 
+//funzioni per la gestione dell'applicativo nel caso in cui l'accesso venga effettuato da un cliente
+
 void stampaMenuCliente();
 
 void stampaMenuPrenotazione();
