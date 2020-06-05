@@ -13,15 +13,97 @@ void stampaMenuCliente(){
 
 void stampaMenuPrenotazione(){
 	printf("\nSeleziona azione da effettuare;\n\n"
-		   "1)Effettua prenotazione inserendo sola partenza\n"
-		   "2)Effettua prenotazione inserendo partenza e destinazione\n"
+		   "1)Effettua prenotazione inserendo partenza e destinazione\n"
+		   "2)Effettua prenotazione inserendo sola partenza\n"
 		   "3)Mostra voli\n"
 		   "4)Torna indietro\n\n"
 	       "Inserire numero: ");
 }
 
-void gestisciPartenzaEDestinazione(t_grf * voli, t_abr * utenteCorrente){
+void stampaMenuSelezioneTratta(int * selettoreTratta){						
+	printf("\nQuale tratta si desidera scegliere?\n"
+		   "1)Tratta piu' economica\n"
+		   "2)Tratta piu' breve\n\n"
+		   "Inserire numero: ");
+		   						
+	fflush(stdin);		
+	scanf("%d", selettoreTratta);
+}
+
+void calcolaPuntiOttenuti(float prezzo){
 	
+}
+
+void gestisciPartenzaEDestinazione(t_grf * voli, t_abr * utenteCorrente){
+	int altroTentativoPartenza;
+	int altroTentativoDestinazione;
+	
+	char partenza[LUNGHEZZA_NOME_AEROPORTO];
+	char destinazione[LUNGHEZZA_NOME_AEROPORTO];
+	
+	do{
+		altroTentativoPartenza = 0;
+		
+		printf("\nInserire aeroporto di partenza: ");
+	
+		fflush(stdin);
+		gets(partenza);
+	
+		if(strlen(partenza) <= 100 && aeroportoEsistente(voli, partenza)){
+			
+			do{
+				altroTentativoDestinazione = 0;
+				
+				printf("\nInserire aeroporto di destinazione: ");
+			
+				fflush(stdin);
+				gets(destinazione);
+			
+				if(strlen(destinazione) <= 100 && aeroportoEsistente(voli, destinazione)){
+					t_grf * raggiungibili = bfs(voli, partenza);
+					//bfs effettua una breadth first search e controlla che l'aeroporto di destinazione sia raggiungibile da quello di partenza
+					if(aeroportoEsistente(raggiungibili, destinazione)){
+						int selettoreTratta, altroTentativo;
+						
+						do{
+							selettoreTratta = altroTentativo = 0;
+							
+							stampaMenuSelezioneTratta(&selettoreTratta);
+		   				
+		   					if(selettoreTratta == 1 || selettoreTratta == 2){
+		   						dijkstra(&voli, partenza, destinazione, selettoreTratta);
+		   						
+		   						t_grf * percorso = costruisciPercorso(&voli, destinazione);
+                				
+                				/*
+                				qui il codice per la costruzione dei campi per l'inserimento della prenotazione e...si deve gestire anche la possibilità di usare tickets e la generazione di punti dalla stessa
+                				utenteCorrente->utente.prenotazioni = inserisciInTesta_P(utenteCorrente->utente.prenotazioni, partenza, destinazione,... );
+                				printf("\nPrenotazione avvenuta con successo pappone che non sei altro!");
+                				*/
+							}else{
+								printf("\nDato inserito non rientra nelle opzioni, riprovare;\n");
+								altroTentativo = 1;
+							}
+						}while(altroTentativo == 1);
+	
+					}else
+						printf("\n%s non e' raggiungibile da %s", destinazione, partenza);
+					
+				}else{
+					printf("\nAeroporto inserito non coperto dalla nostra compagnia, riprovare?(1 si, altro no): ");
+				
+					fflush(stdin);
+					scanf("%d", &altroTentativoDestinazione);
+				}	
+			}while(altroTentativoDestinazione == 1);
+			
+		}else{
+			printf("\nAeroporto inserito non coperto dalla nostra compagnia, riprovare?(1 si, altro no): ");
+			
+			fflush(stdin);
+			scanf("%d", &altroTentativoPartenza);
+		}
+	}while(altroTentativoPartenza == 1);
 }
 void gestisciSolaPartenza(t_abr * utenti, t_grf * voli, t_abr * utenteCorrente){
 	

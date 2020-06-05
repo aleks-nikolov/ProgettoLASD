@@ -6,6 +6,10 @@ void stampaMenuCliente();
 
 void stampaMenuPrenotazione();
 
+void stampaMenuSelezioneTratta(int * selettoreTratta);
+
+void calcolaPuntiOttenuti(float prezzo);
+
 void gestisciPartenzaEDestinazione(t_grf * voli, t_abr * utenteCorrente);
 
 void gestisciSolaPartenza(t_abr * utenti, t_grf * voli, t_abr * utenteCorrente);
