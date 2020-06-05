@@ -268,7 +268,6 @@ void gestisciCliente(t_abr * utenti, t_grf * voli, t_abr * utenteCorrente){
 	
 	do{
 		selettoreAzione = 0;
-		printf("\nBenvenuto, %s", utenteCorrente->utente.nomeUtente);
 		stampaMenuCliente();
 		
 		fflush(stdin);
