@@ -50,10 +50,20 @@ int aeroportoEsistente(t_grf * g, char *nome);
 int lunghezzaGrafo(t_grf * g);
 int grafoVuoto(t_grf * g);
 int arcoVuoto(t_arc * a);
+int getPesoArco(t_grf * g, t_grf * h, int pesoDiRiferimento);
 
-//Dijkstra
-t_grf * dijkstra(t_grf * g, char nome[], int pesoDiRiferimento);
+//Ricerce voli
+t_arc * trovaPiuEconomico(t_arc * a);
+void dijkstra(t_grf ** g, char *da, char *a, int pesoDiRiferimento);
 t_grf * copiaGrafo(t_grf * g, t_grf * q);
 t_grf * impostaPotenziale(t_grf * q, char *nome, int potenziale);
+t_grf * impostaPotenzialeATutti(t_grf * g, int potenziale);
 t_grf * impostaPrecedente(t_grf * q, char *nome, t_grf * precedente);
+t_grf * impostaPrecedenteATutti(t_grf * g, t_grf * precedente);
 t_grf * minimoPotenziale(t_grf * q);
+t_grf * costruisciPercorso(t_grf ** g, char * uscita);
+t_grf * aggiungiPercorsoInTesta(t_grf * g, t_grf * daAggiungere);
+void stampaPercorso(t_grf * g, t_grf * percorso, int pesoDiRiferimento);
+
+//BFS
+t_grf * bfs(t_grf * g, char *origine);

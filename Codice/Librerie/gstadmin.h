@@ -1,7 +1,7 @@
 #include "grafovoli.h"
 
 void gestisciOpzioneAdmin(t_grf ** g);
-void stampaMenuAdmin(int* scelta);
+void stampaMenuAdmin();
 
 void aggiuntaAeroporto(t_grf ** g);
 void aggiuntaVolo(t_grf ** g);

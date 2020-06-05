@@ -65,7 +65,6 @@ t_grf * eliminaAeroporto(t_grf * g, char *nome) {
         g->next = eliminaAeroporto(g->next, nome);
         if(strcmp(g->nome, strupr(nome)) == 0) {
             t_grf * temp = g->next;
-            printf("\nHo eliminato %s dalle destinazioni!", g->nome);
             free(g);
             return temp;
         }
@@ -220,4 +219,15 @@ int grafoVuoto(t_grf * g) {
 
 int arcoVuoto(t_arc * a) {
     return (a == NULL);
+}
+
+int getPesoArco(t_grf * g, t_grf * h, int pesoDiRiferimento) {
+    if (!grafoVuoto(g) && !grafoVuoto(h)) {
+        t_arc * temp = g->archi;
+        while (strcmp(temp->nome, h->nome) != 0)
+            temp = temp->next;
+        return (pesoDiRiferimento == 1) ? (int) temp->prezzo : temp->durata;
+    } else {
+        return 0;
+    }
 }
