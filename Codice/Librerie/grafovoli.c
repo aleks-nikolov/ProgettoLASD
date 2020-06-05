@@ -45,7 +45,7 @@ t_grf * aggiungiAeroporto(t_grf * g, char *nome) {
     return g;
 }
 
-//Aggiunge un nuovo aeroporto in testa alla lista dei vertici (usato solo negli algoritmi di Dijkstra)
+//Aggiunge un nuovo aeroporto in testa alla lista dei vertici
 t_grf * aggiungiAeroportoInTesta(t_grf * g, char *nome) {
     t_grf * temp = (t_grf *)malloc(sizeof(t_grf));
     strcpy(temp->nome, strupr(nome));

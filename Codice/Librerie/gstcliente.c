@@ -74,9 +74,9 @@ void gestisciPartenzaEDestinazione(t_grf * voli, t_abr * utenteCorrente){
 		   						dijkstra(&voli, partenza, destinazione, selettoreTratta);
 		   						
 		   						t_grf * percorso = costruisciPercorso(&voli, destinazione);
-                				
+
                 				/*
-                				qui il codice per la costruzione dei campi per l'inserimento della prenotazione e...si deve gestire anche la possibilità di usare tickets e la generazione di punti dalla stessa
+                				qui il codice per la costruzione dei campi per l'inserimento della prenotazione e...si deve gestire anche la possibilitï¿½ di usare tickets e la generazione di punti dalla stessa
                 				utenteCorrente->utente.prenotazioni = inserisciInTesta_P(utenteCorrente->utente.prenotazioni, partenza, destinazione,... );
                 				printf("\nPrenotazione avvenuta con successo pappone che non sei altro!");
                 				*/
@@ -268,7 +268,7 @@ void gestisciCliente(t_abr * utenti, t_grf * voli, t_abr * utenteCorrente){
 	
 	do{
 		selettoreAzione = 0;
-		
+		printf("\nBenvenuto, %s", utenteCorrente->utente.nomeUtente);
 		stampaMenuCliente();
 		
 		fflush(stdin);

@@ -21,7 +21,7 @@ typedef struct grafo {
     struct arco *archi;
     struct grafo *next;
 
-    int potenziale;       //il peso totale del cammino
+    int camminoMinimo;       //il peso totale del cammino fino a questo vertice
     struct grafo *prev;   //puntatore al vertice che precede nel cammino minimo
 } t_grf;
 
@@ -56,11 +56,11 @@ int getPesoArco(t_grf * g, t_grf * h, int pesoDiRiferimento);
 t_arc * trovaPiuEconomico(t_arc * a);
 void dijkstra(t_grf ** g, char *da, char *a, int pesoDiRiferimento);
 t_grf * copiaGrafo(t_grf * g, t_grf * q);
-t_grf * impostaPotenziale(t_grf * q, char *nome, int potenziale);
-t_grf * impostaPotenzialeATutti(t_grf * g, int potenziale);
+t_grf * impostaCamminoMinimo(t_grf * q, char *nome, int potenziale);
+t_grf * impostaCamminoMinimoATutti(t_grf * g, int potenziale);
 t_grf * impostaPrecedente(t_grf * q, char *nome, t_grf * precedente);
 t_grf * impostaPrecedenteATutti(t_grf * g, t_grf * precedente);
-t_grf * minimoPotenziale(t_grf * q);
+t_grf * minimoCammino(t_grf * q);
 t_grf * costruisciPercorso(t_grf ** g, char * uscita);
 t_grf * aggiungiPercorsoInTesta(t_grf * g, t_grf * daAggiungere);
 void stampaPercorso(t_grf * g, t_grf * percorso, int pesoDiRiferimento);

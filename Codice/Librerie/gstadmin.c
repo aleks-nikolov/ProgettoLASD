@@ -83,7 +83,7 @@ void gestisciOpzioneAdmin(t_grf ** g){
                 //scelta tra tratta più economica e più breve
                 printf("\nTratta preferita"
                        "\n1) Piu' economica"
-                       "\n2) Piu' breve");
+                       "\n2) Piu' breve\n");
                 scanf("%d", &pesoDiRiferimento);
                 fflush(stdin);
                 if (pesoDiRiferimento < 1 || pesoDiRiferimento > 2) {
