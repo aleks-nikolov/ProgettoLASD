@@ -1,7 +1,7 @@
 #include "gstcliente.h"
 
 void stampaMenuCliente(){
-	printf("\nSeleziona azione da effettuare;\n\n"
+	printf("\nSeleziona azione da effettuare:\n\n"
 		   "1)Effettua prenotazione\n"
 		   "2)Stampa prenotazioni attive\n"
 		   "3)Gestisci punti e tickets\n"
@@ -20,7 +20,7 @@ void stampaMenuPrenotazione(){
 	       "Inserire numero: ");
 }
 
-void stampaMenuSelezioneTratta(int * selettoreTratta){						
+void stampaMenuSelezioneTratta(int * selettoreTratta){
 	printf("\nQuale tratta si desidera scegliere?\n"
 		   "1)Tratta piu' economica\n"
 		   "2)Tratta piu' breve\n\n"
@@ -30,10 +30,20 @@ void stampaMenuSelezioneTratta(int * selettoreTratta){
 	scanf("%d", selettoreTratta);
 }
 
+void stampaMenuSelezioneDestinazione(int * selettoreTratta, char *partenza){
+    printf("\nQuale destinazione si desidera scegliere?\n"
+           "1)Destinazione piu' economica\n"
+           "2)Destinazione piu' gettonata\n"
+           "3)Mostra tutte le destinazioni raggiungibili da %s\n\n"
+           "Inserire numero: ", partenza);
+
+    fflush(stdin);
+    scanf("%d", selettoreTratta);
+}
+
 int utilizzaTickets(t_abr * utenteCorrente){
 	int sconto = 5;
-	
-	
+
 	
 	return sconto;
 }
@@ -77,6 +87,30 @@ void gestisciPagamentoPartenzaDestinazione(t_grf * voli, t_grf * percorso, t_abr
     printf("\n\nPrenotazione avvenuta con successo!\n");            			
 }
 
+void gestisciPrenotazione(t_grf * voli, t_abr * utenteCorrente, char * partenza, char * destinazione) {
+    int selettoreTratta, altroTentativoTratta;
+
+    do{
+        selettoreTratta = altroTentativoTratta = 0;
+
+        stampaMenuSelezioneTratta(&selettoreTratta);
+
+        if(selettoreTratta == 1 || selettoreTratta == 2){
+            dijkstra(&voli, partenza, destinazione, selettoreTratta);
+
+            t_grf * percorso = costruisciPercorso(&voli, destinazione);
+
+            float prezzo = 0;
+            t_lista_S * scali = NULL;
+
+            gestisciPagamentoPartenzaDestinazione(voli, percorso, utenteCorrente, selettoreTratta, partenza, destinazione);
+        }else{
+            printf("\nDato inserito non rientra nelle opzioni, riprovare;\n");
+            altroTentativoTratta = 1;
+        }
+    }while(altroTentativoTratta == 1);
+}
+
 void gestisciPartenzaEDestinazione(t_grf * voli, t_abr * utenteCorrente){
 	int altroTentativoPartenza;
 	int altroTentativoDestinazione;
@@ -106,27 +140,8 @@ void gestisciPartenzaEDestinazione(t_grf * voli, t_abr * utenteCorrente){
 					t_grf * raggiungibili = bfs(voli, partenza);
 					//bfs effettua una breadth first search e controlla che l'aeroporto di destinazione sia raggiungibile da quello di partenza
 					if(aeroportoEsistente(raggiungibili, destinazione)){
-						int selettoreTratta, altroTentativoTratta;
-						
-						do{
-							selettoreTratta = altroTentativoTratta = 0;
-							
-							stampaMenuSelezioneTratta(&selettoreTratta);
-		   				
-		   					if(selettoreTratta == 1 || selettoreTratta == 2){
-		   						dijkstra(&voli, partenza, destinazione, selettoreTratta);
-		   						
-		   						t_grf * percorso = costruisciPercorso(&voli, destinazione);
-                				
-                				float prezzo = 0;
-                				t_lista_S * scali = NULL;
-                				
-                				gestisciPagamentoPartenzaDestinazione(voli, percorso, utenteCorrente, selettoreTratta, partenza, destinazione);
-							}else{
-								printf("\nDato inserito non rientra nelle opzioni, riprovare;\n");
-								altroTentativoTratta = 1;
-							}
-						}while(altroTentativoTratta == 1);
+
+					    gestisciPrenotazione(voli, utenteCorrente, partenza, destinazione);
 	
 					}else
 						printf("\n%s non e' raggiungibile da %s", destinazione, partenza);
@@ -149,7 +164,82 @@ void gestisciPartenzaEDestinazione(t_grf * voli, t_abr * utenteCorrente){
 }
 
 void gestisciSolaPartenza(t_abr * utenti, t_grf * voli, t_abr * utenteCorrente){
-	
+    int altroTentativoPartenza;
+
+    char partenza[LUNGHEZZA_NOME_AEROPORTO];
+
+    do{
+        altroTentativoPartenza = 0;
+
+        printf("\nInserire aeroporto di partenza: ");
+        fflush(stdin);
+        gets(partenza);
+
+        if (strlen(partenza) <= 100 && aeroportoEsistente(voli, partenza)) {
+
+            int selettoreDestinazione = 0;
+            int altroTentativoTratta = 0;
+
+            do {
+                selettoreDestinazione = altroTentativoTratta = 0;
+
+                stampaMenuSelezioneDestinazione(&selettoreDestinazione, partenza);
+
+                if (selettoreDestinazione == 1) {  //caso destinazione più economica
+
+                    t_grf *origine = getVertice(voli, partenza);
+                    //trovaPiuEconomico restituisce un puntatore ad arco verso la destinazione adiacente alla partenza più economica
+                    t_grf *destinazione = getVertice(voli, trovaPiuEconomico(origine->archi)->nome);
+
+                    t_grf *percorso = NULL;
+                    percorso = aggiungiPercorsoInTesta(percorso, destinazione);
+                    percorso = aggiungiPercorsoInTesta(percorso, origine);
+
+                    float prezzo = 0;
+                    t_lista_S *scali = NULL;
+
+                    printf("\nIl volo piu' economico da %s e' l'aeroporto di %s\n", partenza, destinazione->nome);
+                    gestisciPagamentoPartenzaDestinazione(voli, percorso, utenteCorrente, 1, partenza, destinazione->nome);
+
+                } else if (selettoreDestinazione == 2) {   //caso destinazione più gettonata
+                    //qui l'implementazione di tratta più gettonata
+                } else if (selettoreDestinazione == 3){   //caso scelta destinazione tra quelle raggiungibili
+                    int n, altroTentativo;
+
+                    t_grf * raggiungibili = bfs(voli, partenza);
+                    raggiungibili = eliminaAeroporto(raggiungibili, partenza);
+
+                    do {
+                        altroTentativo = 0;
+
+						printf("\nDestinazioni raggiungibili da %s", partenza);
+                        elencaGrafo(raggiungibili, 1);
+                        printf("\nScegliere la destinazione desiderata, inserendo il numero a fianco all'aeroporto: ");
+                        fflush(stdin);
+                        scanf("%d", &n);
+                        if (n < 1 || n > 9) {
+                            altroTentativo = 1;
+                            printf("\nInput invalido, riprovare? (1 si, altro no): ");
+                            fflush(stdin);
+                            scanf("%d", &altroTentativo);
+                        }
+                    } while (altroTentativo == 1);
+
+                    t_grf * destinazione = getVerticeByPosizione(raggiungibili, n);
+
+                    gestisciPrenotazione(voli, utenteCorrente, partenza, destinazione->nome);
+                } else {
+                    printf("\nDato inserito non rientra nelle opzioni, riprovare;\n");
+                    altroTentativoTratta = 1;
+                }
+            } while (altroTentativoTratta == 1);
+        } else {
+            printf("\nAeroporto inserito non coperto dalla nostra compagnia, riprovare?(1 si, altro no): ");
+
+            fflush(stdin);
+            scanf("%d", &altroTentativoPartenza);
+        }
+    }while(altroTentativoPartenza == 1);
 }
 
 void effettuaPrenotazione(t_abr * utenti, t_grf * voli, t_abr * utenteCorrente){

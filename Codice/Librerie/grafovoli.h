@@ -29,7 +29,6 @@ typedef struct grafo {
 //Operazioni sui vertici
 t_grf * inizializzaGrafo(t_grf * g);
 t_grf * aggiungiAeroporto(t_grf * g, char *nome);
-t_grf * aggiungiAeroportoInTesta(t_grf * g, char *nome);
 t_grf * eliminaAeroporto(t_grf * g, char *nome);
 
 //Operazioni sugli archi
@@ -40,11 +39,13 @@ t_arc * eliminaArco(t_arc * a, char *nome);
 t_grf * eliminaTuttiVoliAdAeroporto(t_grf * g, char *nome);
 
 //Stampe
+void elencaGrafo(t_grf * G, int contatore);
 void stampaGrafo(t_grf * G);
 void stampaArchi(t_arc * a);
 
 //Utilità
 t_grf * getVertice(t_grf * g, char *nome);
+t_grf * getVerticeByPosizione(t_grf * g, int pos);
 int voloEsistente(t_arc * a, char *entrata);
 int aeroportoEsistente(t_grf * g, char *nome);
 int lunghezzaGrafo(t_grf * g);
@@ -61,7 +62,7 @@ t_grf * impostaCamminoMinimoATutti(t_grf * g, int potenziale);
 t_grf * impostaPrecedente(t_grf * q, char *nome, t_grf * precedente);
 t_grf * impostaPrecedenteATutti(t_grf * g, t_grf * precedente);
 t_grf * minimoCammino(t_grf * q);
-t_grf * costruisciPercorso(t_grf ** g, char * uscita);
+t_grf * costruisciPercorso(t_grf ** g, char * entrata);
 t_grf * aggiungiPercorsoInTesta(t_grf * g, t_grf * daAggiungere);
 void stampaPercorso(t_grf * g, t_grf * percorso, int pesoDiRiferimento);
 

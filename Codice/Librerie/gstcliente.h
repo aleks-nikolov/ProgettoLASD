@@ -8,11 +8,15 @@ void stampaMenuPrenotazione();
 
 void stampaMenuSelezioneTratta(int * selettoreTratta);
 
+void stampaMenuSelezioneDestinazione(int * selettoreTratta, char * partenza);
+
 int utilizzaTickets(t_abr * utenteCorrente);
 
 void costruisciCampiPrenotazione(t_grf * voli, t_grf * percorso, t_lista_S ** scali, float * prezzo);
 
 int calcolaPuntiOttenuti(float prezzo);
+
+void gestisciPrenotazione(t_grf * voli, t_abr * utenteCorrente, char * partenza, char * destinazione);
 
 void gestisciPagamentoPartenzaDestinazione(t_grf * voli, t_grf * percorso, t_abr * utenteCorrente, int selettoreTratta, char * partenza, char * destinazione);
 

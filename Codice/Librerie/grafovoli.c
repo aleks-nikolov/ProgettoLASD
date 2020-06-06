@@ -45,20 +45,6 @@ t_grf * aggiungiAeroporto(t_grf * g, char *nome) {
     return g;
 }
 
-//Aggiunge un nuovo aeroporto in testa alla lista dei vertici
-t_grf * aggiungiAeroportoInTesta(t_grf * g, char *nome) {
-    t_grf * temp = (t_grf *)malloc(sizeof(t_grf));
-    strcpy(temp->nome, strupr(nome));
-    g->archi = NULL;
-    if(!grafoVuoto(g)) {
-        temp->next = g;
-        return temp;
-    } else {
-        temp->next = NULL;
-        return temp;
-    }
-}
-
 //Elimina l'aeroporto di nome 'nome' dal grafo 'g'
 t_grf * eliminaAeroporto(t_grf * g, char *nome) {
     if(!grafoVuoto(g)){
@@ -159,12 +145,22 @@ t_grf * eliminaTuttiVoliAdAeroporto(t_grf * g, char *nome) {
     return g;
 }
 
-//Restituisce il puntatore al vertice con nome 'nome'
+//Restituisce il puntatore al vertice con nome 'nome' nel grafo 'g'
 t_grf * getVertice(t_grf * g, char *nome) {
     if(strcmp(g->nome, nome) == 0)
         return g;
     else
         return getVertice(g->next, nome);
+}
+
+//Restituisce l'i-esimo vertice in una lista da 1 a lunghezzaGrafo
+t_grf * getVerticeByPosizione(t_grf * g, int pos) {
+    if (pos == 1)
+        return g;
+    else {
+        pos--;
+        return getVerticeByPosizione(g->next, pos);
+    }
 }
 
 //Controlla se esiste il volo dal campo 'archi' di un vertice a 'entrata'
@@ -198,6 +194,15 @@ int lunghezzaGrafo(t_grf * g) {
         return 1 + lunghezzaGrafo(g->next);
 }
 
+void elencaGrafo(t_grf * G, int contatore) {
+    if(!grafoVuoto(G)){
+        printf("\n%d) %s ",contatore, G->nome);
+        contatore++;
+        elencaGrafo(G->next, contatore);
+    }
+}
+
+//Stampa il grafo come lista di adiacenze
 void stampaGrafo(t_grf * G) {
     if(!grafoVuoto(G)){
         printf("\n%s ", G->nome);
