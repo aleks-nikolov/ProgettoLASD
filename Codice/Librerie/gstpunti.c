@@ -1,15 +1,19 @@
 #include "gstpunti.h"
 
-int utilizzaTickets(t_abr * utenteCorrente){
-	int sconto = 5;
-
-	
-	return sconto;
+void stampaMenuSelezioneTicket(){
+	printf("\nE' possibile utilizzare un massimo di 2 tickets per prenotazione, selezionare primo ticket;\n\n"
+		   "1)Ticket da 5%%\n"
+		   "2)Ticket da 10%%\n"
+		   "3)Ticket da 15%%\n"
+		   "4)Ticket da 20%%\n"
+		   "5)Ticket da 25%%\n\n"
+	       "Inserire numero: ");
 }
 
-int calcolaPuntiOttenuti(float prezzo){
+int calcolaPuntiOttenuti(float prezzo){//la generazione di punti sarebbe di gran lunga inferiore in ambiente reale, ma in questo modo facilitiamo il testing
+	int puntiOttenuti = prezzo;
 	
-	return prezzo / 10;
+	return puntiOttenuti;
 }
 
 void stampaMenuTickets(){
@@ -62,21 +66,25 @@ void convertiPunti(t_abr * utenteCorrente){
 		if(puntiDaConvertire >= 50 && puntiDaConvertire <= 250 && puntiDaConvertire <= utenteCorrente->utente.punti){//50 punti servono per convertire in un buono da 5%, 100 da 10%,... e 250 da 25%
 			int scontoTicket = 0;
 			
-			while(puntiDaConvertire > 0){
-				puntiDaConvertire -= 50;
-				scontoTicket++;
-			}
-			utenteCorrente->utente.tickets[scontoTicket]++;
+			scontoTicket = puntiDaConvertire / 50;
+			
+			utenteCorrente->utente.tickets[--scontoTicket]++;
 			utenteCorrente->utente.punti -= puntiDaConvertire;
+			
 			printf("\nOperazione di conversione avvenuta con successo!");
-		}else if(puntiDaConvertire < 50 || puntiDaConvertire > 250 )
+			altroTentativo = 0;
+			
+		}else if(puntiDaConvertire < 50 || puntiDaConvertire > 250 ){
 			printf("\nPer convertire punti in tickets e' necessario attenersi alle regole di conversione, riprovare?(1 per si, altro per no): ");
-		 else
+			
+			fflush(stdin);
+			scanf("%d", &altroTentativo);
+		}else{
 			printf("\nPunti inseriti maggiori dei punti disponibili, riprovare?(1 per si, altro per no): ");
 		
-		fflush(stdin);
-		scanf("%d", &altroTentativo);
-		
+			fflush(stdin);
+			scanf("%d", &altroTentativo);
+		}	
 	}while(altroTentativo == 1);	
 }
 

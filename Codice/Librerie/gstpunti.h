@@ -2,9 +2,9 @@
 
 //funzioni per la gestione del terzo case della gestisciCliente
 
-int utilizzaTickets(t_abr * utenteCorrente);
-
 int calcolaPuntiOttenuti(float prezzo);
+
+void stampaMenuSelezioneTicket();
 
 void stampaMenuTickets();
 

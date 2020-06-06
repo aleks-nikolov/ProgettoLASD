@@ -20,14 +20,11 @@ void stampaMenuPrenotazione(){
 	       "Inserire numero: ");
 }
 
-void stampaMenuSelezioneTratta(int * selettoreTratta){
+void stampaMenuSelezioneTratta(){
 	printf("\nQuale tratta si desidera scegliere?\n"
 		   "1)Tratta piu' economica\n"
 		   "2)Tratta piu' breve\n\n"
 		   "Inserire numero: ");
-		   						
-	fflush(stdin);		
-	scanf("%d", selettoreTratta);
 }
 
 void stampaMenuSelezioneDestinazione(int * selettoreTratta, char *partenza){
@@ -54,8 +51,70 @@ void costruisciCampiPrenotazione(t_grf * voli, t_grf * percorso, t_lista_S ** sc
 	free(tmp);
 }
 
+float utilizzaTickets(t_abr * utenteCorrente){
+	int sconto = 0.0;
+	int selettoreAzione = 0;
+	
+	printf("\nSi desidera utilizzare tickets di sconto?(1 per si, altro no): ");
+	
+	fflush(stdin);
+	scanf("%d", &selettoreAzione);
+	
+	if(selettoreAzione == 1){
+		int selettoreTicket = 0;
+		int altroTentativoTicket = 0;
+		int ticketRimanenti = 2;
+		
+		do{
+			mostraTickets(utenteCorrente);
+		
+			stampaMenuSelezioneTicket();
+		
+			fflush(stdin);
+			scanf("%d", &selettoreTicket);
+		
+			if(1 <= selettoreTicket && selettoreTicket <= 5){
+				
+				if(utenteCorrente->utente.tickets[selettoreTicket - 1] > 0){
+					sconto += 5.0 * selettoreTicket;
+					utenteCorrente->utente.tickets[selettoreTicket -1]--;
+					ticketRimanenti--;
+					
+					if(ticketRimanenti == 1){
+						printf("\nSi desidera utilizzare un secondo ticket di sconto?(1 per si, altro no): ");
+						
+						fflush(stdin);
+						scanf("%d", &altroTentativoTicket);
+				
+						if(altroTentativoTicket != 1)
+							ticketRimanenti = 0;
+					}
+				}else{
+					printf("\nNon si hanno tickets di questo sconto rimanenti, riprovare?(1 per si, altro no): ");
+				
+					fflush(stdin);
+					scanf("%d", &altroTentativoTicket);
+				
+					if(altroTentativoTicket != 1)
+						ticketRimanenti = 0;
+				}
+			}else{
+				printf("\nDato inserito non valido, riprovare?(1 per si, altro no): ");
+				
+				fflush(stdin);
+				scanf("%d", &altroTentativoTicket);
+				
+				if(altroTentativoTicket != 1)
+					ticketRimanenti = 0;
+			}
+		}while(ticketRimanenti > 0);
+	}
+	return sconto;
+}
+
 void gestisciPagamentoPartenzaDestinazione(t_grf * voli, t_grf * percorso, t_abr * utenteCorrente, int selettoreTratta, char * partenza, char * destinazione){
-	int sconto = 0;
+	float sconto = 0;
+	int confermaPrenotazione = 0;
 	float prezzo = 0;
 	t_lista_S * scali = NULL;
 	
@@ -63,15 +122,25 @@ void gestisciPagamentoPartenzaDestinazione(t_grf * voli, t_grf * percorso, t_abr
 	
 	costruisciCampiPrenotazione(voli, percorso, &scali, &prezzo);
 	
-	printf(" per un prezzo totale di %.2f euro", prezzo);
+	printf(" per un prezzo totale di %.2f euro\n", prezzo);
 	
-	//va inserito l'utilizzo di tickets e applicazione sconti
-                				
-    utenteCorrente->utente.prenotazioni = inserisciInCoda_P(utenteCorrente->utente.prenotazioni, partenza, destinazione, scali, prezzo);
-                				
-	utenteCorrente->utente.punti += calcolaPuntiOttenuti(prezzo);
-                				
-    printf("\n\nPrenotazione avvenuta con successo!\n");            			
+	sconto = utilizzaTickets(utenteCorrente);
+	
+	//devo implementarle l'utilizzo aspe che faccio pausa 10 minuti
+	
+	printf("\n\n%s, conferma la prenotazione?(1 per si, altro per no): ", utenteCorrente->utente.nomeUtente);
+	
+	fflush(stdin);
+	scanf("%d", &confermaPrenotazione);
+    
+	if(confermaPrenotazione == 1){
+		utenteCorrente->utente.prenotazioni = inserisciInCoda_P(utenteCorrente->utente.prenotazioni, partenza, destinazione, scali, prezzo);
+	                				
+		utenteCorrente->utente.punti += calcolaPuntiOttenuti(prezzo);
+	                				
+	    printf("\nPrenotazione avvenuta con successo!\n");  
+	}else
+		printf("\nPrenotazione annullata;\n");            				            			
 }
 
 void gestisciPrenotazione(t_grf * voli, t_abr * utenteCorrente, char * partenza, char * destinazione) {
@@ -80,7 +149,10 @@ void gestisciPrenotazione(t_grf * voli, t_abr * utenteCorrente, char * partenza,
     do{
         selettoreTratta = altroTentativoTratta = 0;
 
-        stampaMenuSelezioneTratta(&selettoreTratta);
+        stampaMenuSelezioneTratta();
+        
+        fflush(stdin);		
+		scanf("%d", &selettoreTratta);
 
         if(selettoreTratta == 1 || selettoreTratta == 2){
             dijkstra(&voli, partenza, destinazione, selettoreTratta);
