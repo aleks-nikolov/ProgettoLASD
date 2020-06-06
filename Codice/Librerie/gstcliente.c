@@ -126,9 +126,9 @@ void gestisciPagamentoPartenzaDestinazione(t_grf * voli, t_grf * percorso, t_abr
 	
 	sconto = utilizzaTickets(utenteCorrente);
 	
-	//devo implementarle l'utilizzo aspe che faccio pausa 10 minuti
-	
-	printf("\n\n%s, conferma la prenotazione?(1 per si, altro per no): ", utenteCorrente->utente.nomeUtente);
+	prezzo = prezzo * (1 - (sconto/100));
+
+	printf("\n\n%s, conferma la prenotazione di costo %f euro?(1 per si, altro per no): ", utenteCorrente->utente.nomeUtente, prezzo);
 	
 	fflush(stdin);
 	scanf("%d", &confermaPrenotazione);
