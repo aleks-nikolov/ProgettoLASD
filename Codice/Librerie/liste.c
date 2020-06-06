@@ -138,7 +138,7 @@ void mostraPrenotazioni(t_lista_P * top){
 			printf("con scali ");
 			mostraScali(top->prenotazione.scali);  
 		}
-		printf(" e per un prezzo totale di %.2f\n", top->prenotazione.prezzo);
+		printf(" e per un prezzo totale di %.2f euro\n", top->prenotazione.prezzo);
 			
 		mostraPrenotazioni(top->next);
 	}

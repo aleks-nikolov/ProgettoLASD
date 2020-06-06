@@ -1,8 +1,10 @@
-#include "abr.h"
+#include "gstpunti.h"
 
 //funzioni per la gestione dell'applicativo nel caso in cui l'accesso venga effettuato da un cliente
 
 void stampaMenuCliente();
+
+//funzioni per la gestione del primo case della gestisciCliente
 
 void stampaMenuPrenotazione();
 
@@ -10,11 +12,7 @@ void stampaMenuSelezioneTratta(int * selettoreTratta);
 
 void stampaMenuSelezioneDestinazione(int * selettoreTratta, char * partenza);
 
-int utilizzaTickets(t_abr * utenteCorrente);
-
 void costruisciCampiPrenotazione(t_grf * voli, t_grf * percorso, t_lista_S ** scali, float * prezzo);
-
-int calcolaPuntiOttenuti(float prezzo);
 
 void gestisciPrenotazione(t_grf * voli, t_abr * utenteCorrente, char * partenza, char * destinazione);
 
@@ -26,20 +24,14 @@ void gestisciSolaPartenza(t_abr * utenti, t_grf * voli, t_abr * utenteCorrente);
 
 void effettuaPrenotazione(t_abr * utenti, t_grf * voli, t_abr * utenteCorrente);
 
+//funzioni per la gestione del secondo case della gestisciCLiente
+
 void visualizzaPrenotazioni(t_abr * utenteCorrente);
 
-void stampaMenuTickets();
-
-void mostraPunti(t_abr * utenteCorrente);
-
-void mostraTickets(t_abr * utenteCorrente);
-
-void stampaRegoleConversione();
-
-void convertiPunti(t_abr * utenteCorrente);
-
-void gestisciTickets(t_abr * utenteCorrente);
+//funzione per la gestione del quarto case della gestisciCliente
 
 void terminaGestioneCliente(int * selettoreAzione);
+
+//gestisciCliente
 
 void gestisciCliente(t_abr * utenti, t_grf * voli, t_abr * utenteCorrente);
