@@ -30,8 +30,51 @@ void stampaMenuSelezioneTratta(int * selettoreTratta){
 	scanf("%d", selettoreTratta);
 }
 
-void calcolaPuntiOttenuti(float prezzo){
+int utilizzaTickets(t_abr * utenteCorrente){
+	int sconto = 5;
 	
+	
+	
+	return sconto;
+}
+
+void costruisciCampiPrenotazione(t_grf * voli, t_grf * percorso, t_lista_S ** scali, float * prezzo){
+	t_grf * tmp = percorso;
+	
+	for(;!grafoVuoto(tmp) && !grafoVuoto(tmp->next);tmp = tmp->next){
+		*prezzo += getPesoArco(getVertice(voli, tmp->nome), getVertice(voli, tmp->next->nome), 1);
+		
+		if(tmp->next->next)
+			*scali = inserisciInCoda_S(*scali, tmp->next->nome);
+	}	
+	tmp = NULL;
+	free(tmp);
+}
+
+int calcolaPuntiOttenuti(float prezzo){
+	int puntiOttenuti = prezzo / 10;
+	
+	return puntiOttenuti;
+}
+
+void gestisciPagamentoPartenzaDestinazione(t_grf * voli, t_grf * percorso, t_abr * utenteCorrente, int selettoreTratta, char * partenza, char * destinazione){
+	int sconto = 0;
+	float prezzo = 0;
+	t_lista_S * scali = NULL;
+	
+	stampaPercorso(voli, percorso, selettoreTratta);
+	
+	costruisciCampiPrenotazione(voli, percorso, &scali, &prezzo);
+	
+	printf(" per un prezzo totale di %.2f", prezzo);
+	
+	//va inserito l'utilizzo di tickets e applicazione sconti
+                				
+    utenteCorrente->utente.prenotazioni = inserisciInCoda_P(utenteCorrente->utente.prenotazioni, partenza, destinazione, scali, prezzo);
+                				
+	utenteCorrente->utente.punti += calcolaPuntiOttenuti(prezzo);
+                				
+    printf("\n\nPrenotazione avvenuta con successo!\n");            			
 }
 
 void gestisciPartenzaEDestinazione(t_grf * voli, t_abr * utenteCorrente){
@@ -63,10 +106,10 @@ void gestisciPartenzaEDestinazione(t_grf * voli, t_abr * utenteCorrente){
 					t_grf * raggiungibili = bfs(voli, partenza);
 					//bfs effettua una breadth first search e controlla che l'aeroporto di destinazione sia raggiungibile da quello di partenza
 					if(aeroportoEsistente(raggiungibili, destinazione)){
-						int selettoreTratta, altroTentativo;
+						int selettoreTratta, altroTentativoTratta;
 						
 						do{
-							selettoreTratta = altroTentativo = 0;
+							selettoreTratta = altroTentativoTratta = 0;
 							
 							stampaMenuSelezioneTratta(&selettoreTratta);
 		   				
@@ -74,17 +117,16 @@ void gestisciPartenzaEDestinazione(t_grf * voli, t_abr * utenteCorrente){
 		   						dijkstra(&voli, partenza, destinazione, selettoreTratta);
 		   						
 		   						t_grf * percorso = costruisciPercorso(&voli, destinazione);
-
-                				/*
-                				qui il codice per la costruzione dei campi per l'inserimento della prenotazione e...si deve gestire anche la possibilit� di usare tickets e la generazione di punti dalla stessa
-                				utenteCorrente->utente.prenotazioni = inserisciInTesta_P(utenteCorrente->utente.prenotazioni, partenza, destinazione,... );
-                				printf("\nPrenotazione avvenuta con successo pappone che non sei altro!");
-                				*/
+                				
+                				float prezzo = 0;
+                				t_lista_S * scali = NULL;
+                				
+                				gestisciPagamentoPartenzaDestinazione(voli, percorso, utenteCorrente, selettoreTratta, partenza, destinazione);
 							}else{
 								printf("\nDato inserito non rientra nelle opzioni, riprovare;\n");
-								altroTentativo = 1;
+								altroTentativoTratta = 1;
 							}
-						}while(altroTentativo == 1);
+						}while(altroTentativoTratta == 1);
 	
 					}else
 						printf("\n%s non e' raggiungibile da %s", destinazione, partenza);
@@ -105,6 +147,7 @@ void gestisciPartenzaEDestinazione(t_grf * voli, t_abr * utenteCorrente){
 		}
 	}while(altroTentativoPartenza == 1);
 }
+
 void gestisciSolaPartenza(t_abr * utenti, t_grf * voli, t_abr * utenteCorrente){
 	
 }
@@ -123,10 +166,12 @@ void effettuaPrenotazione(t_abr * utenti, t_grf * voli, t_abr * utenteCorrente){
 		switch(selettoreAzione){
 			case 1:
                 gestisciPartenzaEDestinazione(voli, utenteCorrente);
+                selettoreAzione = 4;
                 break;
                 
             case 2:
                 gestisciSolaPartenza(utenti, voli, utenteCorrente);
+                selettoreAzione = 4;
                 break;
 
             case 3:
@@ -143,6 +188,18 @@ void effettuaPrenotazione(t_abr * utenti, t_grf * voli, t_abr * utenteCorrente){
         fflush(stdin);
         
 	}while(selettoreAzione != 4);
+}
+
+//funzione per la gestione del secondo case della gestisciCliente
+
+void visualizzaPrenotazioni(t_abr * utenteCorrente){
+	puts("");
+	
+    if(utenteCorrente->utente.prenotazioni){
+    	mostraPrenotazioni(utenteCorrente->utente.prenotazioni);
+	}
+    else
+        printf("\nL'utente %s non ha effettuato alcuna prenotazione\n", utenteCorrente->utente.nomeUtente);
 }
 
 //funzioni per la gestione del terzo case della gestisciCliente
@@ -207,7 +264,7 @@ void convertiPunti(t_abr * utenteCorrente){
 		}else if(puntiDaConvertire < 50 || puntiDaConvertire > 250 )
 			printf("\nPer convertire punti in tickets e' necessario attenersi alle regole di conversione, riprovare?(1 per si, altro per no): ");
 		 else
-			printf("Punti inseriti maggiori dei punti disponibili, riprovare?(1 per si, altro per no): ");
+			printf("\nPunti inseriti maggiori dei punti disponibili, riprovare?(1 per si, altro per no): ");
 		
 		fflush(stdin);
 		scanf("%d", &altroTentativo);
@@ -263,11 +320,14 @@ void terminaGestioneCliente(int * selettoreAzione){
 			printf("\nLogout avvenuto con successo");
 }
 
+//gestisciCliente
+
 void gestisciCliente(t_abr * utenti, t_grf * voli, t_abr * utenteCorrente){
 	int selettoreAzione;
 	
 	do{
 		selettoreAzione = 0;
+		
 		stampaMenuCliente();
 		
 		fflush(stdin);
@@ -279,11 +339,7 @@ void gestisciCliente(t_abr * utenti, t_grf * voli, t_abr * utenteCorrente){
                 break;
                 
             case 2:
-            	puts("");
-            	if(utenteCorrente->utente.prenotazioni)
-                	mostraPrenotazioni(utenteCorrente->utente.prenotazioni);
-                else
-                	printf("L'utente %s non ha effettuato alcuna prenotazione\n", utenteCorrente->utente.nomeUtente);
+            	visualizzaPrenotazioni(utenteCorrente);
                 break;
 
             case 3:

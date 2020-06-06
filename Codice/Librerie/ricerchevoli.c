@@ -160,9 +160,12 @@ t_grf * aggiungiPercorsoInTesta(t_grf * g, t_grf * daAggiungere) {
 
 void stampaPercorso(t_grf * g, t_grf * percorso, int pesoDiRiferimento) {
     if(!grafoVuoto(percorso)){
-        if(!grafoVuoto(percorso->next))
-            printf("%s --(%d)--> ", percorso->nome, getPesoArco(getVertice(g, percorso->nome), getVertice(g, percorso->next->nome), pesoDiRiferimento));
-        else
+        if(!grafoVuoto(percorso->next)){
+        	if(pesoDiRiferimento == 1)
+            	printf("%s --(%d euro)--> ", percorso->nome, getPesoArco(getVertice(g, percorso->nome), getVertice(g, percorso->next->nome), pesoDiRiferimento));
+            else if(pesoDiRiferimento == 2)
+            	printf("%s --(%d minuti)--> ", percorso->nome, getPesoArco(getVertice(g, percorso->nome), getVertice(g, percorso->next->nome), pesoDiRiferimento));
+		}else
             printf("%s", percorso->nome);
         stampaPercorso(g, percorso->next, pesoDiRiferimento);
     }

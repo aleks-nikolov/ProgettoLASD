@@ -23,6 +23,15 @@ t_lista_S * inserisciInTesta_S (t_lista_S * top, char * nomeAeroporto){
 	return top;
 }
 
+t_lista_S * inserisciInCoda_S (t_lista_S * top, char * nomeAeroporto){
+	if(!top)
+		top = inserisciInTesta_S(top, nomeAeroporto);
+	else
+		top->next = inserisciInCoda_S(top->next, nomeAeroporto);
+	
+	return top;
+}
+
 t_lista_S * rimuoviElemento_S(t_lista_S * top, char * nomeAeroporto){
 	t_lista_S * tmp = top;
 	
@@ -66,10 +75,10 @@ t_lista_P * creaNodo_P (char * partenza, char * destinazione, t_lista_S * scali,
 	t_lista_P * tmp = (t_lista_P *) malloc (sizeof(t_lista_P));
 	
 	if(tmp){
-		strcpy(tmp->prenotazioni.partenza, partenza);
-		strcpy(tmp->prenotazioni.destinazione, destinazione);
-		tmp->prenotazioni.scali = scali;
-		tmp->prenotazioni.prezzo = prezzo;
+		strcpy(tmp->prenotazione.partenza, partenza);
+		strcpy(tmp->prenotazione.destinazione, destinazione);
+		tmp->prenotazione.scali = scali;
+		tmp->prenotazione.prezzo = prezzo;
 		tmp->next = NULL;
 	}else 
 		printf("Memoria insufficiente per la creazione di un nuovo elemento");
@@ -87,11 +96,20 @@ t_lista_P * inserisciInTesta_P (t_lista_P * top, char * partenza, char * destina
 	return top;
 }
 
+t_lista_P * inserisciInCoda_P (t_lista_P * top, char * partenza, char * destinazione, t_lista_S * scali, float prezzo){
+	if(!top)
+		top = inserisciInTesta_P(top, partenza, destinazione, scali, prezzo);
+	else
+		top->next = inserisciInCoda_P(top->next, partenza, destinazione, scali, prezzo);
+	
+	return top;
+}
+
 t_lista_P * rimuoviElemento_P(t_lista_P * top, char * partenza, char * destinazione){
 	t_lista_P * tmp = top;
 	
 	if(tmp){
-		if(strcmp(tmp->prenotazioni.partenza, partenza) == 0 && strcmp(tmp->prenotazioni.destinazione, destinazione) == 0){
+		if(strcmp(tmp->prenotazione.partenza, partenza) == 0 && strcmp(tmp->prenotazione.destinazione, destinazione) == 0){
 			top = tmp->next;
 			free(tmp);
 		}else
@@ -104,7 +122,7 @@ int contains_P(t_lista_P * top, char * partenza, char * destinazione){
 	int result = 0;
 	
 	if(top){
-		if(strcmp(top->prenotazioni.partenza, partenza) == 0 && strcmp(top->prenotazioni.destinazione, destinazione))
+		if(strcmp(top->prenotazione.partenza, partenza) == 0 && strcmp(top->prenotazione.destinazione, destinazione))
 			result = 1;
 		else
 			result = contains_P(top->next, partenza, destinazione);
@@ -115,12 +133,12 @@ int contains_P(t_lista_P * top, char * partenza, char * destinazione){
 
 void mostraPrenotazioni(t_lista_P * top){
 	if(top){
-		printf("%s -> %s ", top->prenotazioni.partenza, top->prenotazioni.destinazione);
-		if(top->prenotazioni.scali){
+		printf("%s -> %s ", top->prenotazione.partenza, top->prenotazione.destinazione);
+		if(top->prenotazione.scali){
 			printf("con scali ");
-			mostraScali(top->prenotazioni.scali);  
-		}else
-			puts("");
+			mostraScali(top->prenotazione.scali);  
+		}
+		printf(" e per un prezzo totale di %.2f\n", top->prenotazione.prezzo);
 			
 		mostraPrenotazioni(top->next);
 	}

@@ -22,7 +22,7 @@ typedef struct t_prenotazione{
 //definizione della struttura che andrà a contenere le prenotazioni di ogni utente, in questo caso, una lista singolarmente linkata
 
 typedef struct t_lista_P{
-	t_prenotazione prenotazioni;
+	t_prenotazione prenotazione;
 	struct t_lista_P * next;
 }t_lista_P;
 
@@ -31,6 +31,8 @@ typedef struct t_lista_P{
 t_lista_S * creaNodo_S (char * nomeAeroporto);
 
 t_lista_S * inserisciInTesta_S (t_lista_S * top, char * nomeAeroporto);
+
+t_lista_S * inserisciInCoda_S (t_lista_S * top, char * nomeAeroporto);
 
 t_lista_S * rimuoviElemento_S(t_lista_S * top, char * nomeAeroporto);
 
@@ -43,6 +45,8 @@ void mostraScali(t_lista_S * top);
 t_lista_P * creaNodo_P (char * partenza, char * destinazione, t_lista_S * scali, float prezzo);
 
 t_lista_P * inserisciInTesta_P (t_lista_P * top, char * partenza, char * destinazione, t_lista_S * scali, float prezzo);
+
+t_lista_P * inserisciInCoda_P (t_lista_P * top, char * partenza, char * destinazione, t_lista_S * scali, float prezzo);
 
 t_lista_P * rimuoviElemento_P(t_lista_P * top, char * partenza, char * destinazione);
 
