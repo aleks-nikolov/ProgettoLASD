@@ -21,5 +21,6 @@ t_grf * bfs(t_grf * g, char *origine) {
 
     }
 
+	free(daVisitare);
     return visitati;
 }
