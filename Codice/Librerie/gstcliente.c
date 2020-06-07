@@ -254,7 +254,10 @@ void gestisciSolaPartenza(t_abr * utenti, t_grf * voli, t_abr * utenteCorrente){
                     gestisciPagamentoPartenzaDestinazione(voli, percorso, utenteCorrente, 1, partenza, destinazione->nome);
 
                 } else if (selettoreDestinazione == 2) {   //caso destinazione più gettonata
-                    //qui l'implementazione di tratta più gettonata
+
+                    t_grf * destinazione = trovaPiuGettonato(voli);
+                    printf("\nDestinazione piu' gettonata: %s", destinazione->nome);
+
                 } else if (selettoreDestinazione == 3){   //caso scelta destinazione tra quelle raggiungibili
                     int n, altroTentativo;
 
