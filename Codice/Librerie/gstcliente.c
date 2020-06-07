@@ -47,12 +47,10 @@ void costruisciCampiPrenotazione(t_grf * voli, t_grf * percorso, t_lista_S ** sc
 		if(tmp->next->next)
 			*scali = inserisciInCoda_S(*scali, tmp->next->nome);
 	}	
-	tmp = NULL;
-	free(tmp);
 }
 
 float utilizzaTickets(t_abr * utenteCorrente, int * ticketsUtilizzati){
-	int sconto = 0.0;
+	float sconto = 0.0;
 	int selettoreAzione = 0;
 	
 	printf("\nSi desidera utilizzare tickets di sconto?(1 per si, altro per no): ");
