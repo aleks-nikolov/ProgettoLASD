@@ -8,7 +8,7 @@ char nomearrivovolo[LUNGHEZZA_NOME_AEROPORTO];
 float prezzo;
 int durata;
 
-void gestisciOpzioneAdmin(t_grf ** g){
+void gestisciOpzioneAdmin(t_grf ** voli){
 
     do{
         stampaMenuAdmin();
@@ -17,24 +17,24 @@ void gestisciOpzioneAdmin(t_grf ** g){
         switch(scelta){
 
             case(1):
-                aggiuntaAeroporto(g);
+                aggiuntaAeroporto(voli);
                 break;
 
             case (2):
-                aggiuntaVolo(g);
+                aggiuntaVolo(voli);
                 break;
 
             case (3):
-                rimozioneAeroporto(g);
+                rimozioneAeroporto(voli);
                 break;
 
             case (4):
-                rimozioneVolo(g);
+                rimozioneVolo(voli);
                 break;
 
             case (5):
                 printf("\nQuesti sono tutti i voli dell'aeroporto:\n\n");
-                stampaGrafo(*g);
+                stampaGrafo(*voli);
                 break;
 
             case (6):

@@ -37,6 +37,7 @@ t_grf * aggiungiAeroporto(t_grf * g, char *nome) {
         g = (t_grf *)malloc(sizeof(t_grf));
         strcpy(g->nome, strupr(nome));
         g->archi = NULL;
+        g->popolarita = 0;
         g->next = NULL;
     } else{
         g->next = aggiungiAeroporto(g->next, nome);
@@ -218,20 +219,20 @@ t_grf * azzeraPopolarita(t_grf * g) {
     return g;
 }
 
-void elencaGrafo(t_grf * G, int contatore) {
-    if(!grafoVuoto(G)){
-        printf("\n%d) %s ",contatore, G->nome);
+void elencaGrafo(t_grf * g, int contatore) {
+    if(!grafoVuoto(g)){
+        printf("\n%d) %s ", contatore, g->nome);
         contatore++;
-        elencaGrafo(G->next, contatore);
+        elencaGrafo(g->next, contatore);
     }
 }
 
 //Stampa il grafo come lista di adiacenze
-void stampaGrafo(t_grf * G) {
-    if(!grafoVuoto(G)){
-        printf("\n%s ", G->nome);
-        stampaArchi(G->archi);
-        stampaGrafo(G->next);
+void stampaGrafo(t_grf * g) {
+    if(!grafoVuoto(g)){
+        printf("\n%s ", g->nome);
+        stampaArchi(g->archi);
+        stampaGrafo(g->next);
     }
 }
 

@@ -41,8 +41,8 @@ t_arc * eliminaArco(t_arc * a, char *nome);
 t_grf * eliminaTuttiVoliAdAeroporto(t_grf * g, char *nome);
 
 //Stampe
-void elencaGrafo(t_grf * G, int contatore);
-void stampaGrafo(t_grf * G);
+void elencaGrafo(t_grf * g, int contatore);
+void stampaGrafo(t_grf * g);
 void stampaArchi(t_arc * a);
 
 //Utilità

@@ -255,6 +255,8 @@ void gestisciSolaPartenza(t_abr * utenti, t_grf * voli, t_abr * utenteCorrente){
 
                 } else if (selettoreDestinazione == 2) {   //caso destinazione più gettonata
 
+                    voli = azzeraPopolarita(voli);
+                    visita(utenti, voli, partenza);
                     t_grf * destinazione = trovaPiuGettonato(voli);
                     printf("\nDestinazione piu' gettonata: %s", destinazione->nome);
 
