@@ -1,13 +1,13 @@
 #include "gstpunti.h"
 
 void stampaMenuSelezioneTicket(){
-	printf("\nE' possibile utilizzare un massimo di 2 tickets per prenotazione, selezionare primo ticket;\n\n"
+	printf("\nE' possibile utilizzare un massimo di %d tickets per prenotazione, selezionare primo ticket;\n\n"
 		   "1)Ticket da 5%%\n"
 		   "2)Ticket da 10%%\n"
 		   "3)Ticket da 15%%\n"
 		   "4)Ticket da 20%%\n"
 		   "5)Ticket da 25%%\n\n"
-	       "Inserire numero: ");
+	       "Inserire numero: ", MAX_TICKETS_UTILIZZABILI);
 }
 
 int calcolaPuntiOttenuti(float prezzo){//la generazione di punti sarebbe di gran lunga inferiore in ambiente reale, ma in questo modo facilitiamo il testing
@@ -122,4 +122,20 @@ void gestisciTickets(t_abr * utenteCorrente){
         fflush(stdin);
 		
 	}while(selettoreAzione != 4);
+}
+
+void restituisciTickets(t_abr * utenteCorrente, int * ticketsUtilizzati){
+	int i;
+	
+	for(i=0;i<MAX_TICKETS_UTILIZZABILI;i++){
+		if(ticketsUtilizzati[i] != -1)
+		utenteCorrente->utente.tickets[ticketsUtilizzati[i]]++;
+	}
+}
+
+void inizializzaTicketsUtilizzati(int * ticketsUtilizzati){
+	int i;
+	
+	for(i=0;i<MAX_TICKETS_UTILIZZABILI;i++)
+		ticketsUtilizzati[i] = -1;
 }

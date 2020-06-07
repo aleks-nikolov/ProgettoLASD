@@ -51,7 +51,7 @@ void costruisciCampiPrenotazione(t_grf * voli, t_grf * percorso, t_lista_S ** sc
 	free(tmp);
 }
 
-float utilizzaTickets(t_abr * utenteCorrente){
+float utilizzaTickets(t_abr * utenteCorrente, int * ticketsUtilizzati){
 	int sconto = 0.0;
 	int selettoreAzione = 0;
 	
@@ -63,7 +63,7 @@ float utilizzaTickets(t_abr * utenteCorrente){
 	if(selettoreAzione == 1){
 		int selettoreTicket = 0;
 		int altroTentativoTicket = 0;
-		int ticketRimanenti = 2;
+		int ticketRimanenti = MAX_TICKETS_UTILIZZABILI;
 		
 		do{
 			mostraTickets(utenteCorrente);
@@ -76,6 +76,7 @@ float utilizzaTickets(t_abr * utenteCorrente){
 			if(1 <= selettoreTicket && selettoreTicket <= 5 && utenteCorrente->utente.tickets[selettoreTicket - 1] > 0){
 				sconto += 5.0 * selettoreTicket;
 				utenteCorrente->utente.tickets[selettoreTicket -1]--;
+				ticketsUtilizzati[ticketRimanenti - 1] = selettoreTicket - 1;
 				ticketRimanenti--;
 					
 				if(ticketRimanenti == 1)
@@ -103,6 +104,9 @@ void gestisciPagamentoPartenzaDestinazione(t_grf * voli, t_grf * percorso, t_abr
 	int confermaPrenotazione = 0;
 	float prezzo = 0;
 	t_lista_S * scali = NULL;
+	int ticketsUtilizzati[MAX_TICKETS_UTILIZZABILI];
+	
+	inizializzaTicketsUtilizzati(ticketsUtilizzati);
 	
 	puts("");
 	
@@ -112,11 +116,11 @@ void gestisciPagamentoPartenzaDestinazione(t_grf * voli, t_grf * percorso, t_abr
 	
 	printf(" per un prezzo totale di %.2f euro\n", prezzo);
 	
-	sconto = utilizzaTickets(utenteCorrente);
+	sconto = utilizzaTickets(utenteCorrente, ticketsUtilizzati);
 	
 	prezzo = prezzo * (1 - (sconto/100));
 
-	printf("\n%s, conferma la prenotazione di costo %.2f euro?(1 per si, altro per no): ", utenteCorrente->utente.nomeUtente, prezzo);
+	printf("\n%s, conferma la prenotazione di costo %f euro?(1 per si, altro per no): ", utenteCorrente->utente.nomeUtente, prezzo);
 	
 	fflush(stdin);
 	scanf("%d", &confermaPrenotazione);
@@ -127,11 +131,11 @@ void gestisciPagamentoPartenzaDestinazione(t_grf * voli, t_grf * percorso, t_abr
 		utenteCorrente->utente.punti += calcolaPuntiOttenuti(prezzo);
 	                				
 	    printf("\nPrenotazione avvenuta con successo!\n");  
-	}else{
-		
+	}else
+		if(sconto)
+			restituisciTickets(utenteCorrente, ticketsUtilizzati);
 		printf("\nPrenotazione annullata;\n");
-		//bisogna gestire la restituzione di punti in seguito a annullamento prenotazione 
-	}	           				            			
+		           				            			
 }
 
 void gestisciPrenotazione(t_grf * voli, t_abr * utenteCorrente, char * partenza, char * destinazione) {
