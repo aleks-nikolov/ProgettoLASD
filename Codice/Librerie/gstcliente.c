@@ -131,11 +131,11 @@ void gestisciPagamentoPartenzaDestinazione(t_grf * voli, t_grf * percorso, t_abr
 		utenteCorrente->utente.punti += calcolaPuntiOttenuti(prezzo);
 	                				
 	    printf("\nPrenotazione avvenuta con successo!\n");  
-	}else
+	}else{
 		if(sconto)
 			restituisciTickets(utenteCorrente, ticketsUtilizzati);
 		printf("\nPrenotazione annullata;\n");
-		           				            			
+	}		           				            			
 }
 
 void gestisciPrenotazione(t_grf * voli, t_abr * utenteCorrente, char * partenza, char * destinazione) {
