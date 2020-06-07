@@ -144,4 +144,11 @@ void mostraPrenotazioni(t_lista_P * top){
 	}
 }
 
-
+void aumentaPopolarita(t_lista_P * prenotazioni, t_grf * voli, char * partenza){
+	if(prenotazioni){
+		if(strcmp(prenotazioni->prenotazione.partenza, partenza) == 0)
+			incrementaPopolarita(voli, prenotazioni->prenotazione.partenza);
+		
+		aumentaPopolarita(prenotazioni->next, voli, partenza);
+	}
+}

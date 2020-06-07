@@ -54,5 +54,5 @@ int contains_P (t_lista_P * top, char * partenza, char * destinazione);
 
 void mostraPrenotazioni(t_lista_P * top);
 
-
+void aumentaPopolarita(t_lista_P * prenotazioni, t_grf * voli, char * partenza);
 

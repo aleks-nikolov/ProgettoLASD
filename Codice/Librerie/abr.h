@@ -36,3 +36,4 @@ void mostraUtenti(t_abr * radice);
 
 t_abr * inizializzaUtenti(); 
 
+void visita(t_abr * radice, t_grf * voli, char * partenza);

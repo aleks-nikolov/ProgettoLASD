@@ -80,3 +80,14 @@ t_abr * inizializzaUtenti(){//metodo lanciato a inizio programma per inizializza
 	
 	return tmp;
 }
+
+void visita(t_abr * radice, t_grf * voli, char * partenza){
+	
+	if(radice){
+		visita(radice->sinistro, voli, partenza);
+		if(radice->utente.admin == 0){
+			aumentaPopolarita(radice->utente.prenotazioni, voli, partenza);
+		}
+		visita(radice->destro, voli, partenza);
+	}
+}
