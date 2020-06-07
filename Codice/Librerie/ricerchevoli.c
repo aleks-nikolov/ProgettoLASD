@@ -11,6 +11,16 @@ t_arc * trovaPiuEconomico(t_arc * a) {
     return a;
 }
 
+t_grf * trovaPiuGettonato(t_grf * g) {
+    if(!grafoVuoto(g->next)) {
+        if(g->popolarita > (trovaPiuGettonato(g->next))->popolarita)
+            return g;
+        else
+            return trovaPiuGettonato(g->next);
+    }
+    return g;
+}
+
 //Trova il volo più economico (pesoDiRiferimento == 1) o breve (pesoDiRiferimento == 2) dall'aeroporto 'da' a 'a'
 void dijkstra(t_grf ** g, char *da, char *a, int pesoDiRiferimento) {
     t_grf * sorgente = getVertice(*g, da);

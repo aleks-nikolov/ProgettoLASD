@@ -21,7 +21,9 @@ typedef struct grafo {
     struct arco *archi;
     struct grafo *next;
 
-    int camminoMinimo;       //il peso totale del cammino fino a questo vertice
+    int popolarita;   //usato nella ricerca della destinazione più gettonata
+
+    int camminoMinimo;    //il peso totale del cammino fino a questo vertice
     struct grafo *prev;   //puntatore al vertice che precede nel cammino minimo
 } t_grf;
 
@@ -52,9 +54,12 @@ int lunghezzaGrafo(t_grf * g);
 int grafoVuoto(t_grf * g);
 int arcoVuoto(t_arc * a);
 int getPesoArco(t_grf * g, t_grf * h, int pesoDiRiferimento);
+t_grf * incrementaPopolarita(t_grf * g, char * nome);
+t_grf * azzeraPopolarita(t_grf * g);
 
 //Ricerce voli
 t_arc * trovaPiuEconomico(t_arc * a);
+t_grf * trovaPiuGettonato(t_grf * g);
 void dijkstra(t_grf ** g, char *da, char *a, int pesoDiRiferimento);
 t_grf * copiaGrafo(t_grf * g, t_grf * q);
 t_grf * impostaCamminoMinimo(t_grf * q, char *nome, int potenziale);

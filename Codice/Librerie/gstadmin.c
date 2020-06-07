@@ -40,65 +40,6 @@ void gestisciOpzioneAdmin(t_grf ** g){
             case (6):
                 printf("\n*************\nLogout dalla pagina admin\n*************\n");
                 break;
-            case (7):
-                printf("\nVolo piu' economico");
-                printf("\nInserire aeroporto di partenza ");
-                scanf("%s", nomepartenzavolo);
-                fflush(stdin);
-                if (!aeroportoEsistente(*g, nomepartenzavolo)) {
-                    printf("\nL'aeroporto inserito non esiste");
-                    break;
-                }
-
-                //Cerca volo più economico
-                t_arc * destArc = trovaPiuEconomico(getVertice(*g, nomepartenzavolo)->archi);
-                printf("\nLa destinazione piu' economica da %s e' %s", nomepartenzavolo, destArc->nome);
-
-                break;
-
-            case (8):
-                printf("\nTest Dijsktra");
-                printf("\nInserire aeroporto di partenza ");
-                scanf("%s", nomepartenzavolo);
-                fflush(stdin);
-                if (!aeroportoEsistente(*g, nomepartenzavolo)) {
-                    printf("\nL'aeroporto inserito non esiste");
-                    break;
-                }
-                printf("\nInserire destinazione ");
-                scanf("%s", nomearrivovolo);
-                fflush(stdin);
-                if (!aeroportoEsistente(*g, nomearrivovolo)) {
-                    printf("\nL'aeroporto inserito non esiste");
-                    break;
-                }
-
-                //bfs effettua una breadth first search e controlla che l'aeroporto di destinazione è raggiungibile da quello di partenza
-                t_grf* raggiungibili = bfs(*g, nomepartenzavolo);
-                if (!aeroportoEsistente(raggiungibili, nomearrivovolo)) {
-                    printf("\n%s non e' raggiungibile da %s", nomearrivovolo, nomepartenzavolo);
-                    break;
-                }
-
-                //scelta tra tratta più economica e più breve
-                printf("\nTratta preferita"
-                       "\n1) Piu' economica"
-                       "\n2) Piu' breve\n");
-                scanf("%d", &pesoDiRiferimento);
-                fflush(stdin);
-                if (pesoDiRiferimento < 1 || pesoDiRiferimento > 2) {
-                    printf("\nInput invalido");
-                    break;
-                }
-
-                dijkstra(g, nomepartenzavolo, nomearrivovolo, pesoDiRiferimento);
-
-                //costruisce e stampa il percorso
-                t_grf * percorso = costruisciPercorso(g, nomearrivovolo);
-                printf("\n");
-                stampaPercorso(*g, percorso, pesoDiRiferimento);
-                free(percorso);
-                break;
 
             default:
                 printf("\nScelta inserita non valida\n");
@@ -116,10 +57,7 @@ void stampaMenuAdmin(){
            "\n\t3 - Rimuovi una destinazione"
            "\n\t4 - Rimuovi un volo"
            "\n\t5 - Stampa tutti i voli"
-           "\n\t6 - Logout\n"
-           "\nRoba per testare, non fara' parte del progetto finale"
-           "\n\t7 - Volo piu' economico data una partenza"
-           "\n\t8 - Test Dijkstra\n");
+           "\n\t6 - Logout\n");
 }
 
 void aggiuntaAeroporto(t_grf ** g) {
