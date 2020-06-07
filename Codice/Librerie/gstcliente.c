@@ -73,40 +73,26 @@ float utilizzaTickets(t_abr * utenteCorrente){
 			fflush(stdin);
 			scanf("%d", &selettoreTicket);
 		
-			if(1 <= selettoreTicket && selettoreTicket <= 5){
-				
-				if(utenteCorrente->utente.tickets[selettoreTicket - 1] > 0){
-					sconto += 5.0 * selettoreTicket;
-					utenteCorrente->utente.tickets[selettoreTicket -1]--;
-					ticketRimanenti--;
+			if(1 <= selettoreTicket && selettoreTicket <= 5 && utenteCorrente->utente.tickets[selettoreTicket - 1] > 0){
+				sconto += 5.0 * selettoreTicket;
+				utenteCorrente->utente.tickets[selettoreTicket -1]--;
+				ticketRimanenti--;
 					
-					if(ticketRimanenti == 1){
-						printf("\nSi desidera utilizzare un secondo ticket di sconto?(1 per si, altro per no): ");
+				if(ticketRimanenti == 1)
+					printf("\nSi desidera utilizzare un secondo ticket di sconto?(1 per si, altro per no): ");
 						
-						fflush(stdin);
-						scanf("%d", &altroTentativoTicket);
+			}else if(selettoreTicket < 1 || selettoreTicket > 5)
+					printf("\nDato inserito non valido, riprovare?(1 per si, altro per no): ");
+			 else if(utenteCorrente->utente.tickets[selettoreTicket - 1] == 0)
+					printf("\nNon si hanno tickets di questo sconto rimanenti, riprovare?(1 per si, altro per no): ");		
 				
-						if(altroTentativoTicket != 1)
-							ticketRimanenti = 0;
-					}
-				}else{
-					printf("\nNon si hanno tickets di questo sconto rimanenti, riprovare?(1 per si, altro per no): ");
-				
+				if(ticketRimanenti > 0){
 					fflush(stdin);
 					scanf("%d", &altroTentativoTicket);
 				
-					if(altroTentativoTicket != 1)
-						ticketRimanenti = 0;
-				}
-			}else{
-				printf("\nDato inserito non valido, riprovare?(1 per si, altro per no): ");
-				
-				fflush(stdin);
-				scanf("%d", &altroTentativoTicket);
-				
 				if(altroTentativoTicket != 1)
 					ticketRimanenti = 0;
-			}
+				}	
 		}while(ticketRimanenti > 0);
 	}
 	return sconto;
@@ -141,8 +127,11 @@ void gestisciPagamentoPartenzaDestinazione(t_grf * voli, t_grf * percorso, t_abr
 		utenteCorrente->utente.punti += calcolaPuntiOttenuti(prezzo);
 	                				
 	    printf("\nPrenotazione avvenuta con successo!\n");  
-	}else
-		printf("\nPrenotazione annullata;\n");            				            			
+	}else{
+		
+		printf("\nPrenotazione annullata;\n");
+		//bisogna gestire la restituzione di punti in seguito a annullamento prenotazione 
+	}	           				            			
 }
 
 void gestisciPrenotazione(t_grf * voli, t_abr * utenteCorrente, char * partenza, char * destinazione) {

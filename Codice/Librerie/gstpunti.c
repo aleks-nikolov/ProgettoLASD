@@ -68,8 +68,8 @@ void convertiPunti(t_abr * utenteCorrente){
 			
 			scontoTicket = puntiDaConvertire / 50;
 			
-			utenteCorrente->utente.tickets[--scontoTicket]++;
-			utenteCorrente->utente.punti -= puntiDaConvertire;
+			utenteCorrente->utente.tickets[scontoTicket - 1]++;
+			utenteCorrente->utente.punti -= scontoTicket * 50;
 			
 			printf("\nOperazione di conversione avvenuta con successo!");
 			altroTentativo = 0;
