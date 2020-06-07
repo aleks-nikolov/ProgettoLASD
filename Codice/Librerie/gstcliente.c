@@ -116,7 +116,7 @@ void gestisciPagamentoPartenzaDestinazione(t_grf * voli, t_grf * percorso, t_abr
 	
 	prezzo = prezzo * (1 - (sconto/100));
 
-	printf("\n%s, conferma la prenotazione di costo %f euro?(1 per si, altro per no): ", utenteCorrente->utente.nomeUtente, prezzo);
+	printf("\n%s, conferma la prenotazione di costo %.2f euro?(1 per si, altro per no): ", utenteCorrente->utente.nomeUtente, prezzo);
 	
 	fflush(stdin);
 	scanf("%d", &confermaPrenotazione);
@@ -258,7 +258,7 @@ void gestisciSolaPartenza(t_abr * utenti, t_grf * voli, t_abr * utenteCorrente){
 
                     t_grf * raggiungibili = bfs(voli, partenza);
                     raggiungibili = eliminaAeroporto(raggiungibili, partenza);
-
+                    t_grf * destinazione = NULL;
                     do {
                         altroTentativo = 0;
 
@@ -267,17 +267,21 @@ void gestisciSolaPartenza(t_abr * utenti, t_grf * voli, t_abr * utenteCorrente){
                         printf("\nScegliere la destinazione desiderata, inserendo il numero a fianco all'aeroporto: ");
                         fflush(stdin);
                         scanf("%d", &n);
-                        if (n < 1 || n > 9) {
+                        if (n < 1 || n > lunghezzaGrafo(raggiungibili)) {
                             altroTentativo = 1;
                             printf("\nInput invalido, riprovare? (1 per si, altro per no): ");
                             fflush(stdin);
                             scanf("%d", &altroTentativo);
-                        }
+                        } else
+                            destinazione = getVerticeByPosizione(raggiungibili, n);
                     } while (altroTentativo == 1);
 
-                    t_grf * destinazione = getVerticeByPosizione(raggiungibili, n);
-
-                    gestisciPrenotazione(voli, utenteCorrente, partenza, destinazione->nome);
+                    if (destinazione != NULL)
+                        gestisciPrenotazione(voli, utenteCorrente, partenza, destinazione->nome);
+                    else {
+                        printf("\nImpossibile effettuare la prenotazione, torno al menu");
+                        break;
+                    }
                 } else {
                     printf("\nDato inserito non rientra nelle opzioni, riprovare;\n");
                     altroTentativoTratta = 1;
