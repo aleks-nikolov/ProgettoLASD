@@ -195,30 +195,6 @@ int lunghezzaGrafo(t_grf * g) {
         return 1 + lunghezzaGrafo(g->next);
 }
 
-//Incrementa la popolarità dell'aeroporto 'nome' di 1
-t_grf * incrementaPopolarita(t_grf * g, char * nome) {
-    if(!grafoVuoto(g)) {
-        if(strcmp(g->nome, nome) == 0) {
-            g->popolarita++;
-            return g;
-        }
-        else
-            g->next = incrementaPopolarita(g->next, nome);
-    }
-
-    return g;
-}
-
-//Imposta la popolarità di tutti gli aeroporti a 0
-t_grf * azzeraPopolarita(t_grf * g) {
-    if(!grafoVuoto(g)) {
-        g->popolarita = 0;
-        g->next = azzeraPopolarita(g->next);
-    }
-
-    return g;
-}
-
 void elencaGrafo(t_grf * g, int contatore) {
     if(!grafoVuoto(g)){
         printf("\n%d) %s ", contatore, g->nome);

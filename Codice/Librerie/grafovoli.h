@@ -54,19 +54,20 @@ int lunghezzaGrafo(t_grf * g);
 int grafoVuoto(t_grf * g);
 int arcoVuoto(t_arc * a);
 int getPesoArco(t_grf * g, t_grf * h, int pesoDiRiferimento);
-t_grf * incrementaPopolarita(t_grf * g, char * nome);
-t_grf * azzeraPopolarita(t_grf * g);
 
 //Ricerce voli
 t_arc * trovaPiuEconomico(t_arc * a);
 t_grf * trovaPiuGettonato(t_grf * g);
 void dijkstra(t_grf ** g, char *da, char *a, int pesoDiRiferimento);
 t_grf * copiaGrafo(t_grf * g, t_grf * q);
-t_grf * impostaCamminoMinimo(t_grf * q, char *nome, int potenziale);
-t_grf * impostaCamminoMinimoATutti(t_grf * g, int potenziale);
+t_grf * impostaCamminoMinimo(t_grf * q, char *nome, int camminoMinimoNuovo);
+t_grf * impostaCamminoMinimoATutti(t_grf * g, int camminoMinimoNuovo);
 t_grf * impostaPrecedente(t_grf * q, char *nome, t_grf * precedente);
 t_grf * impostaPrecedenteATutti(t_grf * g, t_grf * precedente);
-t_grf * minimoCammino(t_grf * q);
+t_grf * impostaPopolarita(t_grf * g, char *nome, int popolaritaNuova);
+t_grf * incrementaPopolarita(t_grf * g, char * nome);
+t_grf * azzeraPopolarita(t_grf * g);
+t_grf * getVerticeByCamminoMinimo(t_grf * q);
 t_grf * costruisciPercorso(t_grf ** g, char * entrata);
 t_grf * aggiungiPercorsoInTesta(t_grf * g, t_grf * daAggiungere);
 void stampaPercorso(t_grf * g, t_grf * percorso, int pesoDiRiferimento);

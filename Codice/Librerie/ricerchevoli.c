@@ -39,7 +39,7 @@ void dijkstra(t_grf ** g, char *da, char *a, int pesoDiRiferimento) {
 
     while(!grafoVuoto(q)) {
 
-        u = minimoCammino(q);
+        u = getVerticeByCamminoMinimo(q);
         if (u->camminoMinimo == INT_MAX)
             break;
 
@@ -88,22 +88,22 @@ t_grf * copiaGrafo(t_grf * g, t_grf * q) {
 }
 
 //Modifica il camminoMinimo del vertice 'nome' nel grafo 'q'
-t_grf * impostaCamminoMinimo(t_grf * q, char *nome, int potenziale) {
+t_grf * impostaCamminoMinimo(t_grf * q, char *nome, int camminoMinimoNuovo) {
     if(!grafoVuoto(q)) {
         if(strcmp(q->nome, nome) == 0)
-            q->camminoMinimo = potenziale;
+            q->camminoMinimo = camminoMinimoNuovo;
         else
-            q->next = impostaCamminoMinimo(q->next, nome, potenziale);
+            q->next = impostaCamminoMinimo(q->next, nome, camminoMinimoNuovo);
     }
 
     return q;
 }
 
 //Modifica il camminoMinimo di tutti i vertici di 'g'
-t_grf * impostaCamminoMinimoATutti(t_grf * g, int potenziale) {
+t_grf * impostaCamminoMinimoATutti(t_grf * g, int camminoMinimoNuovo) {
     if (!grafoVuoto(g)) {
-        g->camminoMinimo = potenziale;
-        g->next = impostaCamminoMinimoATutti(g->next, potenziale);
+        g->camminoMinimo = camminoMinimoNuovo;
+        g->next = impostaCamminoMinimoATutti(g->next, camminoMinimoNuovo);
     }
 
     return g;
@@ -131,13 +131,48 @@ t_grf * impostaPrecedenteATutti(t_grf * g, t_grf * precedente) {
     return g;
 }
 
+t_grf * impostaPopolarita(t_grf * g, char *nome, int popolaritaNuova) {
+    if(!grafoVuoto(g)) {
+        if(strcmp(g->nome, nome) == 0)
+            g->popolarita = popolaritaNuova;
+        else
+            g->next = impostaPopolarita(g->next, nome, popolaritaNuova);
+    }
+
+    return g;
+}
+
+//Incrementa la popolarità dell'aeroporto 'nome' di 1
+t_grf * incrementaPopolarita(t_grf * g, char * nome) {
+    if(!grafoVuoto(g)) {
+        if(strcmp(g->nome, nome) == 0) {
+            g->popolarita++;
+            return g;
+        }
+        else
+            g->next = incrementaPopolarita(g->next, nome);
+    }
+
+    return g;
+}
+
+//Imposta la popolarità di tutti gli aeroporti a 0
+t_grf * azzeraPopolarita(t_grf * g) {
+    if(!grafoVuoto(g)) {
+        g->popolarita = 0;
+        g->next = azzeraPopolarita(g->next);
+    }
+
+    return g;
+}
+
 //Restituisce un puntatore al vertice con il minor camminoMinimo
-t_grf * minimoCammino(t_grf * q) {
+t_grf * getVerticeByCamminoMinimo(t_grf * q) {
     if(!grafoVuoto(q->next)) {
-        if(q->camminoMinimo < (minimoCammino(q->next))->camminoMinimo)
+        if(q->camminoMinimo < (getVerticeByCamminoMinimo(q->next))->camminoMinimo)
             return q;
         else
-            return minimoCammino(q->next);
+            return getVerticeByCamminoMinimo(q->next);
     }
     return q;
 }

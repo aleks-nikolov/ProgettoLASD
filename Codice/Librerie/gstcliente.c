@@ -240,6 +240,7 @@ void gestisciSolaPartenza(t_abr * utenti, t_grf * voli, t_abr * utenteCorrente){
                 if (selettoreDestinazione == 1) {  //caso destinazione più economica
 
                     t_grf *origine = getVertice(voli, partenza);
+
                     //trovaPiuEconomico restituisce un puntatore ad arco verso la destinazione adiacente alla partenza più economica
                     t_grf *destinazione = getVertice(voli, trovaPiuEconomico(origine->archi)->nome);
 
@@ -254,11 +255,29 @@ void gestisciSolaPartenza(t_abr * utenti, t_grf * voli, t_abr * utenteCorrente){
                     gestisciPagamentoPartenzaDestinazione(voli, percorso, utenteCorrente, 1, partenza, destinazione->nome);
 
                 } else if (selettoreDestinazione == 2) {   //caso destinazione più gettonata
+                    int condizioneUscita;
+                    t_grf * raggiungibili = bfs(voli, partenza);
+                    t_grf * destinazione = NULL;
 
+                    //Resetta la popolarita dei voli
                     voli = azzeraPopolarita(voli);
+                    //Imposta i valori di popolarita in base alle prenotazioni esistenti
                     visita(utenti, voli, partenza);
-                    t_grf * destinazione = trovaPiuGettonato(voli);
-                    printf("\nDestinazione piu' gettonata: %s", destinazione->nome);
+
+                    //Garantisce che la destinazione sia raggiungibile nel caso in cui sono avvenute modifiche successive dei tratti
+                    do {
+                        condizioneUscita = 1;
+                        destinazione = trovaPiuGettonato(voli);
+                        if (aeroportoEsistente(raggiungibili, destinazione->nome))
+                            condizioneUscita = 0;
+                        else {
+                            voli = impostaPopolarita(voli, destinazione->nome, 0);
+                            condizioneUscita = 1;
+                        }
+
+                    } while (condizioneUscita == 1);
+
+                    gestisciPrenotazione(voli, utenteCorrente, partenza, destinazione->nome);
 
                 } else if (selettoreDestinazione == 3){   //caso scelta destinazione tra quelle raggiungibili
                     int n, altroTentativo;
