@@ -305,7 +305,7 @@ void gestisciSolaPartenza(t_abr * utenti, t_grf * voli, t_abr * utenteCorrente){
                     if (destinazione != NULL)
                         gestisciPrenotazione(voli, utenteCorrente, partenza, destinazione->nome);
                     else {
-                        printf("\nImpossibile effettuare la prenotazione, torno al menu");
+                        printf("\nImpossibile effettuare la prenotazione, torno al menu\n");
                         break;
                     }
                 } else {
@@ -346,6 +346,7 @@ void effettuaPrenotazione(t_abr * utenti, t_grf * voli, t_abr * utenteCorrente){
 
             case 3:
                 stampaGrafo(voli);
+                puts("");
                 break;
 
             case 4:
