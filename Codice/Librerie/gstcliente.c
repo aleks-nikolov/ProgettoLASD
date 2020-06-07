@@ -120,7 +120,7 @@ void gestisciPagamentoPartenzaDestinazione(t_grf * voli, t_grf * percorso, t_abr
 	
 	prezzo = prezzo * (1 - (sconto/100));
 
-	printf("\n%s, conferma la prenotazione di costo %f euro?(1 per si, altro per no): ", utenteCorrente->utente.nomeUtente, prezzo);
+	printf("\n%s, conferma la prenotazione di costo %.2f euro?(1 per si, altro per no): ", utenteCorrente->utente.nomeUtente, prezzo);
 	
 	fflush(stdin);
 	scanf("%d", &confermaPrenotazione);
