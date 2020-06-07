@@ -55,7 +55,7 @@ float utilizzaTickets(t_abr * utenteCorrente){
 	int sconto = 0.0;
 	int selettoreAzione = 0;
 	
-	printf("\nSi desidera utilizzare tickets di sconto?(1 per si, altro no): ");
+	printf("\nSi desidera utilizzare tickets di sconto?(1 per si, altro per no): ");
 	
 	fflush(stdin);
 	scanf("%d", &selettoreAzione);
@@ -81,7 +81,7 @@ float utilizzaTickets(t_abr * utenteCorrente){
 					ticketRimanenti--;
 					
 					if(ticketRimanenti == 1){
-						printf("\nSi desidera utilizzare un secondo ticket di sconto?(1 per si, altro no): ");
+						printf("\nSi desidera utilizzare un secondo ticket di sconto?(1 per si, altro per no): ");
 						
 						fflush(stdin);
 						scanf("%d", &altroTentativoTicket);
@@ -90,7 +90,7 @@ float utilizzaTickets(t_abr * utenteCorrente){
 							ticketRimanenti = 0;
 					}
 				}else{
-					printf("\nNon si hanno tickets di questo sconto rimanenti, riprovare?(1 per si, altro no): ");
+					printf("\nNon si hanno tickets di questo sconto rimanenti, riprovare?(1 per si, altro per no): ");
 				
 					fflush(stdin);
 					scanf("%d", &altroTentativoTicket);
@@ -99,7 +99,7 @@ float utilizzaTickets(t_abr * utenteCorrente){
 						ticketRimanenti = 0;
 				}
 			}else{
-				printf("\nDato inserito non valido, riprovare?(1 per si, altro no): ");
+				printf("\nDato inserito non valido, riprovare?(1 per si, altro per no): ");
 				
 				fflush(stdin);
 				scanf("%d", &altroTentativoTicket);
@@ -118,6 +118,8 @@ void gestisciPagamentoPartenzaDestinazione(t_grf * voli, t_grf * percorso, t_abr
 	float prezzo = 0;
 	t_lista_S * scali = NULL;
 	
+	puts("");
+	
 	stampaPercorso(voli, percorso, selettoreTratta);
 	
 	costruisciCampiPrenotazione(voli, percorso, &scali, &prezzo);
@@ -128,7 +130,7 @@ void gestisciPagamentoPartenzaDestinazione(t_grf * voli, t_grf * percorso, t_abr
 	
 	prezzo = prezzo * (1 - (sconto/100));
 
-	printf("\n\n%s, conferma la prenotazione di costo %f euro?(1 per si, altro per no): ", utenteCorrente->utente.nomeUtente, prezzo);
+	printf("\n%s, conferma la prenotazione di costo %f euro?(1 per si, altro per no): ", utenteCorrente->utente.nomeUtente, prezzo);
 	
 	fflush(stdin);
 	scanf("%d", &confermaPrenotazione);
@@ -203,10 +205,10 @@ void gestisciPartenzaEDestinazione(t_grf * voli, t_abr * utenteCorrente){
 					    gestisciPrenotazione(voli, utenteCorrente, partenza, destinazione);
 	
 					}else
-						printf("\n%s non e' raggiungibile da %s", destinazione, partenza);
+						printf("\n%s non e' raggiungibile da %s\n\n", destinazione, partenza);
 					
 				}else{
-					printf("\nAeroporto inserito non coperto dalla nostra compagnia, riprovare?(1 si, altro no): ");
+					printf("\nAeroporto inserito non coperto dalla nostra compagnia, riprovare?(1 per si, altro per no): ");
 				
 					fflush(stdin);
 					scanf("%d", &altroTentativoDestinazione);
@@ -214,7 +216,7 @@ void gestisciPartenzaEDestinazione(t_grf * voli, t_abr * utenteCorrente){
 			}while(altroTentativoDestinazione == 1);
 			
 		}else{
-			printf("\nAeroporto inserito non coperto dalla nostra compagnia, riprovare?(1 si, altro no): ");
+			printf("\nAeroporto inserito non coperto dalla nostra compagnia, riprovare?(1 per si, altro per no): ");
 			
 			fflush(stdin);
 			scanf("%d", &altroTentativoPartenza);
@@ -278,7 +280,7 @@ void gestisciSolaPartenza(t_abr * utenti, t_grf * voli, t_abr * utenteCorrente){
                         scanf("%d", &n);
                         if (n < 1 || n > 9) {
                             altroTentativo = 1;
-                            printf("\nInput invalido, riprovare? (1 si, altro no): ");
+                            printf("\nInput invalido, riprovare? (1 per si, altro per no): ");
                             fflush(stdin);
                             scanf("%d", &altroTentativo);
                         }
@@ -293,7 +295,7 @@ void gestisciSolaPartenza(t_abr * utenti, t_grf * voli, t_abr * utenteCorrente){
                 }
             } while (altroTentativoTratta == 1);
         } else {
-            printf("\nAeroporto inserito non coperto dalla nostra compagnia, riprovare?(1 si, altro no): ");
+            printf("\nAeroporto inserito non coperto dalla nostra compagnia, riprovare?(1 per si, altro per no): ");
 
             fflush(stdin);
             scanf("%d", &altroTentativoPartenza);
@@ -342,9 +344,9 @@ void effettuaPrenotazione(t_abr * utenti, t_grf * voli, t_abr * utenteCorrente){
 //funzione per la gestione del secondo case della gestisciCliente
 
 void visualizzaPrenotazioni(t_abr * utenteCorrente){
-	puts("");
 	
     if(utenteCorrente->utente.prenotazioni){
+    	puts("");
     	mostraPrenotazioni(utenteCorrente->utente.prenotazioni);
 	}
     else
