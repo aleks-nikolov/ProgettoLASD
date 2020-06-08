@@ -48,7 +48,7 @@ void effettuaRegistrazione(t_abr * utenti){
 				
 				if(!strchr(passwordTmp, ' ') && strlen(passwordTmp) <= 20){
 					utenti = inserisciNodo_U(utenti, nomeTmp, passwordTmp, 0);
-					printf("\nRegistrazione avvenuta con successo");
+					printf("\nRegistrazione avvenuta con successo!");
 				}else{
 					printf("\nLa password non puo' contenere spazi e la lunghezza non deve superare i 20 caratteri, riprovare");
 					passwordAmmessa = 0;

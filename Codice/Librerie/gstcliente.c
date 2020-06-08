@@ -38,11 +38,13 @@ void stampaMenuSelezioneDestinazione(int * selettoreTratta, char *partenza){
     scanf("%d", selettoreTratta);
 }
 
-void costruisciCampiPrenotazione(t_grf * voli, t_grf * percorso, t_lista_S ** scali, float * prezzo){
+void costruisciCampiPrenotazione(t_grf * voli, t_grf * percorso, t_lista_S ** scali, float * prezzo, int * tempo){
 	t_grf * tmp = percorso;
 	
 	for(;!grafoVuoto(tmp) && !grafoVuoto(tmp->next);tmp = tmp->next){
 		*prezzo += getPesoArco(getVertice(voli, tmp->nome), getVertice(voli, tmp->next->nome), 1);
+		
+		*tempo += getPesoArco(getVertice(voli, tmp->nome), getVertice(voli, tmp->next->nome), 2);
 		
 		if(tmp->next->next)
 			*scali = inserisciInCoda_S(*scali, tmp->next->nome);
@@ -101,6 +103,7 @@ void gestisciPagamentoPartenzaDestinazione(t_grf * voli, t_grf * percorso, t_abr
 	float sconto = 0;
 	int confermaPrenotazione = 0;
 	float prezzo = 0;
+	int tempo = 0;
 	t_lista_S * scali = NULL;
 	int ticketsUtilizzati[MAX_TICKETS_UTILIZZABILI];
 	
@@ -110,9 +113,9 @@ void gestisciPagamentoPartenzaDestinazione(t_grf * voli, t_grf * percorso, t_abr
 	
 	stampaPercorso(voli, percorso, selettoreTratta);
 	
-	costruisciCampiPrenotazione(voli, percorso, &scali, &prezzo);
+	costruisciCampiPrenotazione(voli, percorso, &scali, &prezzo, &tempo);
 	
-	printf(" per un prezzo totale di %.2f euro\n", prezzo);
+	printf(" per un prezzo totale di %.2f euro e tempo totale di %d minuti\n", prezzo, tempo);
 	
 	sconto = utilizzaTickets(utenteCorrente, ticketsUtilizzati);
 	
@@ -124,7 +127,7 @@ void gestisciPagamentoPartenzaDestinazione(t_grf * voli, t_grf * percorso, t_abr
 	scanf("%d", &confermaPrenotazione);
     
 	if(confermaPrenotazione == 1){
-		utenteCorrente->utente.prenotazioni = inserisciInCoda_P(utenteCorrente->utente.prenotazioni, partenza, destinazione, scali, prezzo);
+		utenteCorrente->utente.prenotazioni = inserisciInCoda_P(utenteCorrente->utente.prenotazioni, partenza, destinazione, scali, prezzo, tempo);
 	                				
 		utenteCorrente->utente.punti += calcolaPuntiOttenuti(prezzo);
 	                				

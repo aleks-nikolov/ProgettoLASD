@@ -17,6 +17,7 @@ typedef struct t_prenotazione{
 	char destinazione[LUNGHEZZA_NOME_AEROPORTO];
 	t_lista_S * scali;
 	float prezzo;
+	int tempo;
 }t_prenotazione;
 
 //definizione della struttura che andrà a contenere le prenotazioni di ogni utente, in questo caso, una lista singolarmente linkata
@@ -42,11 +43,11 @@ void mostraScali(t_lista_S * top);
 
 //funzioni per la gestione della struttura t_lista_P
 
-t_lista_P * creaNodo_P (char * partenza, char * destinazione, t_lista_S * scali, float prezzo);
+t_lista_P * creaNodo_P (char * partenza, char * destinazione, t_lista_S * scali, float prezzo, int tempo);
 
-t_lista_P * inserisciInTesta_P (t_lista_P * top, char * partenza, char * destinazione, t_lista_S * scali, float prezzo);
+t_lista_P * inserisciInTesta_P (t_lista_P * top, char * partenza, char * destinazione, t_lista_S * scali, float prezzo, int tempo);
 
-t_lista_P * inserisciInCoda_P (t_lista_P * top, char * partenza, char * destinazione, t_lista_S * scali, float prezzo);
+t_lista_P * inserisciInCoda_P (t_lista_P * top, char * partenza, char * destinazione, t_lista_S * scali, float prezzo, int tempo);
 
 t_lista_P * rimuoviElemento_P(t_lista_P * top, char * partenza, char * destinazione);
 

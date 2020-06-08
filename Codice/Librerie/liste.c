@@ -71,7 +71,7 @@ void mostraScali(t_lista_S * top){
 
 //funzioni per la gestione della struttura t_lista_P
 
-t_lista_P * creaNodo_P (char * partenza, char * destinazione, t_lista_S * scali, float prezzo){
+t_lista_P * creaNodo_P (char * partenza, char * destinazione, t_lista_S * scali, float prezzo, int tempo){
 	t_lista_P * tmp = (t_lista_P *) malloc (sizeof(t_lista_P));
 	
 	if(tmp){
@@ -79,6 +79,7 @@ t_lista_P * creaNodo_P (char * partenza, char * destinazione, t_lista_S * scali,
 		strcpy(tmp->prenotazione.destinazione, destinazione);
 		tmp->prenotazione.scali = scali;
 		tmp->prenotazione.prezzo = prezzo;
+		tmp->prenotazione.tempo = tempo;
 		tmp->next = NULL;
 	}else 
 		printf("Memoria insufficiente per la creazione di un nuovo elemento");
@@ -86,8 +87,8 @@ t_lista_P * creaNodo_P (char * partenza, char * destinazione, t_lista_S * scali,
 	return tmp;
 }
 
-t_lista_P * inserisciInTesta_P (t_lista_P * top, char * partenza, char * destinazione, t_lista_S * scali, float prezzo){
-	t_lista_P * tmp = creaNodo_P(partenza, destinazione, scali, prezzo);
+t_lista_P * inserisciInTesta_P (t_lista_P * top, char * partenza, char * destinazione, t_lista_S * scali, float prezzo, int tempo){
+	t_lista_P * tmp = creaNodo_P(partenza, destinazione, scali, prezzo, tempo);
 	
 	if(tmp){
 		tmp->next = top;
@@ -96,11 +97,11 @@ t_lista_P * inserisciInTesta_P (t_lista_P * top, char * partenza, char * destina
 	return top;
 }
 
-t_lista_P * inserisciInCoda_P (t_lista_P * top, char * partenza, char * destinazione, t_lista_S * scali, float prezzo){
+t_lista_P * inserisciInCoda_P (t_lista_P * top, char * partenza, char * destinazione, t_lista_S * scali, float prezzo, int tempo){
 	if(!top)
-		top = inserisciInTesta_P(top, partenza, destinazione, scali, prezzo);
+		top = inserisciInTesta_P(top, partenza, destinazione, scali, prezzo, tempo);
 	else
-		top->next = inserisciInCoda_P(top->next, partenza, destinazione, scali, prezzo);
+		top->next = inserisciInCoda_P(top->next, partenza, destinazione, scali, prezzo, tempo);
 	
 	return top;
 }
@@ -138,7 +139,7 @@ void mostraPrenotazioni(t_lista_P * top){
 			printf("con scali ");
 			mostraScali(top->prenotazione.scali);  
 		}
-		printf(" per un prezzo totale di %.2f euro\n", top->prenotazione.prezzo);
+		printf(" per un prezzo totale di %.2f euro e tempo totale di %d minuti\n", top->prenotazione.prezzo, top->prenotazione.tempo);
 			
 		mostraPrenotazioni(top->next);
 	}
