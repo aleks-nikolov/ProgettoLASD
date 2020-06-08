@@ -39,15 +39,17 @@ void stampaMenuSelezioneDestinazione(int * selettoreTratta, char *partenza){
 }
 
 void costruisciCampiPrenotazione(t_grf * voli, t_grf * percorso, t_lista_S ** scali, float * prezzo, int * tempo){
-	t_grf * tmp = percorso;
 	
-	for(;!grafoVuoto(tmp) && !grafoVuoto(tmp->next);tmp = tmp->next){
-		*prezzo += getPesoArco(getVertice(voli, tmp->nome), getVertice(voli, tmp->next->nome), 1);
+	if(!grafoVuoto(percorso) && !grafoVuoto(percorso->next)){
+		*prezzo += getPesoArco(getVertice(voli, percorso->nome), getVertice(voli, percorso->next->nome), 1);
 		
-		*tempo += getPesoArco(getVertice(voli, tmp->nome), getVertice(voli, tmp->next->nome), 2);
+		*tempo += getPesoArco(getVertice(voli, percorso->nome), getVertice(voli, percorso->next->nome), 2);
 		
-		if(tmp->next->next)
-			*scali = inserisciInCoda_S(*scali, tmp->next->nome);
+		if(!grafoVuoto(percorso->next->next)){
+			*scali = inserisciInCoda_S(*scali, percorso->next->nome);
+			
+			costruisciCampiPrenotazione(voli, percorso->next, scali, prezzo, tempo);
+		}
 	}	
 }
 
