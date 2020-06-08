@@ -45,7 +45,7 @@ void costruisciCampiPrenotazione(t_grf * voli, t_grf * percorso, t_lista_S ** sc
 		
 		*tempo += getPesoArco(getVertice(voli, percorso->nome), getVertice(voli, percorso->next->nome), 2);
 		
-		if(percorso->next->next){
+		if(!grafoVuoto(percorso->next->next)){
 			*scali = inserisciInCoda_S(*scali, percorso->next->nome);
 			
 			costruisciCampiPrenotazione(voli, percorso->next, scali, prezzo, tempo);
