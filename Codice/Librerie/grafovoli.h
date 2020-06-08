@@ -39,8 +39,10 @@ t_grf * aggiungiVolo(t_grf * g, char *uscita, char *entrata, float prezzo, int d
 t_grf * eliminaVolo(t_grf * g, char *uscita, char *entrata);
 t_arc * eliminaArco(t_arc * a, char *nome);
 t_grf * eliminaTuttiVoliAdAeroporto(t_grf * g, char *nome);
+int haVoli(t_grf * partenza);
 
 //Stampe
+void elencaPopolarita(t_grf * g);
 void elencaGrafo(t_grf * g, int contatore);
 void stampaGrafo(t_grf * g);
 void stampaArchi(t_arc * a);
@@ -56,8 +58,8 @@ int arcoVuoto(t_arc * a);
 int getPesoArco(t_grf * g, t_grf * h, int pesoDiRiferimento);
 
 //Ricerce voli
-t_arc * trovaPiuEconomico(t_arc * a);
-t_grf * trovaPiuGettonato(t_grf * g);
+t_grf * trovaPiuEconomico(t_grf * voli, char * partenza);
+t_grf * trovaPiuGettonato(t_grf * voli, char * partenza);
 void dijkstra(t_grf ** g, char *da, char *a, int pesoDiRiferimento);
 t_grf * copiaGrafo(t_grf * g, t_grf * q);
 t_grf * impostaCamminoMinimo(t_grf * q, char *nome, int camminoMinimoNuovo);
@@ -66,7 +68,10 @@ t_grf * impostaPrecedente(t_grf * q, char *nome, t_grf * precedente);
 t_grf * impostaPrecedenteATutti(t_grf * g, t_grf * precedente);
 t_grf * impostaPopolarita(t_grf * g, char *nome, int popolaritaNuova);
 t_grf * incrementaPopolarita(t_grf * g, char * nome);
+t_grf * getMassimaPopolarita(t_grf * g);
 t_grf * azzeraPopolarita(t_grf * g);
+t_arc * getPrezzoMinimo(t_arc * a);
+int nessunaGettonata(t_grf * g);
 t_grf * getVerticeByCamminoMinimo(t_grf * q);
 t_grf * costruisciPercorso(t_grf ** g, char * entrata);
 t_grf * aggiungiPercorsoInTesta(t_grf * g, t_grf * daAggiungere);

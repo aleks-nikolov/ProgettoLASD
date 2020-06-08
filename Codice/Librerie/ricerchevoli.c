@@ -1,24 +1,45 @@
 #include "grafovoli.h"
 
 //Restituisce l'arco che punta alla destinazione più economica ricevendo le destinazioni adiacenti dalla partenza
-t_arc * trovaPiuEconomico(t_arc * a) {
-    if(!arcoVuoto(a->next)) {
-        if(a->prezzo < (trovaPiuEconomico(a->next))->prezzo)
-            return a;
-        else
-            return trovaPiuEconomico(a->next);
-    }
-    return a;
+t_grf * trovaPiuEconomico(t_grf * voli, char * partenza) {
+
+    t_grf *origine = getVertice(voli, partenza);
+    //trovaPiuEconomico restituisce un puntatore ad arco verso la destinazione adiacente alla partenza più economica
+    t_grf *destinazione = getVertice(voli, getPrezzoMinimo(origine->archi)->nome);
+    t_grf *percorso = NULL;
+    percorso = aggiungiPercorsoInTesta(percorso, destinazione);
+    percorso = aggiungiPercorsoInTesta(percorso, origine);
+
+    return percorso;
+
 }
 
-t_grf * trovaPiuGettonato(t_grf * g) {
-    if(!grafoVuoto(g->next)) {
-        if(g->popolarita > (trovaPiuGettonato(g->next))->popolarita)
-            return g;
-        else
-            return trovaPiuGettonato(g->next);
-    }
-    return g;
+//Restituisce il vertice del grafo raggiungibile dalla partenza e con l'intero popolarita più alto
+t_grf * trovaPiuGettonato(t_grf * voli, char * partenza) {
+    int condizioneUscita;
+    t_grf * raggiungibili = bfs(voli, partenza);
+    t_grf * destinazione = NULL;
+
+    raggiungibili = eliminaAeroporto(raggiungibili, partenza);
+
+    //Se per mancanza di dati non si riesce a stabilire la meta più gettonata
+    if(nessunaGettonata(voli))
+        return NULL;
+
+    //Garantisce che la destinazione sia raggiungibile nel caso in cui sono avvenute modifiche successive dei tratti
+    do {
+        destinazione = getMassimaPopolarita(voli);
+
+        if (aeroportoEsistente(raggiungibili, destinazione->nome))
+            condizioneUscita = 0;
+        else {
+            voli = impostaPopolarita(voli, destinazione->nome, 0);
+            condizioneUscita = 1;
+        }
+
+    } while (condizioneUscita == 1);
+
+    return destinazione;
 }
 
 //Trova il volo più economico (pesoDiRiferimento == 1) o breve (pesoDiRiferimento == 2) dall'aeroporto 'da' a 'a'
@@ -164,6 +185,39 @@ t_grf * azzeraPopolarita(t_grf * g) {
     }
 
     return g;
+}
+
+//Restituisce il vertice la cui popolarita è maggiore
+t_grf * getMassimaPopolarita(t_grf * g) {
+    if(!grafoVuoto(g->next)) {
+        if(g->popolarita > (getMassimaPopolarita(g->next))->popolarita)
+            return g;
+        else
+            return getMassimaPopolarita(g->next);
+    }
+    return g;
+}
+
+t_arc * getPrezzoMinimo(t_arc * a) {
+    if(!arcoVuoto(a->next)) {
+        if(a->prezzo < (getPrezzoMinimo(a->next))->prezzo)
+            return a;
+        else
+            return getPrezzoMinimo(a->next);
+    }
+    return a;
+}
+
+//Ritorna 1 se tutti i valori di popolarita degli aeroporti sono 0
+int nessunaGettonata(t_grf * g) {
+    if(!grafoVuoto(g)) {
+        if(g->popolarita == 0)
+            return nessunaGettonata(g->next);
+        else
+            return 0;
+    }
+
+    return 1;
 }
 
 //Restituisce un puntatore al vertice con il minor camminoMinimo

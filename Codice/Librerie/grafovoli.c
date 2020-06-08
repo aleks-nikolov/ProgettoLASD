@@ -105,6 +105,14 @@ t_grf * eliminaVolo(t_grf * g, char *uscita, char *entrata) {
     return g;
 }
 
+//Controlla se ci sono voli d'uscita da un aeroporto
+int haVoli(t_grf * partenza) {
+    if (arcoVuoto(partenza->archi))
+        return 0;
+    else
+        return 1;
+}
+
 //Inizializza un nuovo arco e lo restituisce (usata dalla funzione aggiungiVolo)
 t_arc * inizializzaArco(t_arc * a, char *nome, float prezzo, int durata) {
     if(arcoVuoto(a)) {
@@ -193,6 +201,13 @@ int lunghezzaGrafo(t_grf * g) {
         return 0;
     else
         return 1 + lunghezzaGrafo(g->next);
+}
+
+void elencaPopolarita(t_grf * g) {
+    if(!grafoVuoto(g)){
+        printf("\n%s - %d ", g->nome, g->popolarita);
+        elencaPopolarita(g->next);
+    }
 }
 
 void elencaGrafo(t_grf * g, int contatore) {
