@@ -81,7 +81,7 @@ t_abr * inizializzaUtenti(){//metodo lanciato a inizio programma per inizializza
 	return tmp;
 }
 
-void visita(t_abr * radice, t_grf * voli, char * partenza){
+void visita(t_abr * radice, t_grf * voli, char * partenza){//utile all'individuazione della meta più gettonata
 	
 	if(radice){
 		visita(radice->sinistro, voli, partenza);

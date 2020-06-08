@@ -145,7 +145,7 @@ void mostraPrenotazioni(t_lista_P * top){
 	}
 }
 
-void aumentaPopolarita(t_lista_P * prenotazioni, t_grf * voli, char * partenza){
+void aumentaPopolarita(t_lista_P * prenotazioni, t_grf * voli, char * partenza){//utile all'individuazione della meta più gettonata
 	if(prenotazioni){
 		if(strcmp(prenotazioni->prenotazione.partenza, partenza) == 0)
 			voli = incrementaPopolarita(voli, prenotazioni->prenotazione.destinazione);
