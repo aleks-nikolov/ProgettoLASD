@@ -190,23 +190,24 @@ void gestisciPartenzaEDestinazione(t_grf * voli, t_abr * utenteCorrente){
 				fflush(stdin);
 				gets(destinazione);
 					
-				if(strcmp(strupr(partenza),strupr(destinazione))!= 0) {
-                    if (strlen(destinazione) <= 100 && aeroportoEsistente(voli, destinazione)) {
-                        t_grf *raggiungibili = bfs(voli, partenza);
-                        //bfs effettua una breadth first search e controlla che l'aeroporto di destinazione sia raggiungibile da quello di partenza
-                        if (aeroportoEsistente(raggiungibili, destinazione))
-							gestisciPrenotazione(voli, utenteCorrente, partenza, destinazione);
-                        else
-                            printf("\n%s non e' raggiungibile da %s\n\n", destinazione, partenza);
-
-                    } else 
-                        printf("\nAeroporto inserito non coperto dalla nostra compagnia, riprovare?(1 per si, altro per no): ");
-                } else 
-                    printf("\nPer favore inserire aeroporti di partenza e destinazine diversi, riprovare?(1 per si, altro per no): ");
-
-                    fflush(stdin);
-                    scanf("%d", &altroTentativoDestinazione);
 				
+                if (strcmp(strupr(partenza),strupr(destinazione))!= 0 && strlen(destinazione) <= 100 && aeroportoEsistente(voli, destinazione)) {
+                    t_grf *raggiungibili = bfs(voli, partenza);
+                    //bfs effettua una breadth first search e controlla che l'aeroporto di destinazione sia raggiungibile da quello di partenza
+                    if (aeroportoEsistente(raggiungibili, destinazione))
+						gestisciPrenotazione(voli, utenteCorrente, partenza, destinazione);
+                    else
+                        printf("\n%s non e' raggiungibile da %s\n\n", destinazione, partenza);
+
+                }else {
+                	if(!aeroportoEsistente(voli, destinazione))
+                        printf("\nAeroporto inserito non coperto dalla nostra compagnia, riprovare?(1 per si, altro per no): ");
+                 	else if(strcmp(strupr(partenza),strupr(destinazione))== 0) 
+                    	printf("\nPer favore inserire aeroporti di partenza e destinazine diversi, riprovare?(1 per si, altro per no): ");
+
+                    	fflush(stdin);
+                    	scanf("%d", &altroTentativoDestinazione);
+				}
 			}while(altroTentativoDestinazione == 1);
 			
 		}else{
