@@ -69,14 +69,40 @@ void mostraUtenti(t_abr * radice){
 	}
 }
 
-t_abr * inizializzaUtenti(){//metodo lanciato a inizio programma per inizializzare 3 utenti admin e 2 utenti clienti
+t_abr * inizializzaUtenti(){//metodo lanciato a inizio programma per inizializzare 3 utenti admin e 2 utenti clienti a cui diamo anche delle prenotazioni già effettuate
 	t_abr * tmp = NULL;
+	
+	t_lista_S * scaliC1_1 = NULL;
+	t_lista_S * scaliC1_2 = NULL;
+	
+	t_lista_S * scaliC2_1 = NULL;
+	t_lista_S * scaliC2_2 = NULL;
+	
+	scaliC1_1 = inserisciInCoda_S(scaliC1_1, "ROMA");
+	scaliC1_2 = inserisciInCoda_S(scaliC1_2, "BARCELLONA");
+	scaliC1_2 = inserisciInCoda_S(scaliC1_2, "MILANO");
+	scaliC1_2 = inserisciInCoda_S(scaliC1_2, "FRANCOFORTE");
+	
+	scaliC2_1 = inserisciInCoda_S(scaliC2_1, "MILANO");
+	scaliC2_1 = inserisciInCoda_S(scaliC2_1, "FRANCOFORTE");
+	scaliC2_2 = inserisciInCoda_S(scaliC2_2, "BARCELLONA");
+	scaliC2_2 = inserisciInCoda_S(scaliC2_2, "MILANO");
+	
+	
+	tmp = inserisciNodo_U(tmp, "cliente1", "passwordC1", 0);
+	tmp->utente.prenotazioni = inserisciInCoda_P(tmp->utente.prenotazioni, "NAPOLI", "MILANO", scaliC1_1, 115, 95);
+	tmp->utente.prenotazioni = inserisciInCoda_P(tmp->utente.prenotazioni, "NAPOLI", "MOSCA", scaliC1_2, 285, 245);
+	tmp->utente.punti = 400;
+	
+	tmp = inserisciNodo_U(tmp, "cliente2", "passwordC2", 0);
+	tmp->destro->utente.prenotazioni = inserisciInCoda_P(tmp->destro->utente.prenotazioni, "ROMA", "MOSCA", scaliC2_1, 235, 220);
+	tmp->destro->utente.prenotazioni = inserisciInCoda_P(tmp->destro->utente.prenotazioni, "MADRID", "SCHIPOL", scaliC2_2, 170, 190);
+	tmp->destro->utente.punti = 405;
 	
 	tmp = inserisciNodo_U(tmp,"admin1", "passwordA1", 1);
 	tmp = inserisciNodo_U(tmp, "admin2", "passwordA2", 1);
 	tmp = inserisciNodo_U(tmp, "admin3", "passwordA3", 1);
-	tmp = inserisciNodo_U(tmp, "cliente1", "passwordC1", 0);
-	tmp = inserisciNodo_U(tmp, "cliente2", "passwordC2", 0);
+
 	
 	return tmp;
 }

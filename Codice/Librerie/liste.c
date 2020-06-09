@@ -7,6 +7,7 @@ t_lista_S * creaNodo_S (char * nomeAeroporto){
 	
 	if(tmp){
 		strcpy(tmp->scalo, nomeAeroporto);
+		tmp->next = NULL;
 	}else 
 		printf("Memoria insufficiente per la creazione di un nuovo elemento");
 	 

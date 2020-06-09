@@ -189,7 +189,6 @@ void gestisciPartenzaEDestinazione(t_grf * voli, t_abr * utenteCorrente){
 			
 				fflush(stdin);
 				gets(destinazione);
-					
 				
                 if (strcmp(strupr(partenza),strupr(destinazione))!= 0 && strlen(destinazione) <= 100 && aeroportoEsistente(voli, destinazione)) {
                     t_grf *raggiungibili = bfs(voli, partenza);
