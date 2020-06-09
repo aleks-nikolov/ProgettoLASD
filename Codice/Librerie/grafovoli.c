@@ -2,6 +2,8 @@
 
 //Inizializza gli aeroporti con alcune tratte predefinite (per ora sono 10 per semplicità di testing, poi li incremento)
 t_grf * inizializzaGrafo(t_grf * g) {
+    //Inizializzazione aeroporti
+    g = aggiungiAeroporto(g, "PALERMO");
     g = aggiungiAeroporto(g, "NAPOLI");
     g = aggiungiAeroporto(g, "ROMA");
     g = aggiungiAeroporto(g, "MILANO");
@@ -12,22 +14,52 @@ t_grf * inizializzaGrafo(t_grf * g) {
     g = aggiungiAeroporto(g, "MOSCA");
     g = aggiungiAeroporto(g, "MADRID");
     g = aggiungiAeroporto(g, "BARCELLONA");
+    g = aggiungiAeroporto(g, "MALTA");
+    g = aggiungiAeroporto(g, "ATENE");
+    g = aggiungiAeroporto(g, "SOFIA");
+    g = aggiungiAeroporto(g, "GINEVRA");
+    g = aggiungiAeroporto(g, "COPENHAGEN");
+    g = aggiungiAeroporto(g, "BRUXELLES");
+    g = aggiungiAeroporto(g, "DUBLINO");
+    g = aggiungiAeroporto(g, "STOCCOLMA");
+    g = aggiungiAeroporto(g, "BUDAPEST");
 
-    g = aggiungiVolo(g, "NAPOLI", "ROMA", 50.00f, 45);
-    g = aggiungiVolo(g, "ROMA", "MILANO", 65.00f, 50);
-    g = aggiungiVolo(g, "ROMA", "FRANCOFORTE", 100.00f, 160);
-    g = aggiungiVolo(g, "MILANO", "NAPOLI", 95.00f, 100);
-    g = aggiungiVolo(g, "MILANO", "LONDRA", 110.00f, 140);
-    g = aggiungiVolo(g, "MILANO", "SCHIPOL", 55.00f, 115);
-    g = aggiungiVolo(g, "MILANO", "FRANCOFORTE", 90.00f, 90);
-	g = aggiungiVolo(g, "MILANO", "MADRID", 65.00f, 50);
-	g = aggiungiVolo(g, "FRANCOFORTE", "MOSCA", 80.00f, 80);
+    //Inizializzazione voli
+    g = aggiungiVolo(g, "ATENE", "ROMA", 90.00f, 75);
+    g = aggiungiVolo(g, "BARCELLONA", "ROMA", 30.00f, 45);
+    g = aggiungiVolo(g, "BARCELLONA", "NAPOLI", 90.00f, 80);
+    g = aggiungiVolo(g, "BRUXELLES", "PARIGI", 25.00f, 20);
+    g = aggiungiVolo(g, "BUDAPEST", "MILANO", 20.00f, 25);
+    g = aggiungiVolo(g, "COPENHAGEN", "LONDRA", 80.00f, 65);
+    g = aggiungiVolo(g, "COPENHAGEN", "STOCCOLMA", 25.00f, 20);
+    g = aggiungiVolo(g, "GINEVRA", "PARIGI", 60.00f, 30);
+    g = aggiungiVolo(g, "FRANCOFORTE", "MOSCA", 60.00f, 90);
+    g = aggiungiVolo(g, "FRANCOFORTE", "BUDAPEST", 35.00f, 40);
+    g = aggiungiVolo(g, "FRANCOFORTE", "SOFIA", 120.00f, 150);
+    g = aggiungiVolo(g, "LONDRA", "DUBLINO", 20.00f, 25);
+    g = aggiungiVolo(g, "LONDRA", "BRUXELLES", 60.00f, 40);
     g = aggiungiVolo(g, "MADRID", "BARCELLONA", 40.00f, 30);
-	g = aggiungiVolo(g, "BARCELLONA", "MILANO", 75.00f, 45);
-    g = aggiungiVolo(g, "MOSCA", "SCHIPOL", 120.00f, 140);
-	g = aggiungiVolo(g, "LONDRA", "PARIGI", 60.00f, 35);
-	g = aggiungiVolo(g, "PARIGI", "MADRID", 55.00f, 40);
-
+    g = aggiungiVolo(g, "MALTA", "ATENE", 90.00f, 120);
+    g = aggiungiVolo(g, "MILANO", "NAPOLI", 95.00f, 100);
+    g = aggiungiVolo(g, "MILANO", "SCHIPOL", 35.00f, 100);
+    g = aggiungiVolo(g, "MILANO", "MADRID", 65.00f, 50);
+    g = aggiungiVolo(g, "MILANO", "GINEVRA", 40.00f, 20);
+    g = aggiungiVolo(g, "MILANO", "SOFIA", 100.00f, 90);
+    g = aggiungiVolo(g, "MOSCA", "STOCCOLMA", 60.00f, 65);
+    g = aggiungiVolo(g, "NAPOLI", "ROMA", 50.00f, 45);
+    g = aggiungiVolo(g, "NAPOLI", "PALERMO", 40.00f, 40);
+    g = aggiungiVolo(g, "NAPOLI", "MALTA", 80.00f, 65);
+    g = aggiungiVolo(g, "PALERMO", "MALTA", 30.00f, 35);
+    g = aggiungiVolo(g, "PARIGI", "MADRID", 45.00f, 50);
+    g = aggiungiVolo(g, "PARIGI", "COPENHAGEN", 45.00f, 50);
+    g = aggiungiVolo(g, "ROMA", "MILANO", 65.00f, 50);
+    g = aggiungiVolo(g, "SOFIA", "ATENE", 30.00f, 30);
+    g = aggiungiVolo(g, "SOFIA", "MOSCA", 100.00f, 125);
+    g = aggiungiVolo(g, "SCHIPOL", "PARIGI", 30.00f, 30);
+    g = aggiungiVolo(g, "SCHIPOL", "COPENHAGEN", 40.00f, 30);
+    g = aggiungiVolo(g, "SCHIPOL", "FRANCOFORTE", 30.00f, 45);
+    g = aggiungiVolo(g, "STOCCOLMA", "LONDRA", 50.00f, 50);
+    
     return g;
 }
 
