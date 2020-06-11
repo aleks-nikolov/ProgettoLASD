@@ -17,7 +17,7 @@ t_grf * trovaPiuEconomico(t_grf * voli, char * partenza) {
 //Restituisce il vertice del grafo raggiungibile dalla partenza e con l'intero popolarita più alto
 t_grf * trovaPiuGettonato(t_grf * voli, char * partenza) {
     int condizioneUscita;
-    t_grf * raggiungibili = bfs(voli, partenza);
+    t_grf * raggiungibili = bfs(voli, strupr(partenza));
     t_grf * destinazione = NULL;
 
     raggiungibili = eliminaAeroporto(raggiungibili, partenza);

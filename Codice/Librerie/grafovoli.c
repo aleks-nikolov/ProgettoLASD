@@ -32,6 +32,7 @@ t_grf * inizializzaGrafo(t_grf * g) {
     g = aggiungiVolo(g, "BUDAPEST", "MILANO", 20.00f, 25);
     g = aggiungiVolo(g, "COPENHAGEN", "LONDRA", 80.00f, 65);
     g = aggiungiVolo(g, "COPENHAGEN", "STOCCOLMA", 25.00f, 20);
+	g = aggiungiVolo(g, "DUBLINO", "BRUXELLES", 30.00f, 25);
     g = aggiungiVolo(g, "GINEVRA", "PARIGI", 60.00f, 30);
     g = aggiungiVolo(g, "FRANCOFORTE", "MOSCA", 60.00f, 90);
     g = aggiungiVolo(g, "FRANCOFORTE", "BUDAPEST", 35.00f, 40);

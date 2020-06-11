@@ -191,7 +191,7 @@ void gestisciPartenzaEDestinazione(t_grf * voli, t_abr * utenteCorrente){
 				gets(destinazione);
 				
                 if (strcmp(strupr(partenza),strupr(destinazione))!= 0 && strlen(destinazione) <= 100 && aeroportoEsistente(voli, destinazione)) {
-                    t_grf *raggiungibili = bfs(voli, partenza);
+                    t_grf *raggiungibili = bfs(voli, strupr(partenza));
                     //bfs effettua una breadth first search e controlla che l'aeroporto di destinazione sia raggiungibile da quello di partenza
                     if (aeroportoEsistente(raggiungibili, destinazione))
 						gestisciPrenotazione(voli, utenteCorrente, partenza, destinazione);
@@ -275,7 +275,7 @@ void gestisciSolaPartenza(t_abr * utenti, t_grf * voli, t_abr * utenteCorrente){
                     } else if (selettoreDestinazione == 3) {   //caso scelta destinazione tra quelle raggiungibili
                         int n, altroTentativo;
 
-                        t_grf *raggiungibili = bfs(voli, partenza);
+                        t_grf *raggiungibili = bfs(voli, strupr(partenza));
                         raggiungibili = eliminaAeroporto(raggiungibili, partenza);
                         t_grf *destinazione = NULL;
                         do {
