@@ -43,6 +43,7 @@ t_grf * trovaPiuGettonato(t_grf * voli, char * partenza) {
 }
 
 //Trova il volo più economico (pesoDiRiferimento == 1) o breve (pesoDiRiferimento == 2) dall'aeroporto 'da' a 'a'
+//Usa un grafo di supporto q che contiene i vertici visitati
 void dijkstra(t_grf ** g, char *da, char *a, int pesoDiRiferimento) {
     t_grf * sorgente = getVertice(*g, da);
     t_grf * destinazione = getVertice(*g, a);
@@ -152,6 +153,7 @@ t_grf * impostaPrecedenteATutti(t_grf * g, t_grf * precedente) {
     return g;
 }
 
+//Modifica il valore di popolarita del vertice di nome 'nome' nel grafo g
 t_grf * impostaPopolarita(t_grf * g, char *nome, int popolaritaNuova) {
     if(!grafoVuoto(g)) {
         if(strcmp(g->nome, nome) == 0)
@@ -163,7 +165,7 @@ t_grf * impostaPopolarita(t_grf * g, char *nome, int popolaritaNuova) {
     return g;
 }
 
-//Incrementa la popolarità dell'aeroporto 'nome' di 1
+//Incrementa il valore di popolarità dell'aeroporto 'nome' di 1
 t_grf * incrementaPopolarita(t_grf * g, char * nome) {
     if(!grafoVuoto(g)) {
         if(strcmp(g->nome, nome) == 0) {
@@ -231,6 +233,7 @@ t_grf * getVerticeByCamminoMinimo(t_grf * q) {
     return q;
 }
 
+//Costruisce un percorso partendo dal vertice di destinazione scorrendo il campo prev
 t_grf * costruisciPercorso(t_grf ** g, char * entrata) {
     t_grf * percorso = NULL;
     t_grf * temp = getVertice(*g, entrata);
@@ -243,6 +246,7 @@ t_grf * costruisciPercorso(t_grf ** g, char * entrata) {
     return percorso;
 }
 
+//Aggiunge un t_grf in testa a un percorso in modo che l'ultimo elemento sia la destinazione
 t_grf * aggiungiPercorsoInTesta(t_grf * g, t_grf * daAggiungere) {
     t_grf * temp = (t_grf *) malloc(sizeof(t_grf));
     strcpy(temp->nome, daAggiungere->nome);
@@ -257,6 +261,7 @@ t_grf * aggiungiPercorsoInTesta(t_grf * g, t_grf * daAggiungere) {
 
 }
 
+//Stampa il percorso con il relativo peso
 void stampaPercorso(t_grf * g, t_grf * percorso, int pesoDiRiferimento) {
     if(!grafoVuoto(percorso)){
         if(!grafoVuoto(percorso->next)){

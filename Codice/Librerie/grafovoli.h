@@ -27,7 +27,7 @@ typedef struct grafo {
     struct grafo *prev;   //puntatore al vertice che precede nel cammino minimo
 } t_grf;
 
-//NOTA: le implementazioni delle funzioni sono divise nei file grafovoli.c e dijkstra.c per fini organizzativi
+//NOTA: le implementazioni delle funzioni sono divise nei file grafovoli.c, ricerchevoli.c e bfs.c per fini organizzativi
 //Operazioni sui vertici
 t_grf * inizializzaGrafo(t_grf * g);
 t_grf * aggiungiAeroporto(t_grf * g, char *nome);
@@ -42,7 +42,6 @@ t_grf * eliminaTuttiVoliAdAeroporto(t_grf * g, char *nome);
 int haVoli(t_grf * partenza);
 
 //Stampe
-void elencaPopolarita(t_grf * g);
 void elencaGrafo(t_grf * g, int contatore);
 void stampaGrafo(t_grf * g);
 void stampaArchi(t_arc * a);

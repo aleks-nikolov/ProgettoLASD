@@ -145,7 +145,7 @@ int haVoli(t_grf * partenza) {
         return 1;
 }
 
-//Inizializza un nuovo arco e lo restituisce (usata dalla funzione aggiungiVolo)
+//Inizializza un nuovo arco e lo restituisce
 t_arc * inizializzaArco(t_arc * a, char *nome, float prezzo, int durata) {
     if(arcoVuoto(a)) {
         a = (t_arc *) malloc(sizeof(t_arc));
@@ -161,7 +161,7 @@ t_arc * inizializzaArco(t_arc * a, char *nome, float prezzo, int durata) {
     return a;
 }
 
-//Dealloca un arco, usata dalla funzione eliminaVolo
+//Dealloca un arco
 t_arc * eliminaArco(t_arc * a, char *nome) {
     if(!arcoVuoto(a)){
         a->next = eliminaArco(a->next, nome);
@@ -235,13 +235,7 @@ int lunghezzaGrafo(t_grf * g) {
         return 1 + lunghezzaGrafo(g->next);
 }
 
-void elencaPopolarita(t_grf * g) {
-    if(!grafoVuoto(g)){
-        printf("\n%s - %d ", g->nome, g->popolarita);
-        elencaPopolarita(g->next);
-    }
-}
-
+//Stampa i vertici del grafo con un indice iniziale
 void elencaGrafo(t_grf * g, int contatore) {
     if(!grafoVuoto(g)){
         printf("\n%d) %s ", contatore, g->nome);
@@ -274,6 +268,7 @@ int arcoVuoto(t_arc * a) {
     return (a == NULL);
 }
 
+//Restituisce il prezzo o durata di un arco 
 int getPesoArco(t_grf * g, t_grf * h, int pesoDiRiferimento) {
     if (!grafoVuoto(g) && !grafoVuoto(h)) {
         t_arc * temp = g->archi;
