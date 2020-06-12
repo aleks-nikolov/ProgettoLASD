@@ -38,7 +38,7 @@ void stampaMenuSelezioneDestinazione(int * selettoreTratta, char *partenza){
     scanf("%d", selettoreTratta);
 }
 
-void costruisciCampiPrenotazione(t_grf * voli, t_grf * percorso, t_lista_S ** scali, float * prezzo, int * tempo){
+void costruisciCampiPrenotazione(t_grf * voli, t_grf * percorso, t_lista_S ** scali, float * prezzo, int * tempo){//ricostruisce scali, prezzo e tempo totali di una prenotazione
 	
 	if(!grafoVuoto(percorso) && !grafoVuoto(percorso->next)){
 		*prezzo += getPesoArco(getVertice(voli, percorso->nome), getVertice(voli, percorso->next->nome), 1);
@@ -53,7 +53,7 @@ void costruisciCampiPrenotazione(t_grf * voli, t_grf * percorso, t_lista_S ** sc
 	}	
 }
 
-float utilizzaTickets(t_abr * utenteCorrente, int * ticketsUtilizzati){
+float utilizzaTickets(t_abr * utenteCorrente, int * ticketsUtilizzati){//ticketsUtilizzati serve per tenere traccia di quali ticket vengano utilizzati, in caso sia necessaria la restituzione in seguito all'annullamento della prenotazione
 	float sconto = 0.0;
 	int selettoreAzione = 0;
 	
@@ -135,7 +135,7 @@ void gestisciPagamentoPartenzaDestinazione(t_grf * voli, t_grf * percorso, t_abr
 	                				
 	    printf("\nPrenotazione avvenuta con successo!\n");  
 	}else{
-		if(sconto)
+		if(sconto)//se sono stati utilizzati ticket di sconto e quindi lo sconto è diverso da 0
 			restituisciTickets(utenteCorrente, ticketsUtilizzati);
 		printf("\nPrenotazione annullata;\n");
 	}		           				            			
