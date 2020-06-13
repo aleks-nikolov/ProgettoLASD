@@ -40,14 +40,14 @@ void effettuaRegistrazione(t_abr * utenti){
 		gets(nomeTmp);
 		fflush(stdin);
 		
-		if(!strchr(nomeTmp, ' ') && strlen(nomeTmp) <= 20){
+		if(!strchr(nomeTmp, ' ') && strlen(nomeTmp) <= 20 && nomeTmp[0] != '\0'){
 			if(!contains_U(utenti, nomeTmp, NULL)){
 				
 				printf("\nInserire nuova password: ");
 				gets(passwordTmp);
 				fflush(stdin);
 				
-				if(!strchr(passwordTmp, ' ') && strlen(passwordTmp) <= 20){
+				if(!strchr(passwordTmp, ' ') && strlen(passwordTmp) <= 20 && passwordTmp[0] != '\0'){
 					utenti = inserisciNodo_U(utenti, nomeTmp, passwordTmp, 0);
 					printf("\nRegistrazione avvenuta con successo!");
 				}else{
