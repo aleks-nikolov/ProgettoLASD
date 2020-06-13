@@ -13,7 +13,7 @@ void stampaMenuIniziale(){
 void terminaProgramma(int * selettoreAzione){
 	*selettoreAzione = 0;
 
-		printf("\nE' stato selezionato il comando di terminazione del programma, si reinserisca 4 per confermare: ");
+		printf("E' stato selezionato il comando di terminazione del programma, si reinserisca 4 per confermare: ");
 		fflush(stdin);
 		scanf("%d" , selettoreAzione);
 }
