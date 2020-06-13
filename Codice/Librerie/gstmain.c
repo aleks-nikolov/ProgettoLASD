@@ -2,7 +2,8 @@
 
 void stampaMenuIniziale(){
 
-	printf("Selezionare azione da effettuare;\n\n"
+	printf("MENU INIZIALE\n"
+		   "Selezionare azione da effettuare;\n\n"
 		   "1)Effettua nuova registrazione\n"
 		   "2)Esegui accesso\n"
 		   "3)Visualizza utenti\n"

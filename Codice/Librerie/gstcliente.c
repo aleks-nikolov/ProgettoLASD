@@ -211,11 +211,9 @@ void gestisciPartenzaEDestinazione(t_grf * voli, t_abr * utenteCorrente){
                     }
                 }else {
                 	if(!aeroportoEsistente(voli, destinazione)){
-                        system("cls");
                         printf("Aeroporto inserito non coperto dalla nostra compagnia, riprovare?(1 per si, altro per no): ");
                 	}
                  	else if(strcmp(strupr(partenza),strupr(destinazione))== 0){
-                        system("cls");
                     	printf("Per favore inserire aeroporti di partenza e destinazine diversi, riprovare?(1 per si, altro per no): ");
                  	}
                     	fflush(stdin);
@@ -326,20 +324,17 @@ void gestisciSolaPartenza(t_abr * utenti, t_grf * voli, t_abr * utenteCorrente){
                             break;
                         }
                     } else {
-                        system("cls");
                         printf("\nDato inserito non rientra nelle opzioni, riprovare;\n*********************\n");
                         altroTentativoTratta = 1;
                     }
                 } while (altroTentativoTratta == 1);
             } else {
-                system("cls");
                 printf("Al momento non ci sono voli da %s, vuole inserire un'altra partenza? (1 per si, altro per no)", partenza);
                 fflush(stdin);
                 scanf("%d", &altroTentativoPartenza);
                 system("cls");
             }
         } else {
-            system("cls");
             printf("Aeroporto inserito non coperto dalla nostra compagnia, riprovare?(1 per si, altro per no): ");
             fflush(stdin);
             scanf("%d", &altroTentativoPartenza);
@@ -444,8 +439,7 @@ void gestisciCliente(t_abr * utenti, t_grf * voli, t_abr * utenteCorrente){
                 break;
 
             case 3:
-                system("cls");
-                printf("GESTIONE TICKETS\n");
+				system("cls");
                 gestisciTickets(utenteCorrente);
                 break;
 

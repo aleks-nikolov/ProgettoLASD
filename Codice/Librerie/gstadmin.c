@@ -97,7 +97,6 @@ void aggiuntaVolo(t_grf ** g) {
         return;
     }
 
-    system("cls");
     printf("Qual'e' la destinazione del nuovo volo con partenza da %s? ", nomepartenzavolo);
     scanf("%s", nomearrivovolo);
     fflush(stdin);
@@ -113,12 +112,10 @@ void aggiuntaVolo(t_grf ** g) {
         return;
     }
 
-    system("cls");
     printf("Qual'e' il prezzo del nuovo volo con partenza da %s e diretto a %s? ", nomepartenzavolo, nomearrivovolo);
     scanf("%f", &prezzo);
     fflush(stdin);
 
-    system("cls");
     printf("Qual'e' la durata del nuovo volo con partenza da %s e diretto a %s? ", nomepartenzavolo, nomearrivovolo);
     scanf("%d", &durata);
     fflush(stdin);
@@ -160,7 +157,6 @@ void rimozioneVolo(t_grf ** g) {
         return;
     }
 
-    system("cls");
     printf("Qual'e' la destinazione del volo con partenza da %s che vuoi eliminare? ", nomepartenzavolo);
     scanf("%s", nomearrivovolo);
     fflush(stdin);
@@ -176,6 +172,7 @@ void rimozioneVolo(t_grf ** g) {
         return;
     }
 
+	system("cls");
     *g = eliminaVolo(*g, nomepartenzavolo, nomearrivovolo);
 
 }

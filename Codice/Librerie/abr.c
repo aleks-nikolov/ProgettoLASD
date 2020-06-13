@@ -74,7 +74,6 @@ t_abr * inizializzaUtenti(){//metodo lanciato a inizio programma per inizializza
 	
 	t_lista_S * scaliC1_1 = NULL;
 	t_lista_S * scaliC1_2 = NULL;
-	t_lista_S * scaliC1_3 = NULL;
 	
 	t_lista_S * scaliC2_1 = NULL;
 	t_lista_S * scaliC2_2 = NULL;

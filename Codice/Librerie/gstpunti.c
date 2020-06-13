@@ -1,7 +1,7 @@
 #include "gstpunti.h"
 
 void stampaMenuSelezioneTicket(){
-	printf("\nE' possibile utilizzare un massimo di %d tickets per prenotazione, selezionare primo ticket;\n\n"
+	printf("\n\nE' possibile utilizzare un massimo di %d tickets per prenotazione, selezionare primo ticket;\n"
 		   "1)Ticket da 5%%\n"
 		   "2)Ticket da 10%%\n"
 		   "3)Ticket da 15%%\n"
@@ -17,7 +17,8 @@ int calcolaPuntiOttenuti(float prezzo){//la generazione di punti sarebbe di gran
 }
 
 void stampaMenuTickets(){
-	printf("\nSeleziona azione da effettuare;\n\n"
+	printf("\nGESTIONE TICKETS"
+		   "\nSeleziona azione da effettuare;\n\n"
 		   "1)Vedi punti disponibili\n"
 		   "2)Vedi tickets disponibili\n"
 		   "3)Converti punti in tickets\n"
@@ -26,18 +27,20 @@ void stampaMenuTickets(){
 }
 
 void mostraPunti(t_abr * utenteCorrente){
+	system("cls");
 	printf("\nL'utente %s ha a disposizione %d punti!", utenteCorrente->utente.nomeUtente, utenteCorrente->utente.punti);
 }
 
 void mostraTickets(t_abr * utenteCorrente){
 	int i, percentualeSconto;
 	
+	system("cls");
 	printf("\nL'utente %s ha a disposizione ", utenteCorrente->utente.nomeUtente);
 	
 	for(i = 0, percentualeSconto = 5; i<LUNGHEZZA_TICKETS - 2; i++, percentualeSconto+=5)
-		printf("%d tickets da %d%%, ", utenteCorrente->utente.tickets[i], percentualeSconto);
+		printf("\n%d tickets da %d%%", utenteCorrente->utente.tickets[i], percentualeSconto);
 	
-	printf("%d tickets da 20%% e %d tickets da 25%%", utenteCorrente->utente.tickets[3], utenteCorrente->utente.tickets[4]);
+	printf("\n%d tickets da 20%%\n%d tickets da 25%%", utenteCorrente->utente.tickets[3], utenteCorrente->utente.tickets[4]);
 }
 
 void stampaRegoleConversione(){
@@ -113,6 +116,7 @@ void gestisciTickets(t_abr * utenteCorrente){
                 break;
 
             case 4:
+				system("cls");
                 break;
 
             default:
