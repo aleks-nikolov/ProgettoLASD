@@ -11,38 +11,50 @@ int durata;
 void gestisciOpzioneAdmin(t_grf ** voli){
 
     do{
+        printf("MENU ADMIN\n");
         stampaMenuAdmin();
         scanf("%d", &scelta);
 
         switch(scelta){
 
             case(1):
+                system("cls");
+                printf("NUOVA DESTINAZIONE\n\n");
                 aggiuntaAeroporto(voli);
                 break;
 
             case (2):
+                system("cls");
+                printf("NUOVA TRATTA\n\n");
                 aggiuntaVolo(voli);
                 break;
 
             case (3):
+                system("cls");
+                printf("RIMOZIONE AEROPORTO\n\n");
                 rimozioneAeroporto(voli);
                 break;
 
             case (4):
+                system("cls");
+                printf("RIMOZIONE TRATTA\n\n");
                 rimozioneVolo(voli);
                 break;
 
             case (5):
-                printf("\nQuesti sono tutti i voli dell'aeroporto:\n\n");
+                system("cls");
+                printf("QUESTE SONO TUTTE LE TRATTE DELL'AEROPORTO\n\n");
                 stampaGrafo(*voli);
                 break;
 
             case (6):
-                printf("\n*************\nLogout dalla pagina admin\n*************\n");
+                system("cls");
+                printf("*************\nLogout dalla pagina admin\n*************\n");
                 break;
 
             default:
-                printf("\nScelta inserita non valida\n");
+                system("cls");
+                printf("Scelta inserita non valida\n*************\n");
                 break;
 
         }
@@ -62,90 +74,104 @@ void stampaMenuAdmin(){
 
 void aggiuntaAeroporto(t_grf ** g) {
 
-    printf("Qual'e' il nuovo aeroporto che vuoi aggiungere alle destinazioni?\n");
+    printf("Qual'e' il nuovo aeroporto che vuoi aggiungere alle destinazioni? ");
     scanf("%s", nomeaeroporto);
     fflush(stdin);
 
     *g = aggiungiAeroporto(*g, nomeaeroporto);
-    printf("\nHo aggiunto %s alle destinazioni con successo!\n", nomeaeroporto);
+    system("cls");
+    printf("Ho aggiunto %s alle destinazioni con successo!\n*************\n", nomeaeroporto);
 
 }
 
 void aggiuntaVolo(t_grf ** g) {
 
-    printf("Qual'e' la partenza del nuovo volo che vuoi aggiungere?\n");
+    printf("Qual'e' la partenza del nuovo volo che vuoi aggiungere? ");
     scanf("%s", nomepartenzavolo);
     fflush(stdin);
 
     if(!aeroportoEsistente(*g, nomepartenzavolo)) {
-        printf("\nL'aeroporto %s non esiste", nomepartenzavolo);
+        system("cls");
+        printf("L'aeroporto %s non esiste\n*************\n", nomepartenzavolo);
         return;
     }
 
-    printf("Qual'e' la destinazione del nuovo volo con partenza da %s?\n", nomepartenzavolo);
+    system("cls");
+    printf("Qual'e' la destinazione del nuovo volo con partenza da %s? ", nomepartenzavolo);
     scanf("%s", nomearrivovolo);
     fflush(stdin);
 
     if(!aeroportoEsistente(*g, nomearrivovolo)) {
-        printf("\nL'aeroporto %s non esiste", nomearrivovolo);
+        system("cls");
+        printf("L'aeroporto %s non esiste\n*************\n", nomearrivovolo);
         return;
     }
     if(voloEsistente(getVertice(*g, nomepartenzavolo)->archi, nomearrivovolo)) {
-        printf("\nIl volo da %s a %s esiste gia'", nomepartenzavolo, nomearrivovolo);
+        system("cls");
+        printf("Il volo da %s a %s esiste gia'\n*************\n", nomepartenzavolo, nomearrivovolo);
         return;
     }
 
-    printf("Qual'e' il prezzo del nuovo volo con partenza da %s e diretto a %s?\n", nomepartenzavolo, nomearrivovolo);
+    system("cls");
+    printf("Qual'e' il prezzo del nuovo volo con partenza da %s e diretto a %s? ", nomepartenzavolo, nomearrivovolo);
     scanf("%f", &prezzo);
     fflush(stdin);
 
-    printf("Qual'e' la durata del nuovo volo con partenza da %s e diretto a %s?\n", nomepartenzavolo, nomearrivovolo);
+    system("cls");
+    printf("Qual'e' la durata del nuovo volo con partenza da %s e diretto a %s? ", nomepartenzavolo, nomearrivovolo);
     scanf("%d", &durata);
     fflush(stdin);
 
+    system("cls");
     if(prezzo > 0.0f && durata > 0) {
         *g = aggiungiVolo(*g, nomepartenzavolo, nomearrivovolo, prezzo, durata);
-        printf("\nIl nuovo volo proveniente da %s e diretto a %s e' stato aggiunto con successo!\n", nomepartenzavolo, nomearrivovolo);
+        printf("Il nuovo volo proveniente da %s e diretto a %s e' stato aggiunto con successo!\n*************\n", nomepartenzavolo, nomearrivovolo);
     }
     else
-        printf("\nDati di prezzo/durata non validi, inserire valori positivi");
+        printf("Dati di prezzo/durata non validi, inserire valori positivi\n*************\n");
 
 }
 
 void rimozioneAeroporto(t_grf ** g) {
 
-    printf("Qual'e' il nome dell'aeroporto che vuoi rimuovere dalle destinazioni?\n");
+    printf("Qual'e' il nome dell'aeroporto che vuoi rimuovere dalle destinazioni? ");
     scanf("%s", nomeaeroporto);
     fflush(stdin);
+
+    system("cls");
     if(aeroportoEsistente(*g, nomeaeroporto)) {
         *g = eliminaAeroporto(*g, nomeaeroporto);
         *g = eliminaTuttiVoliAdAeroporto(*g, nomeaeroporto);
-        printf("\nHo eliminato %s dalle destinazioni!", nomeaeroporto);
+        printf("Ho eliminato %s dalle destinazioni!\n*************\n", nomeaeroporto);
     } else
-        printf("L'aeroporto %s non esiste", nomeaeroporto);
+        printf("L'aeroporto %s non esiste\n*************\n", nomeaeroporto);
 
 }
 
 void rimozioneVolo(t_grf ** g) {
 
-    printf("Qual'e' la partenza del volo che vuoi eliminare?\n");
+    printf("Qual'e' la partenza del volo che vuoi eliminare? ");
     scanf("%s", nomepartenzavolo);
     fflush(stdin);
     if(!aeroportoEsistente(*g, nomepartenzavolo)) {
-        printf("\nL'aeroporto %s non esiste", nomearrivovolo);
+        system("cls");
+        printf("L'aeroporto %s non esiste\n*************\n", nomearrivovolo);
         return;
     }
 
-    printf("Qual'e' la destinazione del volo con partenza da %s che vuoi eliminare?\n", nomepartenzavolo);
+    system("cls");
+    printf("Qual'e' la destinazione del volo con partenza da %s che vuoi eliminare? ", nomepartenzavolo);
     scanf("%s", nomearrivovolo);
     fflush(stdin);
         if(!aeroportoEsistente(*g, nomearrivovolo)) {
-        printf("\nL'aeroporto %s non esiste", nomearrivovolo);
+        system("cls");
+        printf("L'aeroporto %s non esiste\n*************\n", nomearrivovolo);
         return;
     }
 
     if(!voloEsistente(getVertice(*g, nomepartenzavolo)->archi, nomearrivovolo)) {
-        printf("\nIl volo da %s a %s non esiste", nomepartenzavolo, nomearrivovolo);
+        system("cls");
+        printf("Il volo da %s a %s non esiste\n*************\n", nomepartenzavolo, nomearrivovolo);
         return;
     }
 
