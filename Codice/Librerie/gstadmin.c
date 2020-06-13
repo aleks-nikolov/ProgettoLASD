@@ -45,6 +45,7 @@ void gestisciOpzioneAdmin(t_grf ** voli){
                 system("cls");
                 printf("QUESTE SONO TUTTE LE TRATTE DELL'AEROPORTO\n\n");
                 stampaGrafo(*voli);
+                printf("\n\n");
                 break;
 
             case (6):
