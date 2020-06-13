@@ -28,46 +28,39 @@ void effettuaRegistrazione(t_abr * utenti){
 	char passwordTmp[LUNGHEZZA_PASSWORD];
 	int nomeAmmesso;
 	int passwordAmmessa;
-
+	
 	fflush(stdin);
-
+	
 	stampaRegoleCredenziali();
 	do{
 		nomeAmmesso = 1;
 		passwordAmmessa = 1;
-
-        if(strlen(nomeTmp) > 0){
-            printf("REGISTRAZIONE UTENTE\n");
-            printf("\nNome utente inserito: %s", nomeTmp);
-        }
-        else{
-            printf("\n\nInserire nome nuovo utente: ");
-            gets(nomeTmp);
-            fflush(stdin);
-        }
-
+		
+		printf("\n\nInserire nome nuovo utente: ");
+		gets(nomeTmp);
+		fflush(stdin);
+		
 		if(!strchr(nomeTmp, ' ') && strlen(nomeTmp) <= 20){
 			if(!contains_U(utenti, nomeTmp, NULL)){
-
+				
 				printf("\nInserire nuova password: ");
 				gets(passwordTmp);
 				fflush(stdin);
-
+				
 				if(!strchr(passwordTmp, ' ') && strlen(passwordTmp) <= 20){
 					utenti = inserisciNodo_U(utenti, nomeTmp, passwordTmp, 0);
+					printf("\nRegistrazione avvenuta con successo!");
 				}else{
-				    system("cls");
-					printf("La password non puo' contenere spazi e la lunghezza non deve superare i 20 caratteri, riprovare\n*********************\n");
+					system("cls");
+					printf("\nLa password non puo' contenere spazi e la lunghezza non deve superare i 20 caratteri, riprovare");
 					passwordAmmessa = 0;
 				}
 			}else{
-			    system("cls");
-				printf("Nome utente non disponibile, riprovare\n*********************\n");
+				printf("\nNome utente non disponibile, riprovare");
 				nomeAmmesso = 0;
 			}
 		}else{
-		    system("cls");
-			printf("Il nome utente non puo' contenere spazi e la lunghezza non deve superare i 20 caratteri, riprovare\n*********************\n");
+			printf("\nIl nome utente non puo' contenere spazi e la lunghezza non deve superare i 20 caratteri, riprovare");
 			nomeAmmesso = 0;
 		}
 	}while(nomeAmmesso == 0 || passwordAmmessa == 0);
